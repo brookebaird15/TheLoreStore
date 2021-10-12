@@ -1,4 +1,5 @@
-#The Lore Store: Bookstore Inventory Manager
+The Lore Store: Bookstore Inventory Manager
+
 This is a bookstore inventory management tool. This tool allows the user to 
 add and remove inventory, as well as update inventory information.
 
