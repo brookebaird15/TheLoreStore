@@ -1,4 +1,10 @@
 package Panes;
 
-public class AddItemPane {
+import javafx.scene.layout.StackPane;
+
+public class AddItemPane extends StackPane {
+
+    public AddItemPane() {
+
+    }
 }
