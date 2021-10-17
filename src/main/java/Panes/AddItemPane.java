@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 public class AddItemPane extends StackPane {
 
     public AddItemPane() {
+        //inputFields box holds all inputs for pane
         VBox inputFields = new VBox();
 
         VBox title = new VBox();
@@ -51,6 +52,7 @@ public class AddItemPane extends StackPane {
         quantity.getChildren().addAll(quantityText, qtyInput);
         quantity.setSpacing(5);
 
+        //buttons box holds all buttons for pane
         HBox buttons = new HBox();
 
         //Add button saves info and returns user to Main Table
