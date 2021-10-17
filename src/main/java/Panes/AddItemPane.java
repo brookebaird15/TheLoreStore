@@ -8,24 +8,49 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class AddItemPane extends StackPane {
 
     public AddItemPane() {
         VBox inputFields = new VBox();
 
-        TextField title = new TextField();
-        title.setPromptText("Title");
-        TextField author = new TextField();
-        author.setPromptText("Author");
-        TextField genre = new TextField();
-        genre.setPromptText("Genre");
-        TextField publisher = new TextField();
-        publisher.setPromptText("Publisher");
-        TextField publishYear = new TextField();
-        publishYear.setPromptText("Year Published");
-        TextField quantity = new TextField();
-        quantity.setPromptText("Stock Qty");
+        VBox title = new VBox();
+        Text titleText = new Text("Title");
+        TextField titleInput = new TextField();
+        titleInput.setPromptText("Title");
+        title.getChildren().addAll(titleText, titleInput);
+
+        VBox author = new VBox();
+        Text authorText = new Text("Author");
+        TextField authorInput = new TextField();
+        authorInput.setPromptText("Author");
+        author.getChildren().addAll(authorText, authorInput);
+
+        VBox genre = new VBox();
+        Text genreText = new Text("Genre");
+        TextField genreInput = new TextField();
+        genreInput.setPromptText("Genre");
+        genre.getChildren().addAll(genreText, genreInput);
+
+        VBox publisher = new VBox();
+        Text publisherText = new Text("Publisher");
+        TextField publisherInput = new TextField();
+        publisherInput.setPromptText("Publisher");
+        publisher.getChildren().addAll(publisherText, publisherInput);
+
+        VBox year = new VBox();
+        Text yearText = new Text("Year");
+        TextField yearInput = new TextField();
+        yearInput.setPromptText("Year Published");
+        year.getChildren().addAll(yearText, yearInput);
+
+        VBox quantity = new VBox();
+        Text quantityText = new Text("Stock Qty");
+        TextField qtyInput = new TextField();
+        qtyInput.setPromptText("Stock Qty");
+        quantity.getChildren().addAll(quantityText, qtyInput);
+
 
         HBox buttons = new HBox();
 
@@ -43,8 +68,10 @@ public class AddItemPane extends StackPane {
         });
         buttons.getChildren().addAll(addButton, cancelButton);
 
-        inputFields.getChildren().addAll(title, author, genre, publisher, publishYear, quantity, buttons);
+        inputFields.getChildren().addAll(title, author, genre, publisher, year, quantity, buttons);
         inputFields.setAlignment(Pos.CENTER);
+        inputFields.setMaxWidth(500);
+        inputFields.setSpacing(20);
 
 
 
