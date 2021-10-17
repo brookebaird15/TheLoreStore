@@ -13,7 +13,7 @@ public class Launcher extends Application {
     public void start(Stage stage) throws Exception {
 
         mainStage = stage;
-        mainStage.setScene(new AddItemScene());
+        mainStage.setScene(new LoginScene());
         mainStage.setResizable(false);
         mainStage.setTitle("The Lore Store: Inventory Manager");
         mainStage.show();
