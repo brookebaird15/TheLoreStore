@@ -51,7 +51,6 @@ public class AddItemPane extends StackPane {
         quantity.getChildren().addAll(quantityText, qtyInput);
         quantity.setSpacing(5);
 
-
         HBox buttons = new HBox();
 
         //Add button saves info and returns user to Main Table
@@ -74,10 +73,6 @@ public class AddItemPane extends StackPane {
         inputFields.setMaxWidth(500);
         inputFields.setSpacing(20);
 
-
-
-
         this.getChildren().addAll(inputFields);
-
     }
 }
