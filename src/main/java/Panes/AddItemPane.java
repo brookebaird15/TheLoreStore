@@ -19,31 +19,37 @@ public class AddItemPane extends StackPane {
         Text titleText = new Text("Title");
         TextField titleInput = new TextField();
         title.getChildren().addAll(titleText, titleInput);
+        title.setSpacing(5);
 
         VBox author = new VBox();
         Text authorText = new Text("Author");
         TextField authorInput = new TextField();
         author.getChildren().addAll(authorText, authorInput);
+        author.setSpacing(5);
 
         VBox genre = new VBox();
         Text genreText = new Text("Genre");
         TextField genreInput = new TextField();
         genre.getChildren().addAll(genreText, genreInput);
+        genre.setSpacing(5);
 
         VBox publisher = new VBox();
         Text publisherText = new Text("Publisher");
         TextField publisherInput = new TextField();
         publisher.getChildren().addAll(publisherText, publisherInput);
+        publisher.setSpacing(5);
 
         VBox year = new VBox();
         Text yearText = new Text("Year");
         TextField yearInput = new TextField();
         year.getChildren().addAll(yearText, yearInput);
+        year.setSpacing(5);
 
         VBox quantity = new VBox();
         Text quantityText = new Text("Stock Qty");
         TextField qtyInput = new TextField();
         quantity.getChildren().addAll(quantityText, qtyInput);
+        quantity.setSpacing(5);
 
 
         HBox buttons = new HBox();
