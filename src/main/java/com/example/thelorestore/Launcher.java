@@ -1,3 +1,5 @@
+package com.example.thelorestore;
+
 import Scenes.AddItemScene;
 import Scenes.LoginScene;
 import javafx.application.Application;
