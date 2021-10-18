@@ -2,6 +2,7 @@ package Panes;
 
 import Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -66,12 +67,31 @@ public class UpdateItemPane extends StackPane {
 
         //Add the content of text & textfield to matching vbox
         title.getChildren().addAll(titleTxt, titleTextField);
-        author.getChildren().addAll(authorTxt, authorTextField);
-        genre.getChildren().addAll(genreTxt, genreTextField);
-        publisher.getChildren().addAll(publisherTxt, publisherTextField);
-        yearPublished.getChildren().addAll(yearTxt, yearTextField);
-        stockQuantity.getChildren().addAll(stockTxt, stockTextField);
+        title.setSpacing(5);
 
+        author.getChildren().addAll(authorTxt, authorTextField);
+        author.setSpacing(5);
+
+        genre.getChildren().addAll(genreTxt, genreTextField);
+        genre.setSpacing(5);
+
+        publisher.getChildren().addAll(publisherTxt, publisherTextField);
+        publisher.setSpacing(5);
+
+        yearPublished.getChildren().addAll(yearTxt, yearTextField);
+        yearPublished.setSpacing(5);
+
+        stockQuantity.getChildren().addAll(stockTxt, stockTextField);
+        stockQuantity.setSpacing(5);
+
+        //Vboxes get added to the input field box
+        inputFieldsBox.getChildren().addAll(title, author, genre, yearPublished, stockQuantity, buttons);
+        inputFieldsBox.setAlignment(Pos.CENTER);
+        inputFieldsBox.setMaxWidth(500);
+        inputFieldsBox.setSpacing(20);
+
+        //Add to the pane
+        this.getChildren().addAll(inputFieldsBox);
 
     }
 }
