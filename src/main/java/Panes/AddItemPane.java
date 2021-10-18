@@ -41,7 +41,7 @@ public class AddItemPane extends StackPane {
         publisher.setSpacing(5);
 
         VBox year = new VBox();
-        Text yearText = new Text("Year");
+        Text yearText = new Text("Year Published");
         TextField yearInput = new TextField();
         year.getChildren().addAll(yearText, yearInput);
         year.setSpacing(5);
