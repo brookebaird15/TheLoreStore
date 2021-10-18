@@ -54,6 +54,12 @@ public class UpdateItemPane extends StackPane {
             Launcher.mainStage.setScene(new MainTableScene());
         });
 
+        //A Cancel button to return user to Main Table
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.setOnAction(event -> {
+            Launcher.mainStage.setScene(new MainTableScene());
+        });
+
 
     }
 }
