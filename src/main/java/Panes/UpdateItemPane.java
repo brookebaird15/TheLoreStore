@@ -12,9 +12,14 @@ public class UpdateItemPane extends StackPane {
         VBox title = new VBox();
 
         //Vbox to hold author
+        VBox author = new VBox();
         //Vbox to hold genre
+        VBox genre = new VBox();
         //Vbox to hold publisher
+        VBox publisher = new VBox();
         //Vbox to hold year published
+        VBox yearPublished = new VBox();
         //Vbox to hold stock amount
+        VBox stockQuantity = new VBox();
     }
 }
