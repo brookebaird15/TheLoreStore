@@ -60,6 +60,18 @@ public class UpdateItemPane extends StackPane {
             Launcher.mainStage.setScene(new MainTableScene());
         });
 
+        //Add the buttons to the hbox
+        buttons.getChildren().addAll(updateBtn, cancelBtn);
+        buttons.setSpacing(50);
+
+        //Add the content of text & textfield to matching vbox
+        title.getChildren().addAll(titleTxt, titleTextField);
+        author.getChildren().addAll(authorTxt, authorTextField);
+        genre.getChildren().addAll(genreTxt, genreTextField);
+        publisher.getChildren().addAll(publisherTxt, publisherTextField);
+        yearPublished.getChildren().addAll(yearTxt, yearTextField);
+        stockQuantity.getChildren().addAll(stockTxt, stockTextField);
+
 
     }
 }
