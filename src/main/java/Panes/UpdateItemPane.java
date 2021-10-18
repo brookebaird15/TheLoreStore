@@ -30,6 +30,12 @@ public class UpdateItemPane extends StackPane {
         Text yearTxt = new Text("Year Published");
         Text stockTxt = new Text("Stock Qty");
 
-      
+        //Textfields to allow for input of each category
+        TextField titleTextField = new TextField();
+        TextField authorTextField = new TextField();
+        TextField genreTextField = new TextField();
+        TextField publisherTextField = new TextField();
+        TextField yearTextField = new TextField();
+        TextField stockTextField = new TextField();
     }
 }
