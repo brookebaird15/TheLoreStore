@@ -1,6 +1,10 @@
 package Panes;
 
+import Scenes.MainTableScene;
+import com.example.thelorestore.Launcher;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -22,6 +26,9 @@ public class UpdateItemPane extends StackPane {
         //Vbox to hold stock amount
         VBox stockQuantity = new VBox();
 
+        //An Hbox to hold all the buttons
+        HBox buttons = new HBox();
+
         //Texts for each input
         Text titleTxt = new Text("Title");
         Text authorTxt = new Text("Author");
@@ -37,5 +44,16 @@ public class UpdateItemPane extends StackPane {
         TextField publisherTextField = new TextField();
         TextField yearTextField = new TextField();
         TextField stockTextField = new TextField();
+
+        //An Update button to update info and return user to Main Table
+        Button updateBtn = new Button("Update Item");
+        updateBtn.setOnAction(event -> {
+            /*** TODO
+             * Create an update function
+             */
+            Launcher.mainStage.setScene(new MainTableScene());
+        });
+
+
     }
 }
