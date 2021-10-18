@@ -23,6 +23,9 @@ public class LoginPane extends StackPane {
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
             Launcher.mainStage.setScene(new MainTableScene());
+            /*** TODO
+             * Check login credentials for logging into database
+             */
         });
 
         TextField userTextField = new TextField();
