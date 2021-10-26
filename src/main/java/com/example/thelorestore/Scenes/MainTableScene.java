@@ -1,6 +1,6 @@
-package Scenes;
+package com.example.thelorestore.Scenes;
 
-import Panes.MainTablePane;
+import com.example.thelorestore.Panes.MainTablePane;
 import javafx.scene.Scene;
 
 public class MainTableScene extends Scene {
