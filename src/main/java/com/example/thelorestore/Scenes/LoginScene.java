@@ -1,6 +1,6 @@
-package Scenes;
+package com.example.thelorestore.Scenes;
 
-import Panes.LoginPane;
+import com.example.thelorestore.Panes.LoginPane;
 import javafx.scene.Scene;
 
 public class LoginScene extends Scene {
