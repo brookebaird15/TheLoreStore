@@ -1,6 +1,6 @@
-package Panes;
+package com.example.thelorestore.Panes;
 
-import Scenes.MainTableScene;
+import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

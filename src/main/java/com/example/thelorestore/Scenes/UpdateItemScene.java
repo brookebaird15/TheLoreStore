@@ -1,7 +1,6 @@
-package Scenes;
+package com.example.thelorestore.Scenes;
 
-import Panes.AddItemPane;
-import Panes.UpdateItemPane;
+import com.example.thelorestore.Panes.UpdateItemPane;
 import javafx.scene.Scene;
 
 public class UpdateItemScene extends Scene {
