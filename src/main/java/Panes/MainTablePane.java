@@ -1,6 +1,7 @@
 package Panes;
 
 import Scenes.AddItemScene;
+import Scenes.UpdateItemScene;
 import com.example.thelorestore.Launcher;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -73,7 +74,9 @@ public class MainTablePane extends StackPane {
         //viewItemButton directs user to ViewItemPane
         Button viewItemButton = new Button("View Item");
         viewItemButton.setOnAction(e -> {
-            //TODO - connect button to update/view scene
+            viewItemButton.setOnAction(event -> {
+                Launcher.mainStage.setScene(new UpdateItemScene());
+            });
         });
         editButtons.getChildren().addAll(addItemButton, viewItemButton);
         editButtons.setAlignment(Pos.CENTER);
