@@ -12,6 +12,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        Database.getInstance();
         mainStage = stage;
         mainStage.setScene(new LoginScene());
         mainStage.setResizable(false);
