@@ -30,6 +30,18 @@ public class DBTableValues {
     public static final String BOOK_YEAR_COLUMN = "year_published";
     public static final String BOOK_QUANTITY_COLUMN = "quantity";
 
+    /**
+     * Table Create Statements
+     * PUBLISHER TABLE - PRIMARY KEY, COMPANY
+     * GENRE TABLE - PRIMARY KEY, NAME
+     * AUTHOR TABLE - PRIMARY KEY, FIRST_NAME, MIDDLE_NAME, LAST_NAME, PREFIX, SUFFIX
+     * ITEM TABLE - PRIMARY KEY, TITLE, AUTHOR, GENRE, PUBLISHER, YEAR_PUBLISHED, QUANTITY
+     */
 
+    public static final String CREATE_PUBLISHER_TABLE =
+            "CREATE TABLE " + PUBLISHER_TABLE + " ("
+            + PUBLISHER_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+            + PUBLISHER_COMPANY_COLUMN + " VARCHAR(50), "
+            + "PRIMARY KEY(" + PUBLISHER_ID_COLUMN + ")" + ");";
 
 }
