@@ -44,4 +44,11 @@ public class DBTableValues {
             + PUBLISHER_COMPANY_COLUMN + " VARCHAR(50), "
             + "PRIMARY KEY(" + PUBLISHER_ID_COLUMN + ")" + ");";
 
+    public static final String CREATE_GENRE_TABLE =
+            "CREATE TABLE " + GENRE_TABLE + " ("
+            + GENRE_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+            + GENRE_NAME_COLUMN + " VARCHAR(30), "
+            + "PRIMARY KEY(" + GENRE_ID_COLUMN + ")" + ");";
+
+
 }
