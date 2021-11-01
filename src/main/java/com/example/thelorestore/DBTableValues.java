@@ -41,14 +41,24 @@ public class DBTableValues {
     public static final String CREATE_PUBLISHER_TABLE =
             "CREATE TABLE " + PUBLISHER_TABLE + " ("
             + PUBLISHER_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
-            + PUBLISHER_COMPANY_COLUMN + " VARCHAR(50), "
+            + PUBLISHER_COMPANY_COLUMN + " VARCHAR(50) NOT NULL, "
             + "PRIMARY KEY(" + PUBLISHER_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_GENRE_TABLE =
             "CREATE TABLE " + GENRE_TABLE + " ("
             + GENRE_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
-            + GENRE_NAME_COLUMN + " VARCHAR(30), "
+            + GENRE_NAME_COLUMN + " VARCHAR(30) NOT NULL, "
             + "PRIMARY KEY(" + GENRE_ID_COLUMN + ")" + ");";
+
+    public static final String CREATE_AUTHOR_TABLE =
+            "CREATE TABLE " + AUTHOR_TABLE + " ("
+            + AUTHOR_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+            + AUTHOR_FIRST_COLUMN + " VARCHAR(50) NOT NULL, "
+            + AUTHOR_MIDDLE_COLUMN + " VARCHAR(50), "
+            + AUTHOR_LAST_COLUMN + " VARCHAR(50) NOT NULL, "
+            + AUTHOR_PREFIX_COLUMN + " VARCHAR(10), "
+            + AUTHOR_SUFFIX_COLUMN + " VARCHAR(10), "
+            + "PRIMARY KEY(" + AUTHOR_ID_COLUMN + ")" + ");";
 
 
 }
