@@ -30,6 +30,6 @@ public class DBTableValues {
     public static final String BOOK_YEAR_COLUMN = "year_published";
     public static final String BOOK_QUANTITY_COLUMN = "quantity";
 
-    
+
 
 }
