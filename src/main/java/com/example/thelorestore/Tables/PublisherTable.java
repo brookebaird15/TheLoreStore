@@ -41,5 +41,32 @@ public class PublisherTable implements PublisherDAO {
         return publishers;
     }
 
+    /**
+     * Publisher object returns the publisher at ID and returns null if no match
+     * @param publisherID
+     * @return
+     */
+    @Override
+    public Publisher getPublisher(int publisherID) {
+        String query = "SELECT * FROM " + DBTableValues.PUBLISHER_ID_COLUMN + " WHERE "
+                + DBTableValues.PUBLISHER_ID_COLUMN + " = "
+                + publisherID;
+        Statement getPublisher = null;
 
+        //Statement being created and caught in try-catch
+        try {
+            getPublisher = db.getConnection().createStatement();
+            ResultSet data = getPublisher.executeQuery(query);
+
+            if (data.next()){
+                Publisher publisher = new Publisher(
+                        data.getInt(DBTableValues.PUBLISHER_ID_COLUMN),
+                        data.getString(DBTableValues.PUBLISHER_COMPANY_COLUMN)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
