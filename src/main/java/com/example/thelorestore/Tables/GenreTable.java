@@ -69,6 +69,6 @@ public class GenreTable implements GenreDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return null;
     }
 }
