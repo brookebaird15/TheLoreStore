@@ -71,8 +71,31 @@ public class BookTable implements BookDAO {
         return books;
     }
 
+    /**
+     * getBook() returns the book at the ID provided or null if no match
+     * @param id is the column id
+     * @return book | null
+     */
     @Override
     public Book getBook(int id) {
+        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + id;
+        try {
+            Statement getBook = db.getConnection().createStatement();
+            ResultSet data = getBook.executeQuery(query);
+            if(data.next()) {
+                Book book = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN),
+                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN),
+                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
+                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
+                        data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
+                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN));
+                return book;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
