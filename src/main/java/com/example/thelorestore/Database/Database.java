@@ -11,6 +11,7 @@ public class Database {
 
     /**
      * If the connection is null, create a new database connection
+     * Executes createTable for each table (Book, Author, Genre, Publisher)
      */
     private Database() {
         if(connection == null) {
@@ -18,7 +19,10 @@ public class Database {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DBConst.DB_NAME + "?serverTimezone=UTC", DBConst.DB_USER, DBConst.DB_PASS);
                 System.out.println("Connection created");
-                //TODO - create tables
+                createTable(DBTableValues.AUTHOR_TABLE, DBTableValues.CREATE_AUTHOR_TABLE, connection);
+                createTable(DBTableValues.GENRE_TABLE, DBTableValues.CREATE_GENRE_TABLE, connection);
+                createTable(DBTableValues.PUBLISHER_TABLE, DBTableValues.CREATE_PUBLISHER_TABLE, connection);
+                createTable(DBTableValues.BOOK_TABLE, DBTableValues.CREATE_BOOK_TABLE, connection);
             } catch (Exception e) {
                 e.printStackTrace();
             }

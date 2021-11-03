@@ -61,7 +61,7 @@ public class DBTableValues {
             + PUBLISHER_COMPANY_COLUMN + " VARCHAR(50) NOT NULL, "
             + "PRIMARY KEY(" + PUBLISHER_ID_COLUMN + ")" + ");";
 
-    public static final String CREATE_ITEM_TABLE =
+    public static final String CREATE_BOOK_TABLE =
             "CREATE TABLE " + BOOK_TABLE + "("
             + BOOK_ID_COLUMN + " int NOT NULL AUTO INCREMENT PRIMARY KEY,"
             + BOOK_TITLE_COLUMN + " VARCHAR(255) NOT NULL, "
