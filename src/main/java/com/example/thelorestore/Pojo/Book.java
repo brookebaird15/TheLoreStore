@@ -10,6 +10,17 @@ public class Book {
     private int quantity;
     private double price;
 
+    /**
+     * Book class constructors
+     * @param id
+     * @param title
+     * @param author
+     * @param genre
+     * @param publisher
+     * @param year
+     * @param quantity
+     * @param price
+     */
     public Book(int id, String title, int author, int genre, int publisher, int year, int quantity, double price) {
         this.id = id;
         this.title = title;
@@ -30,6 +41,10 @@ public class Book {
         this.quantity = quantity;
         this.price = price;
     }
+
+    /**
+     * Book class getters and setters
+     */
 
     public int getId() {
         return id;
@@ -94,6 +109,11 @@ public class Book {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    /**
+     * Book class toString
+     * returns book title
+     */
 
     @Override
     public String toString() {
