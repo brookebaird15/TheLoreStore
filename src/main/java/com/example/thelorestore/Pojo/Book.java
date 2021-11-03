@@ -112,7 +112,7 @@ public class Book {
 
     /**
      * Book class toString
-     * returns book title
+     * @return book title
      */
 
     @Override

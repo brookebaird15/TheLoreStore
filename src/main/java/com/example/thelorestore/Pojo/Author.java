@@ -1,13 +1,22 @@
 package com.example.thelorestore.Pojo;
 
 public class Author {
-
     private int id;
     private String firstName;
     private String lastName;
     private String middleName;
     private String prefix;
     private String suffix;
+
+    /**
+     * Author class constructors
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param middleName
+     * @param prefix
+     * @param suffix
+     */
 
     public Author(int id, String firstName, String lastName, String middleName, String prefix, String suffix) {
         this.id = id;
@@ -25,6 +34,10 @@ public class Author {
         this.prefix = prefix;
         this.suffix = suffix;
     }
+
+    /**
+     * Author class getters and setters
+     */
 
     public int getId() {
         return id;
@@ -74,6 +87,10 @@ public class Author {
         this.suffix = suffix;
     }
 
+    /**
+     * Author class toString
+     * @return Author full name including prefix and suffix
+     */
     public String toString() {
         return prefix + " " + firstName + " " + middleName + " " + lastName + " " + suffix;
     }
