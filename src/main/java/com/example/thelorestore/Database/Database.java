@@ -51,5 +51,23 @@ public class Database {
         }
     }
 
-    //TODO - add create table method
+    /**
+     * createTable() adds tables to database
+     * @param tableName
+     * @param tableQuery
+     * @param connection
+     * @throws SQLException
+     */
+    private void createTable(String tableName, String tableQuery, Connection connection) throws SQLException {
+        Statement createTable;
+        DatabaseMetaData md = connection.getMetaData();
+        ResultSet resultSet = md.getTables(DBConst.DB_CATALOGUE, null, tableName, null);
+        if(resultSet.next()) {
+            System.out.println(tableName + " table already exists");
+        } else {
+            createTable = connection.createStatement();
+            createTable.execute(tableQuery);
+            System.out.println("The " + tableName + " table has been inserted");
+        }
+    }
 }
