@@ -42,10 +42,10 @@ public class DBTableValues {
     public static final String CREATE_AUTHOR_TABLE =
             "CREATE TABLE " + AUTHOR_TABLE + " ("
                     + AUTHOR_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+                    + AUTHOR_PREFIX_COLUMN + " VARCHAR(10), "
                     + AUTHOR_FIRST_COLUMN + " VARCHAR(50) NOT NULL, "
                     + AUTHOR_MIDDLE_COLUMN + " VARCHAR(50), "
                     + AUTHOR_LAST_COLUMN + " VARCHAR(50) NOT NULL, "
-                    + AUTHOR_PREFIX_COLUMN + " VARCHAR(10), "
                     + AUTHOR_SUFFIX_COLUMN + " VARCHAR(10), "
                     + "PRIMARY KEY(" + AUTHOR_ID_COLUMN + ")" + ");";
 
