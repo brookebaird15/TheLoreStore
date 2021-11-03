@@ -1,10 +1,17 @@
 package com.example.thelorestore.Database;
 import java.sql.*;
 
+/**
+ * Database class follows the Singleton Pattern
+ */
+
 public class Database {
     private static Database instance;
     private Connection connection = null;
 
+    /**
+     * If the connection is null, create a new database connection
+     */
     private Database() {
         if(connection == null) {
             try {
@@ -18,6 +25,9 @@ public class Database {
         }
     }
 
+    /**
+     * getInstance() checks if the database connection is already active
+     */
     public static Database getInstance() {
         if(instance == null) {
             instance = new Database();
@@ -29,6 +39,9 @@ public class Database {
         return connection;
     }
 
+    /**
+     * close() closes the database connection
+     */
     public void close() {
         System.out.println("Closing connection");
         try {
