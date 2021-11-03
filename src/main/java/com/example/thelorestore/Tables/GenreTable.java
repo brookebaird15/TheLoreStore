@@ -28,7 +28,7 @@ public class GenreTable implements GenreDAO {
         //Database connect using createStatement, surrounded in a try-catch
         try {
             Statement getGenres = db.getConnection().createStatement();
-            ResultSet data= getGenres.executeQuery(query);
+            ResultSet data = getGenres.executeQuery(query);
 
             while (data.next()){
                 genres.add((new Genre(
@@ -54,6 +54,21 @@ public class GenreTable implements GenreDAO {
                 + DBTableValues.GENRE_ID_COLUMN + " = "
                 + genreID;
         Statement getGenre = null;
+
+        //Statement being created and connected to database, caught in try-catch
+        try {
+            getGenre = db.getConnection().createStatement();
+            ResultSet data = getGenre.executeQuery(query);
+
+            if (data.next()){
+                Genre genre = new Genre(
+                        data.getInt(DBTableValues.GENRE_ID_COLUMN),
+                        data.getString(DBTableValues.GENRE_NAME_COLUMN)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
