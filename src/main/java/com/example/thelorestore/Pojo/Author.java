@@ -18,6 +18,14 @@ public class Author {
         this.suffix = suffix;
     }
 
+    public Author(String firstName, String lastName, String middleName, String prefix, String suffix) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.prefix = prefix;
+        this.suffix = suffix;
+    }
+
     public int getId() {
         return id;
     }
