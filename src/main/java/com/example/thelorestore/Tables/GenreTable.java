@@ -31,10 +31,10 @@ public class GenreTable implements GenreDAO {
             ResultSet data = getGenres.executeQuery(query);
 
             while (data.next()){
-                genres.add((new Genre(
+                genres.add(new Genre(
                         data.getInt(DBTableValues.GENRE_ID_COLUMN),
                         data.getString(DBTableValues.GENRE_NAME_COLUMN)
-                )));
+                ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,6 +69,6 @@ public class GenreTable implements GenreDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return null;
     }
 }
