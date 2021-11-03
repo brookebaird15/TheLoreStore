@@ -29,6 +29,7 @@ public class DBTableValues {
     public static final String BOOK_PUBLISHER_COLUMN = "publisher";
     public static final String BOOK_YEAR_COLUMN = "year_published";
     public static final String BOOK_QUANTITY_COLUMN = "quantity";
+    public static final String BOOK_PRICE = "price";
 
     /**
      * Table Create Statements
@@ -69,6 +70,7 @@ public class DBTableValues {
             + BOOK_PUBLISHER_COLUMN + " VARCHAR(255) NOT NULL, "
             + BOOK_YEAR_COLUMN + " int(4) NOT NULL, "
             + BOOK_QUANTITY_COLUMN + " int, "
+            + BOOK_PRICE + " decimal(3,2) NOT NULL,"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_GENRE_COLUMN + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + "),"
