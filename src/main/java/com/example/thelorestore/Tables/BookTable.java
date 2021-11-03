@@ -5,7 +5,9 @@ import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Pojo.Book;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BookTable implements BookDAO {
@@ -42,9 +44,31 @@ public class BookTable implements BookDAO {
         }
     }
 
+    /**
+     * getAllBooks() returns all books in Book Table
+     * @return Arraylist of books
+     */
     @Override
     public ArrayList<Book> getAllBooks() {
-        return null;
+        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE;
+        books = new ArrayList<>();
+        try {
+            Statement getBooks = db.getConnection().createStatement();
+            ResultSet data = getBooks.executeQuery(query);
+            while (data.next()) {
+                books.add(new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN),
+                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN),
+                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
+                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
+                        data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
+                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
     }
 
     @Override
