@@ -1,4 +1,4 @@
-package com.example.thelorestore;
+package com.example.thelorestore.Database;
 
 public class DBTableValues {
     //Publisher Table

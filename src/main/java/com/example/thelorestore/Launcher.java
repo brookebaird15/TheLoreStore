@@ -1,7 +1,7 @@
 package com.example.thelorestore;
 
+import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Scenes.LoginScene;
-import com.example.thelorestore.Scenes.UpdateItemScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

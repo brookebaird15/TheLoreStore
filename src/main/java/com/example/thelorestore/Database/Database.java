@@ -1,4 +1,4 @@
-package com.example.thelorestore;
+package com.example.thelorestore.Database;
 import java.sql.*;
 
 public class Database {
