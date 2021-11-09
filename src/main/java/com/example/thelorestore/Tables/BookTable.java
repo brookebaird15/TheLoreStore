@@ -99,16 +99,6 @@ public class BookTable implements BookDAO {
         return null;
     }
 
-
-//    private int id;
-//    private String title;
-//    private int author;
-//    private int genre;
-//    private int publisher;
-//    private int year;
-//    private int quantity;
-//    private double price;
-
     @Override
     public void updateBook(Book book) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
@@ -131,6 +121,12 @@ public class BookTable implements BookDAO {
 
     @Override
     public void deleteBook(Book book) {
-        //TODO - Add deleteBook function
+        String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book;
+        try {
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Deleted record");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
