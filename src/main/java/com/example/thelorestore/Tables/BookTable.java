@@ -4,6 +4,7 @@ import com.example.thelorestore.DAOs.BookDAO;
 import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Pojo.Book;
+import com.example.thelorestore.Pojo.DisplayBook;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,5 +129,11 @@ public class BookTable implements BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<DisplayBook> displayBooks() {
+        ArrayList<DisplayBook> items = new ArrayList<>();
+        //TODO - add displayBook function
+        return items;
     }
 }
