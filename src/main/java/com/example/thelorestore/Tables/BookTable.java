@@ -99,9 +99,34 @@ public class BookTable implements BookDAO {
         return null;
     }
 
+
+//    private int id;
+//    private String title;
+//    private int author;
+//    private int genre;
+//    private int publisher;
+//    private int year;
+//    private int quantity;
+//    private double price;
+
     @Override
     public void updateBook(Book book) {
-        //TODO - Add updateBook function
+        String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
+                DBTableValues.BOOK_TITLE_COLUMN + " = " + book.getTitle() + ", " +
+                DBTableValues.BOOK_AUTHOR_COLUMN + " = " + book.getAuthor() + ", " +
+                DBTableValues.BOOK_GENRE_COLUMN + " = " + book.getGenre() + ", " +
+                DBTableValues.BOOK_PUBLISHER_COLUMN + " = " + book.getPublisher() + ", " +
+                DBTableValues.BOOK_YEAR_COLUMN + " = " + book.getYear() + ", " +
+                DBTableValues.BOOK_QUANTITY_COLUMN + " = " + book.getQuantity() + ", " +
+                DBTableValues.BOOK_PRICE_COLUMN + " = " + book.getPublisher() +
+                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+        try {
+            Statement updateItem = db.getConnection().createStatement();
+            updateItem.executeUpdate(query);
+            System.out.println("Record updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
