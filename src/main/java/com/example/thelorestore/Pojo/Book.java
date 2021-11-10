@@ -9,6 +9,7 @@ public class Book {
     private int year;
     private int quantity;
     private double price;
+    private String borrowed;
 
     /**
      * Book class constructors
@@ -20,8 +21,9 @@ public class Book {
      * @param year
      * @param quantity
      * @param price
+     * @param borrowed
      */
-    public Book(int id, String title, int author, int genre, int publisher, int year, int quantity, double price) {
+    public Book(int id, String title, int author, int genre, int publisher, int year, int quantity, double price, String borrowed) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -30,9 +32,10 @@ public class Book {
         this.year = year;
         this.quantity = quantity;
         this.price = price;
+        this.borrowed = borrowed;
     }
 
-    public Book(String title, int author, int genre, int publisher, int year, int quantity, double price) {
+    public Book(String title, int author, int genre, int publisher, int year, int quantity, double price, String borrowed) {
         this.title = title;
         this.author = author;
         this.genre = genre;
@@ -40,6 +43,7 @@ public class Book {
         this.year = year;
         this.quantity = quantity;
         this.price = price;
+        this.borrowed = borrowed;
     }
 
     /**
@@ -108,6 +112,14 @@ public class Book {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(String borrowed) {
+        this.borrowed = borrowed;
     }
 
     /**

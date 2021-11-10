@@ -29,14 +29,16 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_PUBLISHER_COLUMN + ", " +
                 DBTableValues.BOOK_YEAR_COLUMN + ", " +
                 DBTableValues.BOOK_QUANTITY_COLUMN + ", " +
-                DBTableValues.BOOK_PRICE_COLUMN + ") VALUES ('" +
+                DBTableValues.BOOK_PRICE_COLUMN + ", " +
+                DBTableValues.BOOK_BORROWED_COLUMN + ") VALUES ('" +
                 book.getTitle() + "','" +
                 book.getAuthor() + "','" +
                 book.getGenre() + "','" +
                 book.getPublisher() + "','" +
                 book.getYear() + "','" +
                 book.getQuantity() + "','" +
-                book.getPrice() + "')";
+                book.getPrice() + "','" +
+                book.getBorrowed() + "')";
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Record inserted");
@@ -64,7 +66,8 @@ public class BookTable implements BookDAO {
                         data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
-                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN)));
+                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
+                        data.getString(DBTableValues.BOOK_BORROWED_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,7 +94,8 @@ public class BookTable implements BookDAO {
                         data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
-                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN));
+                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
+                        data.getString(DBTableValues.BOOK_BORROWED_COLUMN));
                 return book;
             }
         } catch (SQLException e) {
@@ -113,7 +117,8 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_PUBLISHER_COLUMN + " = " + book.getPublisher() + ", " +
                 DBTableValues.BOOK_YEAR_COLUMN + " = " + book.getYear() + ", " +
                 DBTableValues.BOOK_QUANTITY_COLUMN + " = " + book.getQuantity() + ", " +
-                DBTableValues.BOOK_PRICE_COLUMN + " = " + book.getPublisher() +
+                DBTableValues.BOOK_PRICE_COLUMN + " = " + book.getPrice() +
+                DBTableValues.BOOK_BORROWED_COLUMN + " = " + book.getBorrowed() +
                 " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
         try {
             Statement updateItem = db.getConnection().createStatement();
