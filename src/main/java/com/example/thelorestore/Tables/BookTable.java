@@ -148,6 +148,8 @@ public class BookTable implements BookDAO {
      * displayPrettyBooks() displays all book table values formatted
      * @return books
      */
+
+    //TODO - check if sql statement correct, need to account for author having multiple columns?
     public ArrayList<DisplayBook> displayPrettyBooks() {
         ArrayList<DisplayBook> books = new ArrayList<>();
         String query = "SELECT book.id, book.title, book.author, book.genre, " +
