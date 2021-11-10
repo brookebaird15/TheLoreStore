@@ -100,6 +100,10 @@ public class BookTable implements BookDAO {
         return null;
     }
 
+    /**
+     * updateBook() updates the book information to the values provided
+     * @param book is the book being updated
+     */
     @Override
     public void updateBook(Book book) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
@@ -120,6 +124,10 @@ public class BookTable implements BookDAO {
         }
     }
 
+    /**
+     * deleteBook() deletes the book with the specified id
+     * @param book is the book being deleted
+     */
     @Override
     public void deleteBook(Book book) {
         String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book;
@@ -131,6 +139,10 @@ public class BookTable implements BookDAO {
         }
     }
 
+    /**
+     * displayBooks() displays all book table values formatted
+     * @return items
+     */
     public ArrayList<DisplayBook> displayBooks() {
         ArrayList<DisplayBook> items = new ArrayList<>();
         //TODO - add displayBook function
