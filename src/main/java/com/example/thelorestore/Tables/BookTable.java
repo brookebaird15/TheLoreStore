@@ -145,12 +145,30 @@ public class BookTable implements BookDAO {
     }
 
     /**
-     * displayBooks() displays all book table values formatted
-     * @return items
+     * displayPrettyBooks() displays all book table values formatted
+     * @return books
      */
-    public ArrayList<DisplayBook> displayBooks() {
-        ArrayList<DisplayBook> items = new ArrayList<>();
-        //TODO - add displayBook function
-        return items;
+    public ArrayList<DisplayBook> displayPrettyBooks() {
+        ArrayList<DisplayBook> books = new ArrayList<>();
+        String query = "SELECT book.id, book.title, book.author, book.genre, " +
+                "book.publisher, book.year_published, book.quantity, book.price, book.borrowed" +
+                "JOIN author on book.author = author.id " +
+                "JOIN genre on book.genre = genre.id " +
+                "JOIN publisher on book.publisher = publisher.id " +
+                "ORDER BY item.id ASC";
+        try {
+            Statement getBooks = db.getConnection().createStatement();
+            ResultSet data = getBooks.executeQuery(query);
+            while(data.next()) {
+                books.add(new DisplayBook(data.getInt("id"), data.getString("title"),
+                        data.getString("author"), data.getString("genre"),
+                        data.getString("publisher"), data.getInt("year_published"),
+                        data.getInt("quantity"), data.getDouble("price"),
+                        data.getString("borrowed")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
     }
 }
