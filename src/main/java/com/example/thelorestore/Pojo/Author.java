@@ -5,8 +5,7 @@ public class Author {
     private String firstName;
     private String lastName;
     private String middleName;
-    private String prefix;
-    private String suffix;
+
 
     /**
      * Author class constructors
@@ -14,25 +13,21 @@ public class Author {
      * @param firstName
      * @param lastName
      * @param middleName
-     * @param prefix
-     * @param suffix
+
      */
 
-    public Author(int id, String firstName, String lastName, String middleName, String prefix, String suffix) {
+    public Author(int id, String firstName, String lastName, String middleName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
-        this.prefix = prefix;
-        this.suffix = suffix;
+
     }
 
-    public Author(String firstName, String lastName, String middleName, String prefix, String suffix) {
+    public Author(String firstName, String lastName, String middleName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
-        this.prefix = prefix;
-        this.suffix = suffix;
     }
 
     /**
@@ -71,27 +66,12 @@ public class Author {
         this.middleName = middleName;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public String getSuffix() {
-        return suffix;
-    }
-
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
-    }
 
     /**
      * Author class toString
      * @return Author full name including prefix and suffix
      */
     public String toString() {
-        return prefix + " " + firstName + " " + middleName + " " + lastName + " " + suffix;
+        return  firstName + " " + middleName + " " + lastName;
     }
 }

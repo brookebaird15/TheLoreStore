@@ -28,11 +28,9 @@ public class AuthorTable implements AuthorDAO {
             ResultSet data = getAuthors.executeQuery(query);
             while (data.next()) {
                 authors.add(new Author(data.getInt(DBTableValues.AUTHOR_ID_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_PREFIX_COLUMN),
                         data.getString(DBTableValues.AUTHOR_FIRST_COLUMN),
                         data.getString(DBTableValues.AUTHOR_MIDDLE_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_LAST_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_SUFFIX_COLUMN)));
+                        data.getString(DBTableValues.AUTHOR_LAST_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,11 +51,9 @@ public class AuthorTable implements AuthorDAO {
             ResultSet data = getAuthor.executeQuery(query);
             if(data.next()) {
                 Author author = new Author(data.getInt(DBTableValues.AUTHOR_ID_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_PREFIX_COLUMN),
                         data.getString(DBTableValues.AUTHOR_FIRST_COLUMN),
                         data.getString(DBTableValues.AUTHOR_MIDDLE_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_LAST_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_SUFFIX_COLUMN));
+                        data.getString(DBTableValues.AUTHOR_LAST_COLUMN));
                 return author;
             }
         } catch (SQLException e) {
