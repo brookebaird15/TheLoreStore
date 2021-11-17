@@ -1,7 +1,7 @@
 package com.example.thelorestore.Pojo;
 
 public class DisplayBook {
-    private int id;
+    private int isbn;
     private String title;
     private String author;
     private String genre;
@@ -11,8 +11,8 @@ public class DisplayBook {
     private double price;
     private String borrowed;
 
-    public DisplayBook(int id, String title, String author, String genre, String publisher, int year, int quantity, double price, String borrowed) {
-        this.id = id;
+    public DisplayBook(int isbn, String title, String author, String genre, String publisher, int year, int quantity, double price, String borrowed) {
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genre = genre;
@@ -23,13 +23,11 @@ public class DisplayBook {
         this.borrowed = borrowed;
     }
 
-    public int getId() {
-        return id;
+    public int getISBN() {
+        return isbn;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setISBN(int id) {this.isbn = isbn;}
 
     public String getTitle() {
         return title;

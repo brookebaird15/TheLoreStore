@@ -17,12 +17,10 @@ public class DBTableValues {
     public static final String AUTHOR_FIRST_COLUMN = "first_name";
     public static final String AUTHOR_MIDDLE_COLUMN = "middle_name";
     public static final String AUTHOR_LAST_COLUMN = "last_name";
-    public static final String AUTHOR_PREFIX_COLUMN = "prefix";
-    public static final String AUTHOR_SUFFIX_COLUMN = "suffix";
 
     //Book Table
     public static final String BOOK_TABLE = "book";
-    public static final String BOOK_ID_COLUMN = "id";
+    public static final String BOOK_ISBN_COLUMN = "isbn";
     public static final String BOOK_TITLE_COLUMN = "title";
     public static final String BOOK_AUTHOR_COLUMN = "author";
     public static final String BOOK_GENRE_COLUMN = "genre";
@@ -43,11 +41,9 @@ public class DBTableValues {
     public static final String CREATE_AUTHOR_TABLE =
             "CREATE TABLE " + AUTHOR_TABLE + " ("
                     + AUTHOR_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
-                    + AUTHOR_PREFIX_COLUMN + " VARCHAR(10), "
                     + AUTHOR_FIRST_COLUMN + " VARCHAR(50) NOT NULL, "
                     + AUTHOR_MIDDLE_COLUMN + " VARCHAR(50), "
                     + AUTHOR_LAST_COLUMN + " VARCHAR(50) NOT NULL, "
-                    + AUTHOR_SUFFIX_COLUMN + " VARCHAR(10), "
                     + "PRIMARY KEY(" + AUTHOR_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_GENRE_TABLE =
@@ -64,7 +60,7 @@ public class DBTableValues {
 
     public static final String CREATE_BOOK_TABLE =
             "CREATE TABLE " + BOOK_TABLE + "("
-            + BOOK_ID_COLUMN + " int NOT NULL AUTO INCREMENT PRIMARY KEY,"
+            + BOOK_ISBN_COLUMN + " int NOT NULL PRIMARY KEY,"
             + BOOK_TITLE_COLUMN + " VARCHAR(255) NOT NULL, "
             + BOOK_AUTHOR_COLUMN + " int NOT NULL, "
             + BOOK_GENRE_COLUMN + " int NOT NULL, "

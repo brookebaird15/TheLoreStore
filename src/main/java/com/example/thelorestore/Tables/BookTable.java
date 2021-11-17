@@ -59,7 +59,7 @@ public class BookTable implements BookDAO {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while (data.next()) {
-                books.add(new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+                books.add(new Book(data.getInt(DBTableValues.BOOK_ISBN_COLUMN),
                         data.getString(DBTableValues.BOOK_TITLE_COLUMN),
                         data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN),
                         data.getInt(DBTableValues.BOOK_GENRE_COLUMN),
@@ -76,18 +76,18 @@ public class BookTable implements BookDAO {
     }
 
     /**
-     * getBook() returns the book at the ID provided or null if no match
-     * @param id is the column id
+     * getBook() returns the book at the ISBN provided or null if no match
+     * @param isbn is the column id
      * @return book | null
      */
     @Override
-    public Book getBook(int id) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + id;
+    public Book getBook(int isbn) {
+        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + isbn;
         try {
             Statement getBook = db.getConnection().createStatement();
             ResultSet data = getBook.executeQuery(query);
             if(data.next()) {
-                Book book = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+                Book book = new Book(data.getInt(DBTableValues.BOOK_ISBN_COLUMN),
                         data.getString(DBTableValues.BOOK_TITLE_COLUMN),
                         data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN),
                         data.getInt(DBTableValues.BOOK_GENRE_COLUMN),
@@ -119,7 +119,7 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_QUANTITY_COLUMN + " = " + book.getQuantity() + ", " +
                 DBTableValues.BOOK_PRICE_COLUMN + " = " + book.getPrice() +
                 DBTableValues.BOOK_BORROWED_COLUMN + " = " + book.getBorrowed() +
-                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+                " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getISBN();
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
@@ -135,7 +135,7 @@ public class BookTable implements BookDAO {
      */
     @Override
     public void deleteBook(Book book) {
-        String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book;
+        String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book;
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Deleted record");

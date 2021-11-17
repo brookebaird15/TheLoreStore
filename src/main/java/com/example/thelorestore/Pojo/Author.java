@@ -69,7 +69,7 @@ public class Author {
 
     /**
      * Author class toString
-     * @return Author full name including prefix and suffix
+     * @return Author full name
      */
     public String toString() {
         return  firstName + " " + middleName + " " + lastName;
