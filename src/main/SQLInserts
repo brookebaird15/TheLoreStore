@@ -146,7 +146,7 @@ VALUES
 (9781481455992, 'City of Fallen Angels', 26, NULL, NULL, 11, 1, NULL, 18, 2011, 1, 19.99, 1);
 
 INSERT INTO `book` (`isbn`, `title`, `author_1`, `author_2`, `author_3`, `genre_1`, `genre_2`, `genre_3`, `publisher`, `year_published`, `quantity`, `price`, `borrowed_qty`)
-VALUES (9781974713851, 'Cats of the Louvre', 1, NULL, NULL, 1, 17, 20, 1, 2019, 2, 39.85 1);
+VALUES (9781974713851, 'Cats of the Louvre', 1, NULL, NULL, 1, 17, 20, 1, 2019, 2, 39.85, 1);
 INSERT INTO `book` (`isbn`, `title`, `author_1`, `author_2`, `author_3`, `genre_1`, `genre_2`, `genre_3`, `publisher`, `year_published`, `quantity`, `price`, `borrowed_qty`)
 VALUES (9780544272996, 'What If?: Serious Scientifc Answers to Absurd Hypothetical Questions', 2, NULL, NULL, 2, 13, NULL, 2, 2014, 3, 40.00, 0);
 INSERT INTO `book` (`isbn`, `title`, `author_1`, `author_2`, `author_3`, `genre_1`, `genre_2`, `genre_3`, `publisher`, `year_published`, `quantity`, `price`, `borrowed_qty`)
