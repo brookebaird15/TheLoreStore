@@ -59,7 +59,7 @@ public class DBTableValues {
             + "PRIMARY KEY(" + PUBLISHER_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_BOOK_TABLE =
-            "CREATE TABLE " + BOOK_TABLE + "("
+            "CREATE TABLE " + BOOK_TABLE + " ("
             + BOOK_ISBN_COLUMN + " int NOT NULL PRIMARY KEY,"
             + BOOK_TITLE_COLUMN + " VARCHAR(255) NOT NULL, "
             + BOOK_AUTHOR_COLUMN + " int NOT NULL, "
@@ -71,7 +71,7 @@ public class DBTableValues {
             + BOOK_BORROWED_COLUMN + " VARCHAR(3) NOT NULL,"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_GENRE_COLUMN + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
-            + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + "),"
+            + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + ")"
             + ");";
 
 
