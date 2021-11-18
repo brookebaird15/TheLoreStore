@@ -3,8 +3,12 @@ package com.example.thelorestore.Pojo;
 public class Book {
     private int isbn;
     private String title;
-    private int author;
-    private int genre;
+    private int author1;
+    private int author2;
+    private int author3;
+    private int genre1;
+    private int genre2;
+    private int genre3;
     private int publisher;
     private int year;
     private int quantity;
@@ -15,19 +19,27 @@ public class Book {
      * Book class constructors
      * @param isbn
      * @param title
-     * @param author
-     * @param genre
+     * @param author1
+     * @param author2
+     * @param author3
+     * @param genre1
+     * @param genre2
+     * @param genre3
      * @param publisher
      * @param year
      * @param quantity
      * @param price
      * @param borrowed
      */
-    public Book(int isbn, String title, int author, int genre, int publisher, int year, int quantity, double price, String borrowed) {
+    public Book(int isbn, String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, String borrowed) {
         this.isbn = isbn;
         this.title = title;
-        this.author = author;
-        this.genre = genre;
+        this.author1 = author1;
+        this.author2 = author2;
+        this.author3 = author3;
+        this.genre1 = genre1;
+        this.genre2 = genre2;
+        this.genre3 = genre3;
         this.publisher = publisher;
         this.year = year;
         this.quantity = quantity;
@@ -35,10 +47,14 @@ public class Book {
         this.borrowed = borrowed;
     }
 
-    public Book(String title, int author, int genre, int publisher, int year, int quantity, double price, String borrowed) {
+    public Book(String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, String borrowed) {
         this.title = title;
-        this.author = author;
-        this.genre = genre;
+        this.author1 = author1;
+        this.author2 = author2;
+        this.author3 = author3;
+        this.genre1 = genre1;
+        this.genre2 = genre2;
+        this.genre3 = genre3;
         this.publisher = publisher;
         this.year = year;
         this.quantity = quantity;
@@ -66,20 +82,52 @@ public class Book {
         this.title = title;
     }
 
-    public int getAuthor() {
-        return author;
+    public int getAuthor1() {
+        return author1;
     }
 
-    public void setAuthor(int author) {
-        this.author = author;
+    public void setAuthor1(int author1) {
+        this.author1 = author1;
     }
 
-    public int getGenre() {
-        return genre;
+    public int getAuthor2() {
+        return author2;
     }
 
-    public void setGenre(int genre) {
-        this.genre = genre;
+    public void setAuthor2(int author2) {
+        this.author2 = author2;
+    }
+
+    public int getAuthor3() {
+        return author3;
+    }
+
+    public void setAuthor3(int author3) {
+        this.author3 = author3;
+    }
+
+    public int getGenre1() {
+        return genre1;
+    }
+
+    public void setGenre1(int genre1) {
+        this.genre1 = genre1;
+    }
+
+    public int getGenre2() {
+        return genre2;
+    }
+
+    public void setGenre2(int genre2) {
+        this.genre2 = genre2;
+    }
+
+    public int getGenre3() {
+        return genre3;
+    }
+
+    public void setGenre3(int genre3) {
+        this.genre3 = genre3;
     }
 
     public int getPublisher() {

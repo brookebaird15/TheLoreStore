@@ -22,8 +22,12 @@ public class DBTableValues {
     public static final String BOOK_TABLE = "book";
     public static final String BOOK_ISBN_COLUMN = "isbn";
     public static final String BOOK_TITLE_COLUMN = "title";
-    public static final String BOOK_AUTHOR_COLUMN = "author";
-    public static final String BOOK_GENRE_COLUMN = "genre";
+    public static final String BOOK_AUTHOR_COLUMN_1 = "author_1";
+    public static final String BOOK_AUTHOR_COLUMN_2 = "author_2";
+    public static final String BOOK_AUTHOR_COLUMN_3 = "author_3";
+    public static final String BOOK_GENRE_COLUMN_1 = "genre_1";
+    public static final String BOOK_GENRE_COLUMN_2 = "genre_2";
+    public static final String BOOK_GENRE_COLUMN_3 = "genre_3";
     public static final String BOOK_PUBLISHER_COLUMN = "publisher";
     public static final String BOOK_YEAR_COLUMN = "year_published";
     public static final String BOOK_QUANTITY_COLUMN = "quantity";
@@ -62,15 +66,23 @@ public class DBTableValues {
             "CREATE TABLE " + BOOK_TABLE + " ("
             + BOOK_ISBN_COLUMN + " int NOT NULL PRIMARY KEY,"
             + BOOK_TITLE_COLUMN + " VARCHAR(255) NOT NULL, "
-            + BOOK_AUTHOR_COLUMN + " int NOT NULL, "
-            + BOOK_GENRE_COLUMN + " int NOT NULL, "
+            + BOOK_AUTHOR_COLUMN_1 + " int NOT NULL, "
+            + BOOK_AUTHOR_COLUMN_2 + " int, "
+            + BOOK_AUTHOR_COLUMN_3 + " int, "
+            + BOOK_GENRE_COLUMN_1 + " int NOT NULL, "
+            + BOOK_GENRE_COLUMN_2 + " int, "
+            + BOOK_GENRE_COLUMN_3 + " int, "
             + BOOK_PUBLISHER_COLUMN + " int NOT NULL, "
             + BOOK_YEAR_COLUMN + " int(4) NOT NULL, "
             + BOOK_QUANTITY_COLUMN + " int, "
             + BOOK_PRICE_COLUMN + " decimal(3,2) NOT NULL, "
             + BOOK_BORROWED_COLUMN + " VARCHAR(3) NOT NULL,"
-            + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
-            + "FOREIGN KEY (" + BOOK_GENRE_COLUMN + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
+            + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_1 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
+            + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_2 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
+            + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_3 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
+            + "FOREIGN KEY (" + BOOK_GENRE_COLUMN_1 + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
+            + "FOREIGN KEY (" + BOOK_GENRE_COLUMN_2 + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
+            + "FOREIGN KEY (" + BOOK_GENRE_COLUMN_3 + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + ")"
             + ");";
 
