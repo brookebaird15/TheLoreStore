@@ -75,7 +75,7 @@ public class DBTableValues {
             + BOOK_PUBLISHER_COLUMN + " int NOT NULL, "
             + BOOK_YEAR_COLUMN + " int(4) NOT NULL, "
             + BOOK_QUANTITY_COLUMN + " int NOT NULL, "
-            + BOOK_PRICE_COLUMN + " decimal(3,2) NOT NULL, "
+            + BOOK_PRICE_COLUMN + " decimal(5,2) NOT NULL, "
             + BOOK_BORROWED_COLUMN + " int NOT NULL,"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_1 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_2 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
