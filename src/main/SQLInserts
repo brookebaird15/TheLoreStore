@@ -149,7 +149,7 @@ INSERT INTO `book` (`isbn`, `title`, `author_1`, `author_2`, `author_3`, `genre_
 VALUES
  (9781974713851, 'Cats of the Louvre', 1, NULL, NULL, 1, 17, 20, 1, 2019, 2, 39.85, 1),
 
- (9780544272996, 'What If?: Serious Scientifc Answers to Absurd Hypothetical Questions', 2, NULL, NULL, 2, 13, NULL, 2, 2014, 3, 40.00, 0),
+ (9780544272996, 'What If?: Serious Scientific Answers to Absurd Hypothetical Questions', 2, NULL, NULL, 2, 13, NULL, 2, 2014, 3, 40.00, 0),
 
  (9780393324822, 'Stiff', 3, NULL, NULL, 2, NULL, NULL, 3, 2004, 1, 22.95, 0),
 
