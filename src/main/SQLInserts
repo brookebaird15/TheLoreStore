@@ -99,7 +99,7 @@ INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NU
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Justin', NULL, 'McElroy');
 
 INSERT INTO book
-(isbn, title, author_1, author_2, author_3, genre_1, genre_2, genre_3, publisher, year_published, quantity, price, borrowed_quantity)
+(isbn, title, author_1, author_2, author_3, genre_1, genre_2, genre_3, publisher, year_published, quantity, price, borrowed_qty)
 VALUES
 (9781451627299, '11/22/63: A Novel', 42, NULL, NULL, 3, 18, NULL, 25, 2012, 4, 27.99, 3),
 (9781501180996, 'The Outsider: A Novel', 42, NULL, NULL, 16, 15, NULL, 25, 2020, 1, 14.99, 0),
@@ -118,7 +118,7 @@ VALUES
 (9780152061548, 'Life As We Knew It', 38, NULL, NULL, 11, 3, NULL, 2, 2008, 1, 14.99, 0),
 (9780785252993, 'Anne of Green Gables', 37, NULL, NULL, 7, NULL, NULL, 22, 2021, 1, 43.50, 0),
 (9780553582017, 'A Dance with Dragons: A Song of Ice and Fire: Book Five', 36, NULL, NULL, 1, NULL, NULL, 5, 2013, 1, 13.50, 1),
-(9780553582024, 'A Feast for Crows: A Song of Ice and Fire: Book Four', 36, NULL, NULL, 1, NULL, NULL, 5, 2006, 2, 13.50 0),
+(9780553582024, 'A Feast for Crows: A Song of Ice and Fire: Book Four', 36, NULL, NULL, 1, NULL, NULL, 5, 2006, 2, 13.50, 0),
 (9780553573428, 'A Storm of Swords: A Song of Ice and Fire: Book Three', 36, NULL, NULL, 1, NULL, NULL, 5, 2003, 1, 13.50, 0),
 (9780553579901, 'A Clash of Kings: A Song of Ice and Fire: Book Two', 36, NULL, NULL, 1, NULL, NULL, 5, 2000, 3, 13.50, 1),
 (9780553573404, 'A Game of Thrones: A Song of Ice and Fire: Book One', 36, NULL, NULL, 1, NULL, NULL, 5, 1997, 1, 13.50, 1),

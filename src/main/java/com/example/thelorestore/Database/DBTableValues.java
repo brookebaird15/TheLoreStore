@@ -64,7 +64,7 @@ public class DBTableValues {
 
     public static final String CREATE_BOOK_TABLE =
             "CREATE TABLE " + BOOK_TABLE + " ("
-            + BOOK_ISBN_COLUMN + " int NOT NULL PRIMARY KEY,"
+            + BOOK_ISBN_COLUMN + " bigint NOT NULL PRIMARY KEY,"
             + BOOK_TITLE_COLUMN + " VARCHAR(255) NOT NULL, "
             + BOOK_AUTHOR_COLUMN_1 + " int NOT NULL, "
             + BOOK_AUTHOR_COLUMN_2 + " int, "
