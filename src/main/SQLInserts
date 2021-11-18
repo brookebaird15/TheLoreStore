@@ -174,3 +174,4 @@ INSERT INTO `book` (`isbn`, `title`, `author_1`, `author_2`, `author_3`, `genre_
 VALUES (9781481455978, 'City of Ashes', 26, NULL, NULL, 11, 1, NULL, 18, 2008, 2, 19.99, 1)
 INSERT INTO `book` (`isbn`, `title`, `author_1`, `author_2`, `author_3`, `genre_1`, `genre_2`, `genre_3`, `publisher`, `year_published`, `quantity`, `price`, `borrowed`)
 VALUES (9781481455985, 'City of Glass', 26, NULL, NULL, 11, 1, NULL, 18, 2009, 2, 19.99, 1)
+
