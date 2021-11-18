@@ -78,7 +78,7 @@ INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('C
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Suzanne', NULL, 'Collins');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Joseph', NULL, 'Fink');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Becca', NULL, 'Fitzpatrick');
-INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Clint', NULL, 'Mcelroy');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Clint', NULL, 'McElroy');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Trixie', NULL, 'Mattel');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('John', NULL, 'Green');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Jenny', NULL, 'Han');
@@ -94,7 +94,7 @@ INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('S
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Linda', NULL, 'Kershaw');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('John', NULL, 'Arnason');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Jeffery', NULL, 'Cranor');
-INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Griffin', NULL, 'Mcelroy');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Griffin', NULL, 'McElroy');
 INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Katya', NULL, 'Zamalodchikova');
-INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Justin', NULL, 'Mcelroy');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES ('Justin', NULL, 'McElroy');
 
