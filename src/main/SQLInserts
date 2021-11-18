@@ -1,1 +1,24 @@
 <!-- DELETE THIS FILE AFTER USE DO NOT PUSH TO DEVELOPMENT -->
+INSERT INTO genre (id, genre) VALUES (NULL, 'Fantasy');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Non-Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Science Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Adventure');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Action');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Romance');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Kids Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Poetry');
+INSERT INTO genre (id, genre) VALUES (NULL, 'New-Age');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Illustration');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Young Adult');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Graphic Novel');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Comedy');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Historical Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Crime Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Horror');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Mystery');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Alternate History');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Dark Fantasy');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Manga');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Parody');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Mythopoeia');
+
