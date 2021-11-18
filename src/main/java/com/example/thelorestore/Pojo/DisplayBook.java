@@ -13,9 +13,9 @@ public class DisplayBook {
     private int year;
     private int quantity;
     private double price;
-    private String borrowed;
+    private int borrowed;
 
-    public DisplayBook(int isbn, String title, String author1, String author2, String author3, String genre1, String genre2, String genre3, String publisher, int year, int quantity, double price, String borrowed) {
+    public DisplayBook(int isbn, String title, String author1, String author2, String author3, String genre1, String genre2, String genre3, String publisher, int year, int quantity, double price, int borrowed) {
         this.isbn = isbn;
         this.title = title;
         this.author1 = author1;
@@ -125,11 +125,11 @@ public class DisplayBook {
         this.price = price;
     }
 
-    public String getBorrowed() {
+    public int getBorrowed() {
         return borrowed;
     }
 
-    public void setBorrowed(String borrowed) {
+    public void setBorrowed(int borrowed) {
         this.borrowed = borrowed;
     }
 

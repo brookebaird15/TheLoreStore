@@ -79,7 +79,7 @@ public class BookTable implements BookDAO {
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
                         data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
-                        data.getString(DBTableValues.BOOK_BORROWED_COLUMN)));
+                        data.getInt(DBTableValues.BOOK_BORROWED_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,7 +111,7 @@ public class BookTable implements BookDAO {
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
                         data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
-                        data.getString(DBTableValues.BOOK_BORROWED_COLUMN));
+                        data.getInt(DBTableValues.BOOK_BORROWED_COLUMN));
                 return book;
             }
         } catch (SQLException e) {
@@ -192,7 +192,7 @@ public class BookTable implements BookDAO {
                         data.getString(DBTableValues.BOOK_GENRE_COLUMN_2), data.getString(DBTableValues.BOOK_GENRE_COLUMN_3),
                         data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN), data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN), data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
-                        data.getString(DBTableValues.BOOK_BORROWED_COLUMN)));
+                        data.getInt(DBTableValues.BOOK_BORROWED_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

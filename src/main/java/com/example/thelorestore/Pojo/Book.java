@@ -13,7 +13,7 @@ public class Book {
     private int year;
     private int quantity;
     private double price;
-    private String borrowed;
+    private int borrowed;
 
     /**
      * Book class constructors
@@ -31,7 +31,7 @@ public class Book {
      * @param price
      * @param borrowed
      */
-    public Book(int isbn, String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, String borrowed) {
+    public Book(int isbn, String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, int borrowed) {
         this.isbn = isbn;
         this.title = title;
         this.author1 = author1;
@@ -47,7 +47,7 @@ public class Book {
         this.borrowed = borrowed;
     }
 
-    public Book(String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, String borrowed) {
+    public Book(String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, int borrowed) {
         this.title = title;
         this.author1 = author1;
         this.author2 = author2;
@@ -162,11 +162,11 @@ public class Book {
         this.price = price;
     }
 
-    public String getBorrowed() {
+    public int getBorrowed() {
         return borrowed;
     }
 
-    public void setBorrowed(String borrowed) {
+    public void setBorrowed(int borrowed) {
         this.borrowed = borrowed;
     }
 
