@@ -36,7 +36,7 @@ public class DBTableValues {
     public static final String BOOK_PUBLISHER_COLUMN = "publisher";
     public static final String BOOK_YEAR_COLUMN = "year_published";
     public static final String BOOK_STATUS_COLUMN = "status";
-    public static final String BOOK_COMMENT_COLUMN = "comments";
+    public static final String BOOK_COMMENT_COLUMN = "comment";
 
     /**
      * Table Create Statements

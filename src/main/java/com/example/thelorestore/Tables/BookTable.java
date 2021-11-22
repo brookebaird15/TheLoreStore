@@ -32,9 +32,8 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_GENRE_COLUMN_3 + ", " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + ", " +
                 DBTableValues.BOOK_YEAR_COLUMN + ", " +
-                DBTableValues.BOOK_QUANTITY_COLUMN + ", " +
-                DBTableValues.BOOK_PRICE_COLUMN + ", " +
-                DBTableValues.BOOK_BORROWED_COLUMN + ") VALUES ('" +
+                DBTableValues.BOOK_STATUS_COLUMN + ", " +
+                DBTableValues.BOOK_COMMENT_COLUMN + ") VALUES ('" +
                 book.getTitle() + "','" +
                 book.getAuthor1() + "','" +
                 book.getAuthor2() + "','" +
@@ -44,9 +43,8 @@ public class BookTable implements BookDAO {
                 book.getGenre3() + "','" +
                 book.getPublisher() + "','" +
                 book.getYear() + "','" +
-                book.getQuantity() + "','" +
-                book.getPrice() + "','" +
-                book.getBorrowed() + "')";
+                book.getStatus() + "','" +
+                book.getComment() + "')";
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Record inserted");
@@ -77,9 +75,8 @@ public class BookTable implements BookDAO {
                         data.getInt(DBTableValues.BOOK_GENRE_COLUMN_3),
                         data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
-                        data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
-                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
-                        data.getInt(DBTableValues.BOOK_BORROWED_COLUMN)));
+                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
+                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,9 +106,8 @@ public class BookTable implements BookDAO {
                         data.getInt(DBTableValues.BOOK_GENRE_COLUMN_3),
                         data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
-                        data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN),
-                        data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
-                        data.getInt(DBTableValues.BOOK_BORROWED_COLUMN));
+                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
+                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN));
                 return book;
             }
         } catch (SQLException e) {
@@ -136,10 +132,9 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_GENRE_COLUMN_3 + " = " + book.getGenre3() + ", " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + " = " + book.getPublisher() + ", " +
                 DBTableValues.BOOK_YEAR_COLUMN + " = " + book.getYear() + ", " +
-                DBTableValues.BOOK_QUANTITY_COLUMN + " = " + book.getQuantity() + ", " +
-                DBTableValues.BOOK_PRICE_COLUMN + " = " + book.getPrice() +
-                DBTableValues.BOOK_BORROWED_COLUMN + " = " + book.getBorrowed() +
-                " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getISBN();
+                DBTableValues.BOOK_STATUS_COLUMN + " = " + book.getStatus() + ", " +
+                DBTableValues.BOOK_COMMENT_COLUMN + " = " + book.getComment() +
+                " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getIsbn();
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
@@ -172,8 +167,10 @@ public class BookTable implements BookDAO {
     //TODO - check if sql statement correct, need to account for author having multiple columns?
     public ArrayList<DisplayBook> displayPrettyBooks() {
         ArrayList<DisplayBook> books = new ArrayList<>();
-        String query = "SELECT book.id, book.title, book.author, book.genre, " +
-                "book.publisher, book.year_published, book.quantity, book.price, book.borrowed " +
+        String query = "SELECT book.id, book.title, " +
+                "book.author_1, book.author_2, book.author_3, " +
+                "book.genre_1, book.genre_2, book.genre_3 " +
+                "book.publisher, book.year_published, book.status, book.comment " +
                 "JOIN author on book.author_1 = author.id " +
                 "JOIN author on book.author_2 = author.id " +
                 "JOIN author on book.author_3 = author.id " +
@@ -181,6 +178,7 @@ public class BookTable implements BookDAO {
                 "JOIN genre on book.genre_2 = genre.id " +
                 "JOIN genre on book.genre_3 = genre.id " +
                 "JOIN publisher on book.publisher = publisher.id " +
+                "JOIN status on book.status = status.id " +
                 "ORDER BY item.id ASC";
         try {
             Statement getBooks = db.getConnection().createStatement();
@@ -191,8 +189,7 @@ public class BookTable implements BookDAO {
                         data.getString(DBTableValues.BOOK_AUTHOR_COLUMN_3), data.getString(DBTableValues.BOOK_GENRE_COLUMN_1),
                         data.getString(DBTableValues.BOOK_GENRE_COLUMN_2), data.getString(DBTableValues.BOOK_GENRE_COLUMN_3),
                         data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN), data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
-                        data.getInt(DBTableValues.BOOK_QUANTITY_COLUMN), data.getDouble(DBTableValues.BOOK_PRICE_COLUMN),
-                        data.getInt(DBTableValues.BOOK_BORROWED_COLUMN)));
+                        data.getString(DBTableValues.BOOK_STATUS_COLUMN), data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

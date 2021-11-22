@@ -11,7 +11,8 @@ public class Book {
     private int genre3;
     private int publisher;
     private int year;
-    private int read;
+    private int status;
+    private String comment;
 
     /**
      * Book class constructors
@@ -25,8 +26,10 @@ public class Book {
      * @param genre3
      * @param publisher
      * @param year
+     * @param status
+     * @param comment
      */
-    public Book(int isbn, String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int read) {
+    public Book(int isbn, String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int status, String comment) {
         this.isbn = isbn;
         this.title = title;
         this.author1 = author1;
@@ -37,20 +40,18 @@ public class Book {
         this.genre3 = genre3;
         this.publisher = publisher;
         this.year = year;
-        this.read = read;
+        this.status = status;
+        this.comment = comment;
     }
-
-
 
     /**
      * Book class getters and setters
      */
-
-    public int getISBN() {
+    public int getIsbn() {
         return isbn;
     }
 
-    public void setISBN(int id) {
+    public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 
@@ -124,6 +125,22 @@ public class Book {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     /**
