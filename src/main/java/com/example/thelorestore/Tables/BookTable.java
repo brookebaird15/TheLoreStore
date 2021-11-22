@@ -47,7 +47,7 @@ public class BookTable implements BookDAO {
                 book.getComment() + "')";
         try {
             db.getConnection().createStatement().execute(query);
-            System.out.println("Record inserted");
+            System.out.println("Book record inserted");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,7 +138,7 @@ public class BookTable implements BookDAO {
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
-            System.out.println("Record updated");
+            System.out.println("Book updated");
         } catch (SQLException e) {
             e.printStackTrace();
         }
