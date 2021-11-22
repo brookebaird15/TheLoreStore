@@ -11,11 +11,10 @@ public class DisplayBook {
     private String genre3;
     private String publisher;
     private int year;
-    private int quantity;
-    private double price;
-    private int borrowed;
+    private String status;
+    private String comment;
 
-    public DisplayBook(int isbn, String title, String author1, String author2, String author3, String genre1, String genre2, String genre3, String publisher, int year, int quantity, double price, int borrowed) {
+    public DisplayBook(int isbn, String title, String author1, String author2, String author3, String genre1, String genre2, String genre3, String publisher, int year, String status, String comment) {
         this.isbn = isbn;
         this.title = title;
         this.author1 = author1;
@@ -26,16 +25,15 @@ public class DisplayBook {
         this.genre3 = genre3;
         this.publisher = publisher;
         this.year = year;
-        this.quantity = quantity;
-        this.price = price;
-        this.borrowed = borrowed;
+        this.status = status;
+        this.comment = comment;
     }
 
     public int getISBN() {
         return isbn;
     }
 
-    public void setISBN(int id) {this.isbn = isbn;}
+    public void setISBN(int isbn) {this.isbn = isbn;}
 
     public String getTitle() {
         return title;
@@ -109,34 +107,25 @@ public class DisplayBook {
         this.year = year;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getStatus() {
+        return status;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public double getPrice() {
-        return price;
+    public String getComment() {
+        return comment;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getBorrowed() {
-        return borrowed;
-    }
-
-    public void setBorrowed(int borrowed) {
-        this.borrowed = borrowed;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override
     public String toString() {
-        return "" +
-                "title='" + title + '\'' +
+        return  "title='" + title + '\'' +
                 ", author='" + author1 + '\'' +
                 ", author='" + author2 + '\'' +
                 ", author='" + author3 + '\'' +
@@ -145,8 +134,6 @@ public class DisplayBook {
                 ", genre='" + genre3 + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", year=" + year +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", borrowed=" + borrowed;
+                ", borrowed=" + status;
     }
 }

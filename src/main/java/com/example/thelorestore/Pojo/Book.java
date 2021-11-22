@@ -11,9 +11,7 @@ public class Book {
     private int genre3;
     private int publisher;
     private int year;
-    private int quantity;
-    private double price;
-    private int borrowed;
+    private int read;
 
     /**
      * Book class constructors
@@ -27,11 +25,8 @@ public class Book {
      * @param genre3
      * @param publisher
      * @param year
-     * @param quantity
-     * @param price
-     * @param borrowed
      */
-    public Book(int isbn, String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, int borrowed) {
+    public Book(int isbn, String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int read) {
         this.isbn = isbn;
         this.title = title;
         this.author1 = author1;
@@ -42,25 +37,10 @@ public class Book {
         this.genre3 = genre3;
         this.publisher = publisher;
         this.year = year;
-        this.quantity = quantity;
-        this.price = price;
-        this.borrowed = borrowed;
+        this.read = read;
     }
 
-    public Book(String title, int author1, int author2, int author3, int genre1, int genre2, int genre3, int publisher, int year, int quantity, double price, int borrowed) {
-        this.title = title;
-        this.author1 = author1;
-        this.author2 = author2;
-        this.author3 = author3;
-        this.genre1 = genre1;
-        this.genre2 = genre2;
-        this.genre3 = genre3;
-        this.publisher = publisher;
-        this.year = year;
-        this.quantity = quantity;
-        this.price = price;
-        this.borrowed = borrowed;
-    }
+
 
     /**
      * Book class getters and setters
@@ -144,30 +124,6 @@ public class Book {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getBorrowed() {
-        return borrowed;
-    }
-
-    public void setBorrowed(int borrowed) {
-        this.borrowed = borrowed;
     }
 
     /**
