@@ -29,32 +29,6 @@ public class MainTablePane extends BorderPane {
         tabPane.getTabs().addAll(bookTab, authorTab, genreTab, publisherTab);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-
-        //editButtons box holds addItem and viewItem buttons
-        HBox editButtons = new HBox();
-
-        //addItemButton directs user to AddItemPane
-        Button addItemButton = new Button("Add Book");
-        addItemButton.setOnAction(e -> {
-            Launcher.mainStage.setScene(new AddItemScene());
-        });
-
-        //viewItemButton directs user to ViewItemPane
-        Button viewItemButton = new Button("Update Book");
-        viewItemButton.setOnAction(e -> {
-                Launcher.mainStage.setScene(new UpdateItemScene());
-            });
-        editButtons.getChildren().addAll(addItemButton, viewItemButton);
-        editButtons.setAlignment(Pos.CENTER);
-        editButtons.setSpacing(500);
-        editButtons.requestFocus();
-
         this.setTop(tabPane);
-        this.setBottom(editButtons);
-
-//        contents.getChildren().addAll(tabPane, editButtons);
-//        contents.setAlignment(Pos.CENTER);
-//
-//        this.getChildren().addAll(contents);
     }
 }
