@@ -4,7 +4,9 @@ import com.example.thelorestore.DAOs.BookDAO;
 import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Pojo.Book;
+import com.example.thelorestore.Pojo.BookGenre;
 import com.example.thelorestore.Pojo.DisplayBook;
+import com.example.thelorestore.Pojo.Genre;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,13 +17,14 @@ public class BookTable implements BookDAO {
 
     Database db = Database.getInstance();
     ArrayList<Book> books;
+    BookGenreTable bookGenreTable = new BookGenreTable();
 
     /**
      * createBook() adds a book to the Book Table
      * @param book is the book being added
      */
     @Override
-    public void createBook(Book book) {
+    public void createBook(Book book, Genre genre) {
         String query = "INSERT INTO " + DBTableValues.BOOK_TABLE + "(" +
                 DBTableValues.BOOK_TITLE_COLUMN + ", " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + ", " +
@@ -33,6 +36,7 @@ public class BookTable implements BookDAO {
                 book.getYear() + "','" +
                 book.getStatus() + "','" +
                 book.getComment() + "')";
+        bookGenreTable.createBookGenreRelation(book, genre);
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Book record inserted");

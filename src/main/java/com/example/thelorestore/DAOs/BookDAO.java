@@ -1,6 +1,7 @@
 package com.example.thelorestore.DAOs;
 
 import com.example.thelorestore.Pojo.Book;
+import com.example.thelorestore.Pojo.Genre;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ public interface BookDAO {
      * Method for creating a new entry to the Book Table
      * @param book
      */
-    public void createBook(Book book);
+    public void createBook(Book book, Genre genre);
 
     /**
      * Method for accessing all books in Book Table
