@@ -170,8 +170,12 @@ public class BookTable implements BookDAO {
         ArrayList<DisplayBook> books = new ArrayList<>();
         String query = "SELECT book.id, book.title, " +
                 "book.author_1, book.author_2, book.author_3, " +
-                "book.genre_1, book.genre_2, book.genre_3 " +
-                "book.publisher, book.year_published, book.status, book.comment " +
+                "genre.genre as genre_1, " +
+                "genre.genre as genre_2, " +
+                "genre.genre as genre_3, " +
+                "publisher.company_name as publisher, " +
+                "book.year_published, " +
+                "status.status as status, " + "book.comment " +
                 "JOIN author on book.author_1 = author.id " +
                 "JOIN author on book.author_2 = author.id " +
                 "JOIN author on book.author_3 = author.id " +
