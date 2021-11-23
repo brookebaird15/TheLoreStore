@@ -20,10 +20,11 @@ public class GenreTab extends Tab {
 
         TableColumn<Genre, String> genreColumn = new TableColumn<>("Genre");
         genreColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getName()));
+        genreColumn.setPrefWidth(1000);
 
         tableView.getColumns().addAll(genreColumn);
         tableView.getItems().addAll(genreTable.getAllGenres());
-        genreColumn.setPrefWidth(700);
+
         root.setCenter(tableView);
 
         this.setContent(root);

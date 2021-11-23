@@ -38,7 +38,7 @@ public class PublisherTable implements PublisherDAO {
 
     @Override
     public ArrayList<Publisher> getAllPublishers() {
-        String query = "SELECT * FROM " + DBTableValues.PUBLISHER_ID_COLUMN;
+        String query = "SELECT * FROM " + DBTableValues.PUBLISHER_TABLE;
         publishers = new ArrayList<>();
 
         //Database statement surrounded in try-catch, executing the query
