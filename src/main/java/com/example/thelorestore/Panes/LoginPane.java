@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -49,10 +50,12 @@ public class LoginPane extends StackPane {
 
             //Holds all the username and password vboxes
             VBox loginBox = new VBox();
+            loginBox.setStyle( "-fx-background-color: rgba(255,255,255,0.5)");
             loginBox.getChildren().addAll(usernameBox, passwordBox, loginBtn);
             loginBox.setAlignment(Pos.CENTER);
             loginBox.setSpacing(10);
             loginBox.setMaxWidth(200);
+            loginBox.setMaxHeight(200);
 
             this.getChildren().addAll(booksImage, loginBox);
 
