@@ -3,13 +3,17 @@ package com.example.thelorestore.Panes;
 import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 //Extend StackPane
 public class LoginPane extends StackPane {
@@ -54,10 +58,44 @@ public class LoginPane extends StackPane {
 
         //Animations for background
         SequentialTransition moveImage = new SequentialTransition();
-            moveImage.getChildren().addAll(
-            )
+            moveImage.getChildren().addAll(translateHorizontal(booksImage, -250, 250),
+                    translateVertical(booksImage, 200, -200),
+                    translateHorizontal(booksImage, 250, -250),
+                    translateVertical(booksImage, -200, 200));
+            moveImage.setCycleCount(Timeline.INDEFINITE);
+            moveImage.play();
         }
 
+
+    /**
+     * Translate the object on the X axis of the screen
+     * @param node
+     * @param fromX
+     * @param toX
+     * @return
+     * @author Ashley McCallum
+     */
+    public TranslateTransition translateHorizontal(Node node, int fromX, int toX){
+      TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(25), node);
+      translateTransition.setFromX(fromX);
+      translateTransition.setToX(toX);
+      return translateTransition;
+}
+
+    /**
+     * Translate the object on the Y axis of the screen
+     * @param node
+     * @param fromY
+     * @param toY
+     * @return
+     * @author Ashley McCallum
+     */
+    public TranslateTransition translateVertical(Node node, int fromY, int toY){
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(25), node);
+        translateTransition.setFromY(fromY);
+        translateTransition.setToY(toY);
+        return translateTransition;
+    }
 
 
 
