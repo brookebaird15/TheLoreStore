@@ -164,7 +164,8 @@ public class BookTable implements BookDAO {
      * @return books
      */
 
-    //TODO - check if sql statement correct, need to account for author having multiple columns?
+    //TODO - check if sql statement correct
+    //TODO - is it possible to have all authors displayed in one column and all genres displayed in one column
     public ArrayList<DisplayBook> displayPrettyBooks() {
         ArrayList<DisplayBook> books = new ArrayList<>();
         String query = "SELECT book.id, book.title, " +
@@ -184,11 +185,11 @@ public class BookTable implements BookDAO {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
-                books.add(new DisplayBook(data.getInt(DBTableValues.BOOK_ISBN_COLUMN), data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+                books.add(new DisplayBook(data.getString(DBTableValues.BOOK_ISBN_COLUMN), data.getString(DBTableValues.BOOK_TITLE_COLUMN),
                         data.getString(DBTableValues.BOOK_AUTHOR_COLUMN_1), data.getString(DBTableValues.BOOK_AUTHOR_COLUMN_2),
                         data.getString(DBTableValues.BOOK_AUTHOR_COLUMN_3), data.getString(DBTableValues.BOOK_GENRE_COLUMN_1),
                         data.getString(DBTableValues.BOOK_GENRE_COLUMN_2), data.getString(DBTableValues.BOOK_GENRE_COLUMN_3),
-                        data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN), data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
+                        data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN), data.getString(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getString(DBTableValues.BOOK_STATUS_COLUMN), data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
             }
         } catch (SQLException e) {
