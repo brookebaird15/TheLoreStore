@@ -15,6 +15,23 @@ public class PublisherTable implements PublisherDAO {
     ArrayList<Publisher> publishers;
 
     /**
+     * createPublisher() adds a publisher to the Publisher table
+     * @param publisher is the publisher being added
+     */
+    @Override
+    public void createPublisher(Publisher publisher) {
+        String query = "INSERT INTO " + DBTableValues.PUBLISHER_TABLE + "(" +
+                DBTableValues.PUBLISHER_COMPANY_COLUMN + ") VALUES ('" +
+                publisher.getCompanyName() + "')";
+        try {
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Publisher record inserted");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * getAllPublisher returns all publishers in Publisher table with associated ID and name
      * @return
      */
@@ -68,5 +85,23 @@ public class PublisherTable implements PublisherDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * updatePublisher() updates the publisher information to the values provided
+     * @param publisher is the publisher being updated
+     */
+    @Override
+    public void updatePublisher(Publisher publisher) {
+        String query = "UPDATE " + DBTableValues.PUBLISHER_TABLE + " SET " +
+                DBTableValues.PUBLISHER_COMPANY_COLUMN + " = " + publisher.getCompanyName() +
+                " WHERE " + DBTableValues.PUBLISHER_ID_COLUMN + " = " + publisher.getId();
+        try {
+            Statement updatePublisher = db.getConnection().createStatement();
+            updatePublisher.executeUpdate(query);
+            System.out.println("Publisher updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
