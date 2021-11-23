@@ -5,6 +5,7 @@ import com.example.thelorestore.Launcher;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -54,12 +55,12 @@ public class AddItemPane extends StackPane {
         commentBox.setSpacing(5);
 
         //Checkboxes for the status
-        CheckBox checkbox1 = new CheckBox("Unread");
-        CheckBox checkbox2 = new CheckBox("In Progress");
-        CheckBox checkbox3 = new CheckBox("Completed");
+        RadioButton radioButton1 = new RadioButton("Unread");
+        RadioButton radioButton2 = new RadioButton("In Progress");
+        RadioButton radioButton3 = new RadioButton("Completed");
         HBox checkboxes = new HBox();
         checkboxes.setSpacing(5);
-        checkboxes.getChildren().addAll(checkbox1, checkbox2, checkbox3);
+        checkboxes.getChildren().addAll(radioButton1, radioButton2, radioButton3);
         //buttons box holds all buttons for pane
         HBox buttons = new HBox();
 
