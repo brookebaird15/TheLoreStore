@@ -15,12 +15,28 @@ public class GenreTable implements GenreDAO {
     ArrayList<Genre> genres;
 
     /**
+     * createGenre() adds a genre to the Genre Table
+     * @param genre is the genre being added
+     */
+    @Override
+    public void createGenre(Genre genre) {
+        String query = "INSERT INTO " + DBTableValues.GENRE_TABLE + "(" +
+                DBTableValues.GENRE_NAME_COLUMN + ") VALUES ('" +
+                genre.getName() + "')";
+        try {
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Genre record inserted");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Method to create the Genre Table is executing an SQL query and creating table
      * @String query
      * @ArrayList genres
      * @return
      */
-
     public ArrayList<Genre> getAllGenres() {
         String query = "SELECT * FROM " + DBTableValues.GENRE_TABLE;
         genres = new ArrayList<>();
@@ -70,5 +86,23 @@ public class GenreTable implements GenreDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * updateGenre() updates the genre information to the values provided
+     * @param genre is the genre being updated
+     */
+    @Override
+    public void updateGenre(Genre genre) {
+        String query = "UPDATE " + DBTableValues.GENRE_TABLE + " SET " +
+                DBTableValues.GENRE_NAME_COLUMN + " = " + genre.getName() +
+                " WHERE " + DBTableValues.GENRE_ID_COLUMN + " = " + genre.getId();
+        try {
+            Statement updateGenre = db.getConnection().createStatement();
+            updateGenre.executeUpdate(query);
+            System.out.println("Genre updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

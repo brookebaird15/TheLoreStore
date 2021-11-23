@@ -16,6 +16,27 @@ public class AuthorTable implements AuthorDAO {
     ArrayList<Author> authors;
 
     /**
+     * createAuthor() adds an author to the Author table
+     * @param author is the author being added
+     */
+    @Override
+    public void createAuthor(Author author) {
+        String query = "INSERT INTO " + DBTableValues.AUTHOR_TABLE + "(" +
+                DBTableValues.AUTHOR_FIRST_COLUMN + ", " +
+                DBTableValues.AUTHOR_MIDDLE_COLUMN + ", " +
+                DBTableValues.AUTHOR_LAST_COLUMN + ") VALUES ('" +
+                author.getFirstName() + "','" +
+                author.getMiddleName() + "','" +
+                author.getLastName() + "')";
+        try {
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Author record inserted");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * getAllAuthors() returns all authors in Author Table
      * @return Arraylist of authors
      */
@@ -60,5 +81,25 @@ public class AuthorTable implements AuthorDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * updateAuthor() updates the author information to the values provided
+     * @param author is the author being updated
+     */
+    @Override
+    public void updateAuthor(Author author) {
+        String query = "UPDATE " + DBTableValues.AUTHOR_TABLE + " SET " +
+                DBTableValues.AUTHOR_FIRST_COLUMN + " = " + author.getFirstName() + ", " +
+                DBTableValues.AUTHOR_MIDDLE_COLUMN + " = " + author.getMiddleName() + ", " +
+                DBTableValues.AUTHOR_LAST_COLUMN + " = " + author.getLastName() +
+                " WHERE " + DBTableValues.AUTHOR_ID_COLUMN + " = " + author.getId();
+        try {
+            Statement updateAuthor = db.getConnection().createStatement();
+            updateAuthor.executeUpdate(query);
+            System.out.println("Author updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

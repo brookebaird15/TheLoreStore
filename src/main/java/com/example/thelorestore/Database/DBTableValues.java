@@ -11,6 +11,11 @@ public class DBTableValues {
     public static final String GENRE_ID_COLUMN = "id";
     public static final String GENRE_NAME_COLUMN = "genre";
 
+    //Status Table
+    public static final String STATUS_TABLE = "status";
+    public static final String STATUS_ID_COLUMN = "id";
+    public static final String STATUS_NAME_COLUMN = "status";
+
     //Author Table
     public static final String AUTHOR_TABLE = "author";
     public static final String AUTHOR_ID_COLUMN = "id";
@@ -30,16 +35,15 @@ public class DBTableValues {
     public static final String BOOK_GENRE_COLUMN_3 = "genre_3";
     public static final String BOOK_PUBLISHER_COLUMN = "publisher";
     public static final String BOOK_YEAR_COLUMN = "year_published";
-    public static final String BOOK_QUANTITY_COLUMN = "quantity";
-    public static final String BOOK_PRICE_COLUMN = "price";
-    public static final String BOOK_BORROWED_COLUMN = "borrowed_qty";
+    public static final String BOOK_STATUS_COLUMN = "status";
+    public static final String BOOK_COMMENT_COLUMN = "comment";
 
     /**
      * Table Create Statements
-     * PUBLISHER TABLE - PRIMARY KEY, COMPANY
-     * GENRE TABLE - PRIMARY KEY, NAME
-     * AUTHOR TABLE - PRIMARY KEY, FIRST_NAME, MIDDLE_NAME, LAST_NAME, PREFIX, SUFFIX
-     * BOOK TABLE - PRIMARY KEY, TITLE, AUTHOR, GENRE, PUBLISHER, YEAR_PUBLISHED, QUANTITY
+     * PUBLISHER TABLE - ID, COMPANY
+     * GENRE TABLE - ID, GENRE
+     * AUTHOR TABLE - ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME
+     * BOOK TABLE - ID, TITLE, AUTHOR_1, AUTHOR_2, AUTHOR_3, GENRE_1, GENRE_2, GENRE_3, PUBLISHER, YEAR_PUBLISHED, READ, COMMENTS
      */
 
     public static final String CREATE_AUTHOR_TABLE =
@@ -55,6 +59,12 @@ public class DBTableValues {
                     + GENRE_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
                     + GENRE_NAME_COLUMN + " VARCHAR(30) NOT NULL, "
                     + "PRIMARY KEY(" + GENRE_ID_COLUMN + ")" + ");";
+
+    public static final String CREATE_STATUS_TABLE =
+            "CREATE TABLE " + STATUS_TABLE + " ("
+                    + STATUS_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+                    + STATUS_NAME_COLUMN + " VARCHAR(15) NOT NULL, "
+                    + "PRIMARY KEY(" + STATUS_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_PUBLISHER_TABLE =
             "CREATE TABLE " + PUBLISHER_TABLE + " ("
@@ -74,9 +84,8 @@ public class DBTableValues {
             + BOOK_GENRE_COLUMN_3 + " int, "
             + BOOK_PUBLISHER_COLUMN + " int NOT NULL, "
             + BOOK_YEAR_COLUMN + " int(4) NOT NULL, "
-            + BOOK_QUANTITY_COLUMN + " int NOT NULL, "
-            + BOOK_PRICE_COLUMN + " decimal(5,2) NOT NULL, "
-            + BOOK_BORROWED_COLUMN + " int NOT NULL,"
+            + BOOK_STATUS_COLUMN + " int NOT NULL, "
+            + BOOK_COMMENT_COLUMN + " VARCHAR(1000),"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_1 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_2 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_3 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
