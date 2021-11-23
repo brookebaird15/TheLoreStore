@@ -3,8 +3,7 @@ package com.example.thelorestore.Panes;
 import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -46,11 +45,24 @@ public class AddItemPane extends StackPane {
         year.getChildren().addAll(yearText, yearInput);
         year.setSpacing(5);
 
-        VBox quantity = new VBox();
-        Text quantityText = new Text("Stock Qty");
-        TextField qtyInput = new TextField();
-        quantity.getChildren().addAll(quantityText, qtyInput);
-        quantity.setSpacing(5);
+        VBox commentBox = new VBox();
+        Text commentText = new Text("Comment");
+        TextField commentInput = new TextField();
+        commentBox.getChildren().addAll(commentText, commentInput);
+        commentBox.setSpacing(5);
+
+        //Checkboxes for the status
+        RadioButton radioButton1 = new RadioButton("Unread");
+        RadioButton radioButton2 = new RadioButton("In Progress");
+        RadioButton radioButton3 = new RadioButton("Completed");
+        ToggleGroup buttonGroup = new ToggleGroup();
+        radioButton1.setToggleGroup(buttonGroup);
+        radioButton2.setToggleGroup(buttonGroup);
+        radioButton3.setToggleGroup(buttonGroup);
+        //Hbox for the radio buttons
+        HBox checkboxes = new HBox();
+        checkboxes.setSpacing(5);
+        checkboxes.getChildren().addAll(radioButton1, radioButton2, radioButton3);
 
         //buttons box holds all buttons for pane
         HBox buttons = new HBox();
@@ -70,7 +82,7 @@ public class AddItemPane extends StackPane {
         buttons.getChildren().addAll(addButton, cancelButton);
         buttons.setSpacing(50);
 
-        inputFields.getChildren().addAll(title, author, genre, publisher, year, quantity, buttons);
+        inputFields.getChildren().addAll(title, author, genre, publisher, year, commentBox, checkboxes, buttons);
         inputFields.setAlignment(Pos.CENTER);
         inputFields.setMaxWidth(500);
         inputFields.setSpacing(20);
