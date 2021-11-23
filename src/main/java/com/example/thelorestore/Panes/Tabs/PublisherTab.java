@@ -40,6 +40,8 @@ public class PublisherTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
+        //TODO - add button to cancel add and update
+
         Button saveAddButton = new Button("Save");
         saveAddButton.setOnAction(e-> {
             Publisher publisher = new Publisher(publisherField.getText());
@@ -50,7 +52,6 @@ public class PublisherTab extends Tab {
         });
         saveAddButton.setVisible(false);
 
-        //addItemButton directs user to AddItemPane
         Button addPubButton = new Button("Add Publisher");
         addPubButton.setOnAction(e -> {
             publisherField.setVisible(true);
@@ -69,7 +70,6 @@ public class PublisherTab extends Tab {
         });
         saveUpdateButton.setVisible(false);
 
-        //updatePubButton directs user to ViewItemPane
         Button updatePubButton = new Button("Update Publisher");
         updatePubButton.setOnAction(e -> {
             publisherField.setText(tableView.getSelectionModel().getSelectedItem().toString());
