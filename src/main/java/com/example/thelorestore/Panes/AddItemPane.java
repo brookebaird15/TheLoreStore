@@ -52,7 +52,14 @@ public class AddItemPane extends StackPane {
         TextField commentInput = new TextField();
         commentBox.getChildren().addAll(commentText, commentInput);
         commentBox.setSpacing(5);
-        
+
+        //Checkboxes for the status
+        CheckBox checkbox1 = new CheckBox("Unread");
+        CheckBox checkbox2 = new CheckBox("In Progress");
+        CheckBox checkbox3 = new CheckBox("Completed");
+        HBox checkboxes = new HBox();
+        checkboxes.setSpacing(5);
+        checkboxes.getChildren().addAll(checkbox1, checkbox2, checkbox3);
         //buttons box holds all buttons for pane
         HBox buttons = new HBox();
 
@@ -71,7 +78,7 @@ public class AddItemPane extends StackPane {
         buttons.getChildren().addAll(addButton, cancelButton);
         buttons.setSpacing(50);
 
-        inputFields.getChildren().addAll(title, author, genre, publisher, year, commentBox, buttons);
+        inputFields.getChildren().addAll(title, author, genre, publisher, year, commentBox, checkboxes, buttons);
         inputFields.setAlignment(Pos.CENTER);
         inputFields.setMaxWidth(500);
         inputFields.setSpacing(20);
