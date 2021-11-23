@@ -3,10 +3,7 @@ package com.example.thelorestore.Tables;
 import com.example.thelorestore.DAOs.BookDAO;
 import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
-import com.example.thelorestore.Pojo.Book;
-import com.example.thelorestore.Pojo.BookGenre;
-import com.example.thelorestore.Pojo.DisplayBook;
-import com.example.thelorestore.Pojo.Genre;
+import com.example.thelorestore.Pojo.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,13 +15,14 @@ public class BookTable implements BookDAO {
     Database db = Database.getInstance();
     ArrayList<Book> books;
     BookGenreTable bookGenreTable = new BookGenreTable();
+    BookAuthorTable bookAuthorTable = new BookAuthorTable();
 
     /**
      * createBook() adds a book to the Book Table
      * @param book is the book being added
      */
     @Override
-    public void createBook(Book book, Genre genre) {
+    public void createBook(Book book, Genre genre, Author author) {
         String query = "INSERT INTO " + DBTableValues.BOOK_TABLE + "(" +
                 DBTableValues.BOOK_TITLE_COLUMN + ", " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + ", " +
@@ -37,6 +35,7 @@ public class BookTable implements BookDAO {
                 book.getStatus() + "','" +
                 book.getComment() + "')";
         bookGenreTable.createBookGenreRelation(book, genre);
+        bookAuthorTable.createBookAuthorRelation(book, author);
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Book record inserted");
@@ -101,7 +100,7 @@ public class BookTable implements BookDAO {
      * @param book is the book being updated
      */
     @Override
-    public void updateBook(Book book) {
+    public void updateBook(Book book, Genre genre, Author author) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
                 DBTableValues.BOOK_TITLE_COLUMN + " = '" + book.getTitle() + "', " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + " = '" + book.getPublisher() + "', " +
@@ -109,6 +108,8 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_STATUS_COLUMN + " = '" + book.getStatus() + "', " +
                 DBTableValues.BOOK_COMMENT_COLUMN + " = '" + book.getComment() +
                 "' WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+        bookGenreTable.updateGenreRelation(book, genre);
+        bookAuthorTable.updateBookAuthorRelation(book, author);
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);

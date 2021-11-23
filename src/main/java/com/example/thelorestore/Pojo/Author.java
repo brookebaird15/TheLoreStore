@@ -30,6 +30,10 @@ public class Author {
         this.middleName = middleName;
     }
 
+    public Author(int id) {
+        this.id = id;
+    }
+
     /**
      * Author class getters and setters
      */

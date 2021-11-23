@@ -78,4 +78,18 @@ public class BookAuthorTable implements BookAuthorDAO {
 
         return authors;
     }
+
+    @Override
+    public void updateBookAuthorRelation(Book book, Author author) {
+        String query = "UPDATE " + DBTableValues.BOOK_AUTHOR_TABLE + " SET " +
+                DBTableValues.GENRE_FK_ID_COLUMN + " = " + author.getId() +
+                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+        try {
+            Statement updateRelation = db.getConnection().createStatement();
+            updateRelation.executeUpdate(query);
+            System.out.println("Book/author relation updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.thelorestore.DAOs;
 
+import com.example.thelorestore.Pojo.Author;
 import com.example.thelorestore.Pojo.Book;
 import com.example.thelorestore.Pojo.Genre;
 
@@ -10,7 +11,7 @@ public interface BookDAO {
      * Method for creating a new entry to the Book Table
      * @param book
      */
-    public void createBook(Book book, Genre genre);
+    public void createBook(Book book, Genre genre, Author author);
 
     /**
      * Method for accessing all books in Book Table
@@ -27,7 +28,7 @@ public interface BookDAO {
      * Method for updating book information in Book Table
      * @param book
      */
-    public void updateBook(Book book);
+    public void updateBook(Book book, Genre genre, Author author);
 
     /**
      * Method for removing a book from the Book Table

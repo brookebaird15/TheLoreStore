@@ -26,6 +26,10 @@ public class Book {
         this.comment = comment;
     }
 
+    public Book(int id) {
+        this.id = id;
+    }
+
     /**
      * Book class getters and setters
      */

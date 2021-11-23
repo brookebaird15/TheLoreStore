@@ -10,4 +10,5 @@ public interface BookGenreDAO {
     public void createBookGenreRelation(Book book, Genre genre);
     public ArrayList<Book> getAllBooksForGenre(BookGenre bookGenre);
     public ArrayList<Genre> getAllGenresForBook(BookGenre bookGenre);
+    public void updateGenreRelation(Book book, Genre genre);
 }

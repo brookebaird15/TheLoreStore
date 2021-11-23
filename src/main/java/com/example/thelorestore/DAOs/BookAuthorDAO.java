@@ -10,4 +10,5 @@ public interface BookAuthorDAO {
     public void createBookAuthorRelation(Book book, Author author);
     public ArrayList<Book> getAllBooksForAuthor(BookAuthor bookAuthor);
     public ArrayList<Author> getAllAuthorsForBook(BookAuthor bookAuthor);
+    public void updateBookAuthorRelation(Book book, Author author);
 }
