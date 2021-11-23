@@ -3,10 +3,7 @@ package com.example.thelorestore.Panes;
 import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -58,9 +55,15 @@ public class AddItemPane extends StackPane {
         RadioButton radioButton1 = new RadioButton("Unread");
         RadioButton radioButton2 = new RadioButton("In Progress");
         RadioButton radioButton3 = new RadioButton("Completed");
+        ToggleGroup buttonGroup = new ToggleGroup();
+        radioButton1.setToggleGroup(buttonGroup);
+        radioButton2.setToggleGroup(buttonGroup);
+        radioButton3.setToggleGroup(buttonGroup);
+        //Hbox for the radio buttons
         HBox checkboxes = new HBox();
         checkboxes.setSpacing(5);
         checkboxes.getChildren().addAll(radioButton1, radioButton2, radioButton3);
+
         //buttons box holds all buttons for pane
         HBox buttons = new HBox();
 
