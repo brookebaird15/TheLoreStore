@@ -1,0 +1,195 @@
+INSERT INTO status (id, status)
+VALUES
+(NULL, 'unread'),
+(NULL, 'in progress'),
+(NULL, 'completed');
+
+INSERT INTO genre (id, genre) VALUES (NULL, 'Fantasy');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Non-Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Science Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Adventure');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Action');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Romance');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Kids Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Poetry');
+INSERT INTO genre (id, genre) VALUES (NULL, 'New-Age');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Illustration');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Young Adult');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Graphic Novel');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Comedy');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Historical Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Crime Fiction');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Horror');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Mystery');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Alternate History');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Dark Fantasy');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Manga');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Parody');
+INSERT INTO genre (id, genre) VALUES (NULL, 'Mythopoeia');
+
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Viz Media LLC');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Houghton Mifflin Harcourt');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'WW Norton');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Penguin Publishing Group');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Random House Publishing Group');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Kodansha Comics');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Shambhala');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Partners Publishing');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Pie International');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Grand Central Publishing');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Annick Press');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'HarperCollins');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Llewellyn Worldwide, LTD.');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Red Wheel Weiser');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Shueisha');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Penguin Young Readers Group');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Random House Children''s Books');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Margaret K. McElderry Books');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Scholastic Inc.');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Simon & Schuster Books');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'First Second');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Thomas Nelson');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Disney-Hyperion');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Knopf Doubleday Publishing Group');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Scribner');
+INSERT INTO publisher (id, company_name) VALUES (NULL, 'Gallery Books');
+
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Taiyo', NULL, 'Matsumoto');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Randall', NULL, 'Munroe');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Mary', NULL, 'Roach');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Phillip', 'K.', 'Dick');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Frank', NULL, 'Herbert');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'HG', NULL, 'Wells');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Eiichiro', NULL, 'Oda');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Hajime', NULL, 'Isayama');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Gege', NULL, 'Akutami');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Sun', NULL, 'Tzu');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Andy', NULL, 'MacKinnon');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Toshimitsu', NULL, 'Fukiharu');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Nicholas', NULL, 'Sparks');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Ali', NULL, 'Hazelwood');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Carl', NULL, 'Sagan');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Robert', NULL, 'Munsch');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Shel', NULL, 'Silverstein');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Judy', NULL, 'Hall');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Mat', NULL, 'Auryn');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Jason', NULL, 'Miller');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Haruichi', NULL, 'Furudate');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Louisa', 'May', 'Alcott');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Jane', NULL, 'Austen');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Libba', NULL, 'Bray');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Jim', NULL, 'Butcher');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Cassandra', NULL, 'Clare');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Suzanne', NULL, 'Collins');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Joseph', NULL, 'Fink');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Becca', NULL, 'Fitzpatrick');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Clint', NULL, 'McElroy');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Trixie', NULL, 'Mattel');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'John', NULL, 'Green');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Jenny', NULL, 'Han');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Victor', NULL, 'Hugo');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Gregory', NULL, 'Macguire');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'George', 'R.R', 'Martin');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'L.M.', NULL, 'Montgomery');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Susan', 'Beth', 'Pfeffer');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Mario', NULL, 'Puzo');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Rick', NULL, 'Riordan');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'J.R.R.', NULL, 'Tolkien');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Stephen', NULL, 'King');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Linda', NULL, 'Kershaw');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'John', NULL, 'Arnason');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Jeffery', NULL, 'Cranor');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Griffin', NULL, 'McElroy');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Katya', NULL, 'Zamalodchikova');
+INSERT INTO `author` (`id`, `first_name`, `middle_name`, `last_name`) VALUES (NULL, 'Justin', NULL, 'McElroy');
+
+INSERT INTO book
+(isbn, title, author_1, author_2, author_3, genre_1, genre_2, genre_3, publisher, year_published, status)
+VALUES
+(9781451627299, '11/22/63: A Novel', 42, NULL, NULL, 3, 18, NULL, 25, 2012, 1),
+(9781501180996, 'The Outsider: A Novel', 42, NULL, NULL, 16, 15, NULL, 25, 2020, 2),
+(9781982136079, '1922', 42, NULL, NULL, 16, NULL, NULL, 25, 2019, 3),
+(9780307743657, 'The Shining', 42, NULL, NULL, 16, NULL, NULL, 24, 2012, 3),
+(9780261102736, 'The Silmarillion', 41, NULL, NULL, 1, 22, NULL, 12, 2013, 1),
+(9780261102378, 'The Return of the King', 41, NULL, NULL, 1, 4, NULL, 12, 2011, 2),
+(9780261102361, 'The Two Towers', 41, NULL, NULL, 1, 4, NULL, 12, 2007, 3),
+(9780261102354, 'The Fellowship of the Ring', 41, NULL, NULL, 1, 4, NULL, 12, 2007, 3),
+(9781423101505, 'Percy Jackson and the Olympians: The Last Olympian', 40, NULL, NULL, 7, 1, NULL, 23, 2011, 1),
+(9781423101499, 'Percy Jackson and the Olympians: The Battle of the Labyrinth', 40, NULL, NULL, 7, 1, NULL, 23, 2009, 1),
+(9781423101482, 'Percy Jackson and the Olympians: The Titan''s Curse', 40, NULL, NULL, 7, 1, NULL, 23, 2008, 1),
+(9781423103349, 'Percy Jackson and the Olympians: The Sea of Monsters', 40, NULL, NULL, 7, 1, NULL, 23, 2007, 1),
+(9780786838653, 'Percy Jackson and the Olympians: The Lightning Thief', 40, NULL, NULL, 7, 1, NULL, 23, 2006, 2),
+(9780451205766, 'The Godfather', 39, NULL, NULL, 15, NULL, NULL, 4, 2002, 1),
+(9780152061548, 'Life As We Knew It', 38, NULL, NULL, 11, 3, NULL, 2, 2008, 3),
+(9780785252993, 'Anne of Green Gables', 37, NULL, NULL, 7, NULL, NULL, 22, 2021, 3),
+(9780553582017, 'A Dance with Dragons: A Song of Ice and Fire: Book Five', 36, NULL, NULL, 1, NULL, NULL, 5, 2013, 1),
+(9780553582024, 'A Feast for Crows: A Song of Ice and Fire: Book Four', 36, NULL, NULL, 1, NULL, NULL, 5, 2006, 1),
+(9780553573428, 'A Storm of Swords: A Song of Ice and Fire: Book Three', 36, NULL, NULL, 1, NULL, NULL, 5, 2003, 1),
+(9780553579901, 'A Clash of Kings: A Song of Ice and Fire: Book Two', 36, NULL, NULL, 1, NULL, NULL, 5, 2000, 1),
+(9780553573404, 'A Game of Thrones: A Song of Ice and Fire: Book One', 36, NULL, NULL, 1, NULL, NULL, 5, 1997, 3),
+(9780061350962, 'Wicked: The Life and Times of The Wicked Witch of the West', 35, NULL, NULL, 1, NULL, NULL, 12, 2007, 3),
+(9780143107569, 'Les Miserables', 34, NULL, NULL, 14, NULL, NULL, 4, 2015, 1),
+(9781416995593, 'We''ll Always Have Summer', 33, NULL, NULL, 11, 6, NULL, 20, 2012, 3),
+(9781416995562, 'It''s Not Summer Without You', 33, NULL, NULL, 11, 6, NULL, 20, 2011, 3),
+(9781416968290, 'The Summer I Turned Pretty', 33, NULL, NULL, 11, 6, NULL, 20, 2010, 2),
+(9780142414934, 'Paper Towns', 32, NULL, NULL, 11, 17, NULL, 16, 2009, 1),
+(9780593086704, 'Trixie and Katya''s Guide to Modern Womanhood', 31, 47, NULL, 13, 21, NULL, 4, 2020, 1),
+(9781250232656, 'The Adventure Zone: The Crystal Kingdom', 30, 46, 48, 12, 1, 13, 21, 2021, 3),
+(9781250232632, 'The Adventure Zone: Petals to the Metal', 30, 46, 48, 12, 1, 13, 21, 2020, 3),
+(9781250153715, 'The Adventure Zone: Murder on the Rockport Limited!', 30, 46, 48, 12, 1, 13, 21, 2019, 3),
+(9781250153708, 'The Adventure Zone: Here There Be Gerblins!', 30, 46, 48, 12, 1, 13, 21, 2018, 3),
+(9781442426689, 'Finale', 29, NULL, NULL, 11, 1, 6, 20, 2013, 1),
+(9781442426658, 'Silence', 29, NULL, NULL, 11, 1, 6, 20, 2013, 1),
+(9781416989448, 'Crescendo', 29, NULL, NULL, 11, 1, 6, 20, 2012, 1),
+(9781416989424, 'Hush, Hush', 29, NULL, NULL, 11, 1, 6, 20, 2010, 1),
+(9780062351432, 'Welcome to Night Vale: A Novel', 28, 45, NULL, 1, 16, NULL, 12, 2017, 1),
+(9780545663267, 'Mockingjay', 27, NULL, NULL, 11, 3, NULL, 19, 2014, 3),
+(9780545586177, 'Catching Fire', 27, NULL, NULL, 11, 3, NULL, 19, 2013, 3),
+(9781481444422, 'The Hunger Games', 27, NULL, NULL, 11, 3, NULL, 19, 2010, 3),
+(9781442416895, 'City of Heavenly Fire', 26, NULL, NULL, 11, 1, NULL, 18, 2014, 2),
+(9781481456005, 'City of Lost Souls', 26, NULL, NULL, 11, 1, NULL, 18, 2012, 3),
+(9781481455992, 'City of Fallen Angels', 26, NULL, NULL, 11, 1, NULL, 18, 2011, 3),
+(9781974713851, 'Cats of the Louvre', 1, NULL, NULL, 1, 17, 20, 1, 2019, 1),
+(9780544272996, 'What If?: Serious Scientific Answers to Absurd Hypothetical Questions', 2, NULL, NULL, 2, 13, NULL, 2, 2014, 2),
+(9780393324822, 'Stiff', 3, NULL, NULL, 2, NULL, NULL, 3, 2004, 1),
+(9780393339918, 'Packing for Mars: The Curious Science of Life in the Void', 3, NULL, NULL, 2, NULL, NULL, 3, 2011, 3),
+(9780393348743, 'Gulp: Adventures on the Alimentary Canal', 3, NULL, NULL, 2, NULL, NULL, 3, 2014, 3),
+(9780547572291, 'Ubik', 4, NULL, NULL, 3, NULL, NULL, 2, 2012, 1),
+(9780547572482, 'The Man in the High Castle', 4, NULL, NULL, 3, 18, NULL, 2, 2012, 3),
+(9780547572178, 'A Scanner Darkly', 4, NULL, NULL, 3, NULL, NULL, 2, 2011, 1),
+(9780441172719, 'Dune', 5, NULL, NULL, 3, NULL, NULL, 4, 1990, 1),
+(9780449300435, 'The Time Machine And The War of the Worlds: Two Novels in One Volume', 6, NULL, NULL, 3, NULL, NULL, 5, 1968, 3),
+(9781974722891, 'One Piece, Vol. 97', 7, NULL, NULL, 4, 1, 20, 1, 2021, 3),
+(9781646510269, 'Attack On Titan 33', 8, NULL, NULL, 5, 19, 20, 6, 2021, 1),
+(9781974722846, 'Jujutsu Kaisen, Vol. 11', 9, NULL, NULL, 4, 19, 20, 1, 2021, 1),
+(9781590302255, 'The Art of War', 10, NULL, NULL, 2, NULL, NULL, 7, 2005, 3),
+(9781772130027, 'Edible and Medicinal Plants of Canada', 11, 43, 44, 2, NULL, NULL, 8, 2016, 3),
+(9784756254757, 'Mushroom Botanical Art', 12, NULL, NULL, 2, NULL, NULL, 9, 2021, 1),
+(9781538728628, 'The Wish', 13, NULL, NULL, 6, NULL, NULL, 10, 2021, 2),
+(9780593336823, 'The Love Hypothesis', 14, NULL, NULL, 6, NULL, NULL, 4, 2021, 3),
+(9780345539434, 'Cosmos', 15, NULL, NULL, 2, NULL, NULL, 4, 2021, 3),
+(9780920236864, '50 Below Zero', 16, NULL, NULL, 7, NULL, NULL, 11, 2021, 3),
+(9780060256739, 'A Light in the Attic', 17, NULL, NULL, 8, 7, NULL, 12, 2005, 3),
+(9781582972404, 'The Crystal Bible: A Definitive Guide to Crystals', 18, NULL, NULL, 9, NULL, NULL, 4, 2003, 3),
+(9780738760841, 'Psychic Witch: A Metaphysical Guide to Meditation, Magick & Manifestation', 19, NULL, NULL, 9, NULL, NULL, 13, 2020, 1),
+(9781564148797, 'Protection & Reversal Magick: A Witch''s Defense Manual', 20, NULL, NULL, 9, NULL, NULL, 14, 2006, 1),
+(9784087925869, 'Haikyuu!! Complete Illustration Book: Endings and Beginnings', 21, NULL, NULL, 10, 20, NULL, 15, 2020, 3),
+(9780147514011, 'Little Women', 22, NULL, NULL, 7, NULL, NULL, 16, 2014, 3),
+(9780141439518, 'Pride and Prejudice', 23, NULL, NULL, 6, NULL, NULL, 4, 2002, 1),
+(9780385732314, 'A Great and Terrible Beauty', 24, NULL, NULL, 1, NULL, NULL, 17, 2005, 3),
+(9780385733410, 'Rebel Angels', 24, NULL, NULL, 1, NULL, NULL, 17, 2006, 3),
+(9781439589021, 'The Sweet Far Thing', 24, NULL, NULL, 1, NULL, NULL, 17, 2009, 3),
+(9780451457813, 'Storm Front', 25, NULL, NULL, 3, 1, NULL, 4, 2000, 1),
+(9780451458124, 'Fool Moon', 25, NULL, NULL, 3, 1, NULL, 4, 2001, 1),
+(9781481456036, 'The Clockwork Princess', 26, NULL, NULL, 11, 1, NULL, 18, 2013, 3),
+(9781481456012, 'The Clockwork Prince', 26, NULL, NULL, 11, 1, NULL, 18, 2011, 3),
+(9781481456029, 'The Clockwork Angel', 26, NULL, NULL, 11, 1, NULL, 18, 2010, 3),
+(9781481455923, 'City of Bones', 26, NULL, NULL, 11, 1, NULL, 18, 2007, 1),
+(9781481455978, 'City of Ashes', 26, NULL, NULL, 11, 1, NULL, 18, 2008, 1),
+(9781481455985, 'City of Glass', 26, NULL, NULL, 11, 1, NULL, 18, 2009, 1);
+
+INSERT INTO book_genre_relation
+(bookid, genreid)
+VALUES
+(1, 1)
+
