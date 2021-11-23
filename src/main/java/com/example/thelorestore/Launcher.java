@@ -12,6 +12,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        //TODO - change project name and title
         Database.getInstance();
         mainStage = stage;
         mainStage.setScene(new LoginScene());

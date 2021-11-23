@@ -94,8 +94,8 @@ public class PublisherTable implements PublisherDAO {
     @Override
     public void updatePublisher(Publisher publisher) {
         String query = "UPDATE " + DBTableValues.PUBLISHER_TABLE + " SET " +
-                DBTableValues.PUBLISHER_COMPANY_COLUMN + " = " + publisher.getCompanyName() +
-                " WHERE " + DBTableValues.PUBLISHER_ID_COLUMN + " = " + publisher.getId();
+                DBTableValues.PUBLISHER_COMPANY_COLUMN + " = '" + publisher.getCompanyName() +
+                "' WHERE " + DBTableValues.PUBLISHER_ID_COLUMN + " = " + publisher.getId();
         try {
             Statement updatePublisher = db.getConnection().createStatement();
             updatePublisher.executeUpdate(query);

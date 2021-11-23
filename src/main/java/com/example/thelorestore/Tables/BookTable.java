@@ -123,18 +123,18 @@ public class BookTable implements BookDAO {
     @Override
     public void updateBook(Book book) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
-                DBTableValues.BOOK_TITLE_COLUMN + " = " + book.getTitle() + ", " +
+                DBTableValues.BOOK_TITLE_COLUMN + " = '" + book.getTitle() + "', " +
                 DBTableValues.BOOK_AUTHOR_COLUMN_1 + " = " + book.getAuthor1() + ", " +
                 DBTableValues.BOOK_AUTHOR_COLUMN_2 + " = " + book.getAuthor2() + ", " +
                 DBTableValues.BOOK_AUTHOR_COLUMN_3 + " = " + book.getAuthor3() + ", " +
                 DBTableValues.BOOK_GENRE_COLUMN_1 + " = " + book.getGenre1() + ", " +
                 DBTableValues.BOOK_GENRE_COLUMN_2 + " = " + book.getGenre2() + ", " +
                 DBTableValues.BOOK_GENRE_COLUMN_3 + " = " + book.getGenre3() + ", " +
-                DBTableValues.BOOK_PUBLISHER_COLUMN + " = " + book.getPublisher() + ", " +
+                DBTableValues.BOOK_PUBLISHER_COLUMN + " = '" + book.getPublisher() + "', " +
                 DBTableValues.BOOK_YEAR_COLUMN + " = " + book.getYear() + ", " +
-                DBTableValues.BOOK_STATUS_COLUMN + " = " + book.getStatus() + ", " +
-                DBTableValues.BOOK_COMMENT_COLUMN + " = " + book.getComment() +
-                " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getIsbn();
+                DBTableValues.BOOK_STATUS_COLUMN + " = '" + book.getStatus() + "', " +
+                DBTableValues.BOOK_COMMENT_COLUMN + " = '" + book.getComment() +
+                "' WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getIsbn();
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
@@ -170,8 +170,12 @@ public class BookTable implements BookDAO {
         ArrayList<DisplayBook> books = new ArrayList<>();
         String query = "SELECT book.id, book.title, " +
                 "book.author_1, book.author_2, book.author_3, " +
-                "book.genre_1, book.genre_2, book.genre_3 " +
-                "book.publisher, book.year_published, book.status, book.comment " +
+                "genre.genre as genre_1, " +
+                "genre.genre as genre_2, " +
+                "genre.genre as genre_3, " +
+                "publisher.company_name as publisher, " +
+                "book.year_published, " +
+                "status.status as status, " + "book.comment " +
                 "JOIN author on book.author_1 = author.id " +
                 "JOIN author on book.author_2 = author.id " +
                 "JOIN author on book.author_3 = author.id " +
