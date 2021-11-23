@@ -90,10 +90,10 @@ public class AuthorTable implements AuthorDAO {
     @Override
     public void updateAuthor(Author author) {
         String query = "UPDATE " + DBTableValues.AUTHOR_TABLE + " SET " +
-                DBTableValues.AUTHOR_FIRST_COLUMN + " = " + author.getFirstName() + ", " +
-                DBTableValues.AUTHOR_MIDDLE_COLUMN + " = " + author.getMiddleName() + ", " +
-                DBTableValues.AUTHOR_LAST_COLUMN + " = " + author.getLastName() +
-                " WHERE " + DBTableValues.AUTHOR_ID_COLUMN + " = " + author.getId();
+                DBTableValues.AUTHOR_FIRST_COLUMN + " = '" + author.getFirstName() + "', " +
+                DBTableValues.AUTHOR_MIDDLE_COLUMN + " = '" + author.getMiddleName() + "', " +
+                DBTableValues.AUTHOR_LAST_COLUMN + " = '" + author.getLastName() +
+                "' WHERE " + DBTableValues.AUTHOR_ID_COLUMN + " = " + author.getId();
         try {
             Statement updateAuthor = db.getConnection().createStatement();
             updateAuthor.executeUpdate(query);

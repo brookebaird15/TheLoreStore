@@ -4,7 +4,9 @@ import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -25,7 +27,7 @@ public class UpdateItemPane extends StackPane {
         //Vbox to hold year published
         VBox yearPublished = new VBox();
         //Vbox to hold stock amount
-        VBox stockQuantity = new VBox();
+        VBox commentBox = new VBox();
 
         //An Hbox to hold all the buttons
         HBox buttons = new HBox();
@@ -36,7 +38,7 @@ public class UpdateItemPane extends StackPane {
         Text genreTxt = new Text("Genre");
         Text publisherTxt = new Text("Publisher");
         Text yearTxt = new Text("Year Published");
-        Text stockTxt = new Text("Stock Qty");
+        Text commentTxt = new Text("Comment");
 
         //Textfields to allow for input of each category
         TextField titleTextField = new TextField();
@@ -44,7 +46,7 @@ public class UpdateItemPane extends StackPane {
         TextField genreTextField = new TextField();
         TextField publisherTextField = new TextField();
         TextField yearTextField = new TextField();
-        TextField stockTextField = new TextField();
+        TextField commentTextField = new TextField();
 
         //An Update button to update info and return user to Main Table
         Button updateBtn = new Button("Update Item");
@@ -81,11 +83,24 @@ public class UpdateItemPane extends StackPane {
         yearPublished.getChildren().addAll(yearTxt, yearTextField);
         yearPublished.setSpacing(5);
 
-        stockQuantity.getChildren().addAll(stockTxt, stockTextField);
-        stockQuantity.setSpacing(5);
+        commentBox.getChildren().addAll(commentTxt, commentTextField);
+        commentBox.setSpacing(5);
+
+        //Checkboxes for the status
+        RadioButton radioButton1 = new RadioButton("Unread");
+        RadioButton radioButton2 = new RadioButton("In Progress");
+        RadioButton radioButton3 = new RadioButton("Completed");
+        ToggleGroup buttonGroup = new ToggleGroup();
+        radioButton1.setToggleGroup(buttonGroup);
+        radioButton2.setToggleGroup(buttonGroup);
+        radioButton3.setToggleGroup(buttonGroup);
+        //Hbox for the radio buttons
+        HBox checkboxes = new HBox();
+        checkboxes.setSpacing(5);
+        checkboxes.getChildren().addAll(radioButton1, radioButton2, radioButton3);
 
         //Vboxes get added to the input field box
-        inputFieldsBox.getChildren().addAll(title, author, genre, yearPublished, stockQuantity, buttons);
+        inputFieldsBox.getChildren().addAll(title, author, genre, yearPublished, commentBox, checkboxes, buttons);
         inputFieldsBox.setAlignment(Pos.CENTER);
         inputFieldsBox.setMaxWidth(500);
         inputFieldsBox.setSpacing(20);

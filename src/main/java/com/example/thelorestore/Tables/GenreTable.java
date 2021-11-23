@@ -95,8 +95,8 @@ public class GenreTable implements GenreDAO {
     @Override
     public void updateGenre(Genre genre) {
         String query = "UPDATE " + DBTableValues.GENRE_TABLE + " SET " +
-                DBTableValues.GENRE_NAME_COLUMN + " = " + genre.getName() +
-                " WHERE " + DBTableValues.GENRE_ID_COLUMN + " = " + genre.getId();
+                DBTableValues.GENRE_NAME_COLUMN + " = '" + genre.getName() +
+                "' WHERE " + DBTableValues.GENRE_ID_COLUMN + " = " + genre.getId();
         try {
             Statement updateGenre = db.getConnection().createStatement();
             updateGenre.executeUpdate(query);
