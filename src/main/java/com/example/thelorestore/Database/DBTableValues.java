@@ -37,12 +37,6 @@ public class DBTableValues {
     public static final String BOOK_TABLE = "book";
     public static final String BOOK_ID_COLUMN = "id";
     public static final String BOOK_TITLE_COLUMN = "title";
-    public static final String BOOK_AUTHOR_COLUMN_1 = "author_1";
-    public static final String BOOK_AUTHOR_COLUMN_2 = "author_2";
-    public static final String BOOK_AUTHOR_COLUMN_3 = "author_3";
-    public static final String BOOK_GENRE_COLUMN_1 = "genre_1";
-    public static final String BOOK_GENRE_COLUMN_2 = "genre_2";
-    public static final String BOOK_GENRE_COLUMN_3 = "genre_3";
     public static final String BOOK_PUBLISHER_COLUMN = "publisher";
     public static final String BOOK_YEAR_COLUMN = "year_published";
     public static final String BOOK_STATUS_COLUMN = "status";

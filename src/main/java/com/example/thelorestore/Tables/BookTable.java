@@ -24,23 +24,11 @@ public class BookTable implements BookDAO {
     public void createBook(Book book) {
         String query = "INSERT INTO " + DBTableValues.BOOK_TABLE + "(" +
                 DBTableValues.BOOK_TITLE_COLUMN + ", " +
-                DBTableValues.BOOK_AUTHOR_COLUMN_1 + ", " +
-                DBTableValues.BOOK_AUTHOR_COLUMN_2 + ", " +
-                DBTableValues.BOOK_AUTHOR_COLUMN_3 + ", " +
-                DBTableValues.BOOK_GENRE_COLUMN_1 + ", " +
-                DBTableValues.BOOK_GENRE_COLUMN_2 + ", " +
-                DBTableValues.BOOK_GENRE_COLUMN_3 + ", " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + ", " +
                 DBTableValues.BOOK_YEAR_COLUMN + ", " +
                 DBTableValues.BOOK_STATUS_COLUMN + ", " +
                 DBTableValues.BOOK_COMMENT_COLUMN + ") VALUES ('" +
                 book.getTitle() + "','" +
-                book.getAuthor1() + "','" +
-                book.getAuthor2() + "','" +
-                book.getAuthor3() + "','" +
-                book.getGenre1() + "','" +
-                book.getGenre2() + "','" +
-                book.getGenre3() + "','" +
                 book.getPublisher() + "','" +
                 book.getYear() + "','" +
                 book.getStatus() + "','" +
@@ -65,14 +53,8 @@ public class BookTable implements BookDAO {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while (data.next()) {
-                books.add(new Book(data.getInt(DBTableValues.BOOK_ISBN_COLUMN),
+                books.add(new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
                         data.getString(DBTableValues.BOOK_TITLE_COLUMN),
-                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN_1),
-                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN_2),
-                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN_3),
-                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN_1),
-                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN_2),
-                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN_3),
                         data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
@@ -91,19 +73,13 @@ public class BookTable implements BookDAO {
      */
     @Override
     public Book getBook(int isbn) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + isbn;
+        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + isbn;
         try {
             Statement getBook = db.getConnection().createStatement();
             ResultSet data = getBook.executeQuery(query);
             if(data.next()) {
-                Book book = new Book(data.getInt(DBTableValues.BOOK_ISBN_COLUMN),
+                Book book = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
                         data.getString(DBTableValues.BOOK_TITLE_COLUMN),
-                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN_1),
-                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN_2),
-                        data.getInt(DBTableValues.BOOK_AUTHOR_COLUMN_3),
-                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN_1),
-                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN_2),
-                        data.getInt(DBTableValues.BOOK_GENRE_COLUMN_3),
                         data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
                         data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
                         data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
@@ -124,17 +100,11 @@ public class BookTable implements BookDAO {
     public void updateBook(Book book) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
                 DBTableValues.BOOK_TITLE_COLUMN + " = '" + book.getTitle() + "', " +
-                DBTableValues.BOOK_AUTHOR_COLUMN_1 + " = " + book.getAuthor1() + ", " +
-                DBTableValues.BOOK_AUTHOR_COLUMN_2 + " = " + book.getAuthor2() + ", " +
-                DBTableValues.BOOK_AUTHOR_COLUMN_3 + " = " + book.getAuthor3() + ", " +
-                DBTableValues.BOOK_GENRE_COLUMN_1 + " = " + book.getGenre1() + ", " +
-                DBTableValues.BOOK_GENRE_COLUMN_2 + " = " + book.getGenre2() + ", " +
-                DBTableValues.BOOK_GENRE_COLUMN_3 + " = " + book.getGenre3() + ", " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + " = '" + book.getPublisher() + "', " +
                 DBTableValues.BOOK_YEAR_COLUMN + " = " + book.getYear() + ", " +
                 DBTableValues.BOOK_STATUS_COLUMN + " = '" + book.getStatus() + "', " +
                 DBTableValues.BOOK_COMMENT_COLUMN + " = '" + book.getComment() +
-                "' WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getIsbn();
+                "' WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
@@ -150,7 +120,7 @@ public class BookTable implements BookDAO {
      */
     @Override
     public void deleteBook(Book book) {
-        String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book;
+        String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book;
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Deleted record");
@@ -189,12 +159,12 @@ public class BookTable implements BookDAO {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
-                books.add(new DisplayBook(data.getString(DBTableValues.BOOK_ISBN_COLUMN), data.getString(DBTableValues.BOOK_TITLE_COLUMN),
-                        data.getString(DBTableValues.BOOK_AUTHOR_COLUMN_1), data.getString(DBTableValues.BOOK_AUTHOR_COLUMN_2),
-                        data.getString(DBTableValues.BOOK_AUTHOR_COLUMN_3), data.getString(DBTableValues.BOOK_GENRE_COLUMN_1),
-                        data.getString(DBTableValues.BOOK_GENRE_COLUMN_2), data.getString(DBTableValues.BOOK_GENRE_COLUMN_3),
-                        data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN), data.getString(DBTableValues.BOOK_YEAR_COLUMN),
-                        data.getString(DBTableValues.BOOK_STATUS_COLUMN), data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
+                books.add(new DisplayBook(data.getString(DBTableValues.BOOK_ID_COLUMN),
+                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+                        data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN),
+                        data.getString(DBTableValues.BOOK_YEAR_COLUMN),
+                        data.getString(DBTableValues.BOOK_STATUS_COLUMN),
+                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
