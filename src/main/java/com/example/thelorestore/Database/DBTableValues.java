@@ -12,7 +12,7 @@ public class DBTableValues {
     public static final String GENRE_NAME_COLUMN = "genre";
 
     //Status Table
-    public static final String STATUS_TABLE = "book_status";
+    public static final String STATUS_TABLE = "status";
     public static final String STATUS_ID_COLUMN = "id";
     public static final String STATUS_NAME_COLUMN = "status";
 
@@ -85,7 +85,7 @@ public class DBTableValues {
             + BOOK_PUBLISHER_COLUMN + " int NOT NULL, "
             + BOOK_YEAR_COLUMN + " int(4) NOT NULL, "
             + BOOK_STATUS_COLUMN + " int NOT NULL, "
-            + BOOK_COMMENT_COLUMN + " VARCHAR,"
+            + BOOK_COMMENT_COLUMN + " VARCHAR(1000),"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_1 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_2 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_AUTHOR_COLUMN_3 + ")" + " REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
@@ -93,7 +93,6 @@ public class DBTableValues {
             + "FOREIGN KEY (" + BOOK_GENRE_COLUMN_2 + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_GENRE_COLUMN_3 + ")" + " REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
             + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + ")"
-            + "FOREIGN KEY (" + BOOK_STATUS_COLUMN + ")" + " REFERENCES " + STATUS_TABLE + "(" + STATUS_ID_COLUMN + ")"
             + ");";
 
 
