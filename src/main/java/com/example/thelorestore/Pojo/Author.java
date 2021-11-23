@@ -16,7 +16,7 @@ public class Author {
 
      */
 
-    public Author(int id, String firstName, String lastName, String middleName) {
+    public Author(int id, String firstName, String middleName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,7 +24,7 @@ public class Author {
 
     }
 
-    public Author(String firstName, String lastName, String middleName) {
+    public Author(String firstName, String middleName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;

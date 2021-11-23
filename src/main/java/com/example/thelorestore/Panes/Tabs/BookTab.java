@@ -53,7 +53,7 @@ public class BookTab extends Tab {
         statusColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getStatus()));
 
         tableView.getColumns().addAll(isbnColumn, titleColumn, author1Column, author2Column, author3Column, genre1Column, genre2Column, genre3Column, publisherColumn, yearColumn, statusColumn);
-        tableView.getItems().addAll(bookTable.displayPrettyBooks());
+//        tableView.getItems().addAll(bookTable.displayPrettyBooks());
         root.setCenter(tableView);
 
         this.setContent(root);

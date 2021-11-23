@@ -26,7 +26,6 @@ public class MainTablePane extends BorderPane {
         AuthorTab authorTab = AuthorTab.getInstance();
         GenreTab genreTab = GenreTab.getInstance();
         PublisherTab publisherTab = PublisherTab.getInstance();
-        //TODO - add tab functionality, should switch between tables
         tabPane.getTabs().addAll(bookTab, authorTab, genreTab, publisherTab);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
