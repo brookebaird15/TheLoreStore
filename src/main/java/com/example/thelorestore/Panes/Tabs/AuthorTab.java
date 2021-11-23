@@ -53,6 +53,7 @@ public class AuthorTab extends Tab {
 
         //TODO - add button to cancel add and update
 
+        //saveAddButton saves changes made with the add button
         Button saveAddButton = new Button("Save");
         saveAddButton.setOnAction(e-> {
             String firstName = firstField.getText();
@@ -67,6 +68,7 @@ public class AuthorTab extends Tab {
         });
         saveAddButton.setVisible(false);
 
+        //addAuthButton allows user to add an author
         addAuthButton = new Button("Add Author");
         addAuthButton.setOnAction(e -> {
             nameFields.setVisible(true);
@@ -74,6 +76,7 @@ public class AuthorTab extends Tab {
             updateAuthButton.setDisable(true);
         });
 
+        //saveUpdateButton saves changes made with update button
         Button saveUpdateButton = new Button("Save");
         saveUpdateButton.setOnAction(e-> {
             int index = tableView.getSelectionModel().getSelectedIndex() + 1;
@@ -89,6 +92,7 @@ public class AuthorTab extends Tab {
         });
         saveUpdateButton.setVisible(false);
 
+        //updateAuthButton allows user to update an author
         updateAuthButton = new Button("Update Author");
         updateAuthButton.setOnAction(e -> {
             String fullName = tableView.getSelectionModel().getSelectedItem().toString();
@@ -105,13 +109,13 @@ public class AuthorTab extends Tab {
 
         editButtons.getChildren().addAll(addAuthButton, saveAddButton, saveUpdateButton, updateAuthButton);
         editButtons.setAlignment(Pos.CENTER);
-//        editButtons.setSpacing(500);
         editButtons.requestFocus();
 
-        VBox publisherFields = new VBox();
-        publisherFields.getChildren().addAll(nameFields, editButtons);
+        //authfields box holds buttons and fields for entry
+        VBox authFields = new VBox();
+        authFields.getChildren().addAll(nameFields, editButtons);
 
-        root.setBottom(publisherFields);
+        root.setBottom(authFields);
 
         this.setContent(root);
     }
