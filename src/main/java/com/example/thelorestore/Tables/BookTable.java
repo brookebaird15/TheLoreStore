@@ -123,18 +123,18 @@ public class BookTable implements BookDAO {
     @Override
     public void updateBook(Book book) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
-                DBTableValues.BOOK_TITLE_COLUMN + " = " + book.getTitle() + ", " +
+                DBTableValues.BOOK_TITLE_COLUMN + " = '" + book.getTitle() + "', " +
                 DBTableValues.BOOK_AUTHOR_COLUMN_1 + " = " + book.getAuthor1() + ", " +
                 DBTableValues.BOOK_AUTHOR_COLUMN_2 + " = " + book.getAuthor2() + ", " +
                 DBTableValues.BOOK_AUTHOR_COLUMN_3 + " = " + book.getAuthor3() + ", " +
                 DBTableValues.BOOK_GENRE_COLUMN_1 + " = " + book.getGenre1() + ", " +
                 DBTableValues.BOOK_GENRE_COLUMN_2 + " = " + book.getGenre2() + ", " +
                 DBTableValues.BOOK_GENRE_COLUMN_3 + " = " + book.getGenre3() + ", " +
-                DBTableValues.BOOK_PUBLISHER_COLUMN + " = " + book.getPublisher() + ", " +
+                DBTableValues.BOOK_PUBLISHER_COLUMN + " = '" + book.getPublisher() + "', " +
                 DBTableValues.BOOK_YEAR_COLUMN + " = " + book.getYear() + ", " +
-                DBTableValues.BOOK_STATUS_COLUMN + " = " + book.getStatus() + ", " +
-                DBTableValues.BOOK_COMMENT_COLUMN + " = " + book.getComment() +
-                " WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getIsbn();
+                DBTableValues.BOOK_STATUS_COLUMN + " = '" + book.getStatus() + "', " +
+                DBTableValues.BOOK_COMMENT_COLUMN + " = '" + book.getComment() +
+                "' WHERE " + DBTableValues.BOOK_ISBN_COLUMN + " = " + book.getIsbn();
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
