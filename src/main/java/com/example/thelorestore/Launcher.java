@@ -1,7 +1,7 @@
 package com.example.thelorestore;
 
+import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Scenes.LoginScene;
-import com.example.thelorestore.Scenes.UpdateItemScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,6 +12,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        Database.getInstance();
         mainStage = stage;
         mainStage.setScene(new LoginScene());
         mainStage.setResizable(false);
