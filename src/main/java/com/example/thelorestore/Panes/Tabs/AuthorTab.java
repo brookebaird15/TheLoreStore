@@ -59,9 +59,7 @@ public class AuthorTab extends Tab {
        //Cancel button to cancel out of making a change
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(event -> {
-            firstField.setVisible(false);
-            middleField.setVisible(false);
-            lastField.setVisible(false);
+            nameFields.setVisible(false);
             saveButton.setVisible(false);
             cancelButton.setVisible(false);
             updateAuthButton.setDisable(false);
