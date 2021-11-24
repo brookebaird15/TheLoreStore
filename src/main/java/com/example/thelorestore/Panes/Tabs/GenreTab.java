@@ -35,7 +35,7 @@ public class GenreTab extends Tab {
         });
 
         //Save Button for Adding
-        saveAddBtn = new Button();
+        saveAddBtn = new Button("Save");
         saveAddBtn.setOnAction(event -> {
             Genre genre = new Genre(genreField.getText());
             genreTable.createGenre(genre);
@@ -43,8 +43,26 @@ public class GenreTab extends Tab {
             genreField.setVisible(false);
             refreshGenreTable();
             updateGenreBtn.setDisable(true);
+        });
+        saveAddBtn.setVisible(false);
 
+        //Allow user to update a genre
+        updateGenreBtn = new Button("Update Genre");
+        updateGenreBtn.setOnAction(event -> {
+            genreField.setText(tableView.getSelectionModel().getSelectedItem().toString());
+            saveUpdateBtn.setVisible(true);
+            addGenreBtn.setDisable(true);
+        });
 
+        //Save button for Updating
+        saveUpdateBtn = new Button("Save");
+        saveUpdateBtn.setOnAction(event -> {
+            Genre genre = new Genre(tableView.getSelectionModel().getSelectedIndex() + 1, genreField.getText());
+            genreTable.updateGenre(genre);
+            saveAddBtn.setVisible(false);
+            genreField.setVisible(false);
+            refreshGenreTable();
+            addGenreBtn.setDisable(true);
         });
 
         TableColumn<Genre, String> genreColumn = new TableColumn<>("Genre");
