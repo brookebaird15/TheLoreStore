@@ -72,6 +72,7 @@ public class AuthorTab extends Tab {
         saveButton = new Button("Save");
         saveButton.setOnAction(e-> {
             if(updating) {
+                //TODO - get author by id not index?
                 int index = tableView.getSelectionModel().getSelectedIndex() + 1;
                 String firstName = firstField.getText();
                 String middleName = middleField.getText();
