@@ -41,7 +41,7 @@ public class PublisherTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
-        
+
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e-> {
             publisherField.setVisible(false);

@@ -3,9 +3,11 @@ package com.example.thelorestore.Panes.Tabs;
 import com.example.thelorestore.Pojo.Genre;
 import com.example.thelorestore.Tables.GenreTable;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class GenreTab extends Tab {
     private static GenreTab tab;
@@ -23,6 +25,20 @@ public class GenreTab extends Tab {
         BorderPane root = new BorderPane();
         tableView = new TableView();
 
+        /** TABLEVIEW **/
+        TableColumn<Genre, String> genreColumn = new TableColumn<>("Genre");
+        genreColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getName()));
+        genreColumn.setPrefWidth(1000);
+
+        tableView.getColumns().addAll(genreColumn);
+        tableView.getItems().addAll(genreTable.getAllGenres());
+        tableView.getSelectionModel().selectFirst();
+
+        /** TEXTFIELD **/
+        //Set genreField to false visibility
+        genreField = new TextField();
+        genreField.setVisible(false);
+
         /** HBOX **/
         HBox editButtons = new HBox();
 
@@ -33,6 +49,7 @@ public class GenreTab extends Tab {
             genreField.setVisible(true);
             saveAddBtn.setVisible(true);
             updateGenreBtn.setDisable(true);
+            cancelBtn.setVisible(true);
         });
 
         //Save Button for Adding
@@ -43,7 +60,8 @@ public class GenreTab extends Tab {
             saveAddBtn.setVisible(false);
             genreField.setVisible(false);
             refreshGenreTable();
-            updateGenreBtn.setDisable(true);
+            updateGenreBtn.setDisable(false);
+            cancelBtn.setVisible(false);
         });
         saveAddBtn.setVisible(false);
 
@@ -51,8 +69,10 @@ public class GenreTab extends Tab {
         updateGenreBtn = new Button("Update Genre");
         updateGenreBtn.setOnAction(event -> {
             genreField.setText(tableView.getSelectionModel().getSelectedItem().toString());
+            genreField.setVisible(true);
             saveUpdateBtn.setVisible(true);
             addGenreBtn.setDisable(true);
+            cancelBtn.setVisible(true);
         });
 
         //Save button for Updating
@@ -63,7 +83,8 @@ public class GenreTab extends Tab {
             saveAddBtn.setVisible(false);
             genreField.setVisible(false);
             refreshGenreTable();
-            addGenreBtn.setDisable(true);
+            addGenreBtn.setDisable(false);
+            cancelBtn.setVisible(false);
         });
         saveUpdateBtn.setVisible(false);
 
@@ -79,21 +100,25 @@ public class GenreTab extends Tab {
         });
         cancelBtn.setVisible(false);
 
-        TableColumn<Genre, String> genreColumn = new TableColumn<>("Genre");
-        genreColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getName()));
-        genreColumn.setPrefWidth(1000);
+        //Adding children to HBox
+        editButtons.getChildren().addAll(addGenreBtn, saveAddBtn, cancelBtn, saveUpdateBtn, updateGenreBtn);
+        editButtons.setAlignment(Pos.CENTER);
 
-        tableView.getColumns().addAll(genreColumn);
-        tableView.getItems().addAll(genreTable.getAllGenres());
+        //VBox to hold buttons HBox and textfield
+        VBox genreFields = new VBox();
+        genreFields.getChildren().addAll(genreField, editButtons);
 
+        //Set the tableview to the center of the root
         root.setCenter(tableView);
-
-        //Set genreField to false visibility
-        genreField.setVisible(false);
-
+        //Set the textfield and buttons to bottom of root
+        root.setBottom(genreFields);
         this.setContent(root);
     }
 
+    /**
+     *  Generate a new tab if one doesn't exist
+     * @return tab
+     */
     public static GenreTab getInstance() {
         if (tab == null) {
             tab = new GenreTab();
