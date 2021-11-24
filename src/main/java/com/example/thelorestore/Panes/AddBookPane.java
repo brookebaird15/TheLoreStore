@@ -1,7 +1,14 @@
 package com.example.thelorestore.Panes;
 
+import com.example.thelorestore.Pojo.Author;
+import com.example.thelorestore.Pojo.Genre;
+import com.example.thelorestore.Pojo.Publisher;
 import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
+import com.example.thelorestore.Tables.AuthorTable;
+import com.example.thelorestore.Tables.GenreTable;
+import com.example.thelorestore.Tables.PublisherTable;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -9,11 +16,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class AddItemPane extends StackPane {
+public class AddBookPane extends StackPane {
 
-    public AddItemPane() {
+    public AddBookPane() {
         //inputFields box holds all inputs for pane
         VBox inputFields = new VBox();
+
+        AuthorTable authorTable = new AuthorTable();
+        GenreTable genreTable = new GenreTable();
+        PublisherTable publisherTable = new PublisherTable();
 
         VBox title = new VBox();
         Text titleText = new Text("Title");
@@ -23,20 +34,26 @@ public class AddItemPane extends StackPane {
 
         VBox author = new VBox();
         Text authorText = new Text("Author");
-        TextField authorInput = new TextField();
-        author.getChildren().addAll(authorText, authorInput);
+//        TextField authorInput = new TextField();
+        ComboBox<Author> authorList = new ComboBox<>();
+        authorList.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
+        author.getChildren().addAll(authorText, authorList);
         author.setSpacing(5);
 
         VBox genre = new VBox();
         Text genreText = new Text("Genre");
-        TextField genreInput = new TextField();
-        genre.getChildren().addAll(genreText, genreInput);
+//        TextField genreInput = new TextField();
+        ComboBox<Genre> genreList = new ComboBox<>();
+        genreList.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
+        genre.getChildren().addAll(genreText, genreList);
         genre.setSpacing(5);
 
         VBox publisher = new VBox();
         Text publisherText = new Text("Publisher");
-        TextField publisherInput = new TextField();
-        publisher.getChildren().addAll(publisherText, publisherInput);
+//        TextField publisherInput = new TextField();
+        ComboBox<Publisher> publisherList = new ComboBox<>();
+        publisherList.setItems(FXCollections.observableArrayList(publisherTable.getAllPublishers()));
+        publisher.getChildren().addAll(publisherText, publisherList);
         publisher.setSpacing(5);
 
         VBox year = new VBox();
