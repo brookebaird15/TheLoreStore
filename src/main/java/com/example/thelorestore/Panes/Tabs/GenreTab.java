@@ -14,10 +14,11 @@ public class GenreTab extends Tab {
     private TableView tableView;
     private TextField genreField;
     private Button addGenreBtn;
-    private Button saveAddBtn;
+    private Button saveBtn;
     private Button updateGenreBtn;
-    private Button saveUpdateBtn;
+//    private Button saveUpdateBtn;
     private Button cancelBtn;
+    private boolean updating;
 
     private GenreTab() {
         this.setText("Genre");
@@ -47,53 +48,45 @@ public class GenreTab extends Tab {
         addGenreBtn = new Button("Add Genre");
         addGenreBtn.setOnAction(event -> {
             genreField.setVisible(true);
-            saveAddBtn.setVisible(true);
+            saveBtn.setVisible(true);
             updateGenreBtn.setDisable(true);
             cancelBtn.setVisible(true);
         });
 
         //Save Button for Adding
-        saveAddBtn = new Button("Save");
-        saveAddBtn.setOnAction(event -> {
-            Genre genre = new Genre(genreField.getText());
-            genreTable.createGenre(genre);
-            saveAddBtn.setVisible(false);
+        saveBtn = new Button("Save");
+        saveBtn.setOnAction(event -> {
+            if(updating) {
+                Genre genre = new Genre(tableView.getSelectionModel().getSelectedIndex() + 1, genreField.getText());
+                genreTable.updateGenre(genre);
+            } else {
+                Genre genre = new Genre(genreField.getText());
+                genreTable.createGenre(genre);
+            }
+            saveBtn.setVisible(false);
             genreField.setVisible(false);
             refreshGenreTable();
             updateGenreBtn.setDisable(false);
             cancelBtn.setVisible(false);
         });
-        saveAddBtn.setVisible(false);
+        saveBtn.setVisible(false);
 
         //Allow user to update a genre
         updateGenreBtn = new Button("Update Genre");
         updateGenreBtn.setOnAction(event -> {
             genreField.setText(tableView.getSelectionModel().getSelectedItem().toString());
             genreField.setVisible(true);
-            saveUpdateBtn.setVisible(true);
+            saveBtn.setVisible(true);
             addGenreBtn.setDisable(true);
             cancelBtn.setVisible(true);
+            updating = true;
         });
-
-        //Save button for Updating
-        saveUpdateBtn = new Button("Save");
-        saveUpdateBtn.setOnAction(event -> {
-            Genre genre = new Genre(tableView.getSelectionModel().getSelectedIndex() + 1, genreField.getText());
-            genreTable.updateGenre(genre);
-            saveAddBtn.setVisible(false);
-            genreField.setVisible(false);
-            refreshGenreTable();
-            addGenreBtn.setDisable(false);
-            cancelBtn.setVisible(false);
-        });
-        saveUpdateBtn.setVisible(false);
 
         //Cancel button
         cancelBtn = new Button("Cancel");
         cancelBtn.setOnAction(event -> {
             genreField.setVisible(false);
-            saveAddBtn.setVisible(false);
-            saveUpdateBtn.setVisible(false);
+            saveBtn.setVisible(false);
             cancelBtn.setVisible(false);
             updateGenreBtn.setDisable(false);
             addGenreBtn.setDisable(false);
@@ -101,7 +94,7 @@ public class GenreTab extends Tab {
         cancelBtn.setVisible(false);
 
         //Adding children to HBox
-        editButtons.getChildren().addAll(addGenreBtn, saveAddBtn, cancelBtn, saveUpdateBtn, updateGenreBtn);
+        editButtons.getChildren().addAll(addGenreBtn, saveBtn, cancelBtn, updateGenreBtn);
         editButtons.setAlignment(Pos.CENTER);
 
         //VBox to hold buttons HBox and textfield
