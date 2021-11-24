@@ -14,6 +14,10 @@ public class PublisherTab extends Tab {
     public TableView tableView;
     private Button addPubButton;
     private Button updatePubButton;
+    private Button cancelButton;
+    private Button saveButton;
+    private Boolean updating = false;
+//    private Button saveUpdateButton;
 
     private PublisherTab() {
         this.setText("Publisher");
@@ -27,6 +31,7 @@ public class PublisherTab extends Tab {
 
         tableView.getColumns().addAll(publisherColumn);
         tableView.getItems().addAll(publisherTable.getAllPublishers());
+        tableView.getSelectionModel().selectFirst();
 
         root.setCenter(tableView);
 
@@ -37,54 +42,70 @@ public class PublisherTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
-        //TODO - add button to cancel add and update
+
+        cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(e-> {
+            publisherField.setVisible(false);
+            saveButton.setVisible(false);
+//            saveUpdateButton.setVisible(false);
+            cancelButton.setVisible(false);
+            updatePubButton.setDisable(false);
+            addPubButton.setDisable(false);
+        });
+        cancelButton.setVisible(false);
+
 
         //saveAddButton saves changes made with the add button
-        Button saveAddButton = new Button("Save");
-        saveAddButton.setOnAction(e-> {
-            Publisher publisher = new Publisher(publisherField.getText());
-            publisherTable.createPublisher(publisher);
-            saveAddButton.setVisible(false);
+        saveButton = new Button("Save");
+        saveButton.setOnAction(e-> {
+            //TODO - catch exception where user entry is too long
+            if(updating) {
+                //TODO - need to retrieve item based on id - how?
+                int index = tableView.getSelectionModel().getSelectedIndex() + 1;
+                String pubName = publisherField.getText();
+                Publisher publisher = new Publisher(index, pubName);
+                publisherTable.updatePublisher(publisher);
+                addPubButton.setDisable(false);
+            } else {
+                Publisher publisher = new Publisher(publisherField.getText());
+                publisherTable.createPublisher(publisher);
+                updatePubButton.setDisable(false);
+            }
+            //hide fields and buttons
+            saveButton.setVisible(false);
             publisherField.setVisible(false);
+            cancelButton.setVisible(false);
+
+            //refresh table
             refreshPubTable();
-            updatePubButton.setDisable(false);
+
+            //set updating back to false
+            updating = false;
         });
-        saveAddButton.setVisible(false);
+        saveButton.setVisible(false);
 
         //addPubButton allows user to add a publisher
         addPubButton = new Button("Add Publisher");
         addPubButton.setOnAction(e -> {
             publisherField.setVisible(true);
-            saveAddButton.setVisible(true);
+            saveButton.setVisible(true);
             updatePubButton.setDisable(true);
+            cancelButton.setVisible(true);
         });
-
-        //saveUpdateButton saves changes made with the update button
-        Button saveUpdateButton = new Button("Save");
-        saveUpdateButton.setOnAction(e-> {
-            int index = tableView.getSelectionModel().getSelectedIndex() + 1;
-            String pubName = publisherField.getText();
-            Publisher publisher = new Publisher(index, pubName);
-            publisherTable.updatePublisher(publisher);
-            saveAddButton.setVisible(false);
-            publisherField.setVisible(false);
-            refreshPubTable();
-            addPubButton.setDisable(false);
-        });
-        saveUpdateButton.setVisible(false);
 
         //updatePubButton allows user to update a publisher
         updatePubButton = new Button("Update Publisher");
         updatePubButton.setOnAction(e -> {
+            updating = true;
             publisherField.setText(tableView.getSelectionModel().getSelectedItem().toString());
             publisherField.setVisible(true);
-            saveUpdateButton.setVisible(true);
             addPubButton.setDisable(true);
+            cancelButton.setVisible(true);
+            saveButton.setVisible(true);
         });
 
-        editButtons.getChildren().addAll(addPubButton, saveAddButton, saveUpdateButton, updatePubButton);
+        editButtons.getChildren().addAll(addPubButton, saveButton, cancelButton, updatePubButton);
         editButtons.setAlignment(Pos.CENTER);
-        editButtons.requestFocus();
 
         //pubFields box holds buttons and field for entry
         VBox publisherFields = new VBox();

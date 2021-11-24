@@ -18,6 +18,10 @@ public class AuthorTab extends Tab {
     public TableView tableView;
     private Button addAuthButton;
     private Button updateAuthButton;
+    private Button cancelButton;
+    private Button saveButton;
+//    private Button saveUpdateButton;
+    private boolean updating;
 
     private AuthorTab() {
         this.setText("Author");
@@ -36,6 +40,7 @@ public class AuthorTab extends Tab {
 
         tableView.getColumns().addAll(firstNameColumn, middleNameColumn, lastNameColumn);
         tableView.getItems().addAll(authorTable.getAllAuthors());
+        tableView.getSelectionModel().selectFirst();
         root.setCenter(tableView);
 
         //textfields to allow user input
@@ -51,46 +56,70 @@ public class AuthorTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
-        //TODO - add button to cancel add and update
+       //Cancel button to cancel out of making a change
+        cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(event -> {
+            nameFields.setVisible(false);
+            saveButton.setVisible(false);
+            cancelButton.setVisible(false);
+            updateAuthButton.setDisable(false);
+            addAuthButton.setDisable(false);
+        });
+        cancelButton.setVisible(false);
+
 
         //saveAddButton saves changes made with the add button
-        Button saveAddButton = new Button("Save");
-        saveAddButton.setOnAction(e-> {
-            String firstName = firstField.getText();
-            String middleName = middleField.getText();
-            String lastName = lastField.getText();
-            Author author = new Author(firstName, middleName, lastName);
-            authorTable.createAuthor(author);
-            saveAddButton.setVisible(false);
+        saveButton = new Button("Save");
+        saveButton.setOnAction(e-> {
+            if(updating) {
+                int index = tableView.getSelectionModel().getSelectedIndex() + 1;
+                String firstName = firstField.getText();
+                String middleName = middleField.getText();
+                String lastName = lastField.getText();
+                Author author = new Author(index, firstName, middleName, lastName);
+                authorTable.updateAuthor(author);
+                addAuthButton.setDisable(false);
+            } else {
+                String firstName = firstField.getText();
+                String middleName = middleField.getText();
+                String lastName = lastField.getText();
+                Author author = new Author(firstName, middleName, lastName);
+                authorTable.createAuthor(author);
+                updateAuthButton.setDisable(false);
+            }
+            //set updating back to false
+            updating = false;
+
+            //hide fields and buttons
+            saveButton.setVisible(false);
+            cancelButton.setVisible(false);
             nameFields.setVisible(false);
+
+            //refresh table
             refreshAuthTable();
-            updateAuthButton.setDisable(false);
         });
-        saveAddButton.setVisible(false);
+        saveButton.setVisible(false);
 
         //addAuthButton allows user to add an author
         addAuthButton = new Button("Add Author");
         addAuthButton.setOnAction(e -> {
             nameFields.setVisible(true);
-            saveAddButton.setVisible(true);
+            saveButton.setVisible(true);
             updateAuthButton.setDisable(true);
+            cancelButton.setVisible(true);
         });
 
         //saveUpdateButton saves changes made with update button
-        Button saveUpdateButton = new Button("Save");
-        saveUpdateButton.setOnAction(e-> {
-            int index = tableView.getSelectionModel().getSelectedIndex() + 1;
-            String firstName = firstField.getText();
-            String middleName = middleField.getText();
-            String lastName = lastField.getText();
-            Author author = new Author(index, firstName, middleName, lastName);
-            authorTable.updateAuthor(author);
-            saveAddButton.setVisible(false);
-            nameFields.setVisible(false);
-            refreshAuthTable();
-            addAuthButton.setDisable(false);
-        });
-        saveUpdateButton.setVisible(false);
+//        saveUpdateButton = new Button("Save");
+//        saveUpdateButton.setOnAction(e-> {
+//
+//            saveAddButton.setVisible(false);
+//            nameFields.setVisible(false);
+//            refreshAuthTable();
+//            addAuthButton.setDisable(false);
+//            cancelButton.setVisible(false);
+//        });
+//        saveUpdateButton.setVisible(false);
 
         //updateAuthButton allows user to update an author
         updateAuthButton = new Button("Update Author");
@@ -103,11 +132,13 @@ public class AuthorTab extends Tab {
             middleField.setText(nameSplit[1]);
             lastField.setText(nameSplit[2]);
             nameFields.setVisible(true);
-            saveUpdateButton.setVisible(true);
+            saveButton.setVisible(true);
             addAuthButton.setDisable(true);
+            cancelButton.setVisible(true);
+            updating = true;
         });
 
-        editButtons.getChildren().addAll(addAuthButton, saveAddButton, saveUpdateButton, updateAuthButton);
+        editButtons.getChildren().addAll(addAuthButton, saveButton, cancelButton, updateAuthButton);
         editButtons.setAlignment(Pos.CENTER);
         editButtons.requestFocus();
 

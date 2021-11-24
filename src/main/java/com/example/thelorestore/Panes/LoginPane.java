@@ -23,6 +23,9 @@ public class LoginPane extends StackPane {
         Text user = new Text("Username");
         Text password = new Text("Password");
 
+        /** TODO
+         * Make title for login screen
+         */
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
 
 //        New login button
@@ -48,8 +51,11 @@ public class LoginPane extends StackPane {
             passwordBox.setAlignment(Pos.CENTER);
 
 
-            //Holds all the username and password vboxes
-            VBox loginBox = new VBox();
+        /**
+         * Login box to host the username, password textfields and login button
+         * @author Brooke Baird
+         */
+        VBox loginBox = new VBox();
             loginBox.setStyle( "-fx-background-color: rgba(255,255,255,0.5)");
             loginBox.getChildren().addAll(usernameBox, passwordBox, loginBtn);
             loginBox.setAlignment(Pos.CENTER);
@@ -60,6 +66,10 @@ public class LoginPane extends StackPane {
             this.getChildren().addAll(booksImage, loginBox);
 
         //Animations for background
+        /**
+         * Sequential transition to move the image
+         * @author Ashley McCallum
+         */
         SequentialTransition moveImage = new SequentialTransition();
             moveImage.getChildren().addAll(translateHorizontal(booksImage, -250, 250),
                     translateVertical(booksImage, 200, -200),
