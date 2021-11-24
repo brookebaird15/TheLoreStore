@@ -14,6 +14,9 @@ public class PublisherTab extends Tab {
     public TableView tableView;
     private Button addPubButton;
     private Button updatePubButton;
+    private Button cancelButton;
+    private Button saveAddButton;
+    private Button saveUpdateButton;
 
     private PublisherTab() {
         this.setText("Publisher");
@@ -27,6 +30,7 @@ public class PublisherTab extends Tab {
 
         tableView.getColumns().addAll(publisherColumn);
         tableView.getItems().addAll(publisherTable.getAllPublishers());
+        tableView.getSelectionModel().selectFirst();
 
         root.setCenter(tableView);
 
@@ -37,9 +41,23 @@ public class PublisherTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
+<<<<<<< HEAD
+=======
+        //TODO - add button to cancel add and update
+        cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(e-> {
+            publisherField.setVisible(false);
+            saveAddButton.setVisible(false);
+            saveUpdateButton.setVisible(false);
+            cancelButton.setVisible(false);
+            updatePubButton.setDisable(false);
+            addPubButton.setDisable(false);
+        });
+        cancelButton.setVisible(false);
+>>>>>>> a00ed2ec94f039775190dada74352b6f3183dc2e
 
         //saveAddButton saves changes made with the add button
-        Button saveAddButton = new Button("Save");
+        saveAddButton = new Button("Save");
         saveAddButton.setOnAction(e-> {
             Publisher publisher = new Publisher(publisherField.getText());
             publisherTable.createPublisher(publisher);
@@ -47,6 +65,7 @@ public class PublisherTab extends Tab {
             publisherField.setVisible(false);
             refreshPubTable();
             updatePubButton.setDisable(false);
+            cancelButton.setVisible(false);
         });
         saveAddButton.setVisible(false);
 
@@ -56,11 +75,13 @@ public class PublisherTab extends Tab {
             publisherField.setVisible(true);
             saveAddButton.setVisible(true);
             updatePubButton.setDisable(true);
+            cancelButton.setVisible(true);
         });
 
         //saveUpdateButton saves changes made with the update button
-        Button saveUpdateButton = new Button("Save");
+        saveUpdateButton = new Button("Save");
         saveUpdateButton.setOnAction(e-> {
+            //TODO - need to retrieve item based on id - how?
             int index = tableView.getSelectionModel().getSelectedIndex() + 1;
             String pubName = publisherField.getText();
             Publisher publisher = new Publisher(index, pubName);
@@ -69,6 +90,7 @@ public class PublisherTab extends Tab {
             publisherField.setVisible(false);
             refreshPubTable();
             addPubButton.setDisable(false);
+            cancelButton.setVisible(false);
         });
         saveUpdateButton.setVisible(false);
 
@@ -79,11 +101,11 @@ public class PublisherTab extends Tab {
             publisherField.setVisible(true);
             saveUpdateButton.setVisible(true);
             addPubButton.setDisable(true);
+            cancelButton.setVisible(true);
         });
 
-        editButtons.getChildren().addAll(addPubButton, saveAddButton, saveUpdateButton, updatePubButton);
+        editButtons.getChildren().addAll(addPubButton, saveAddButton, cancelButton, saveUpdateButton, updatePubButton);
         editButtons.setAlignment(Pos.CENTER);
-        editButtons.requestFocus();
 
         //pubFields box holds buttons and field for entry
         VBox publisherFields = new VBox();
