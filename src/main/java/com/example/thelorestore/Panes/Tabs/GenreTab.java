@@ -9,12 +9,13 @@ import javafx.scene.layout.HBox;
 
 public class GenreTab extends Tab {
     private static GenreTab tab;
-    public TableView tableView;
-    public TextField genreField;
-    public Button addGenreBtn;
-    public Button saveAddBtn;
-    public Button updateGenreBtn;
-    public Button saveUpdateBtn;
+    private TableView tableView;
+    private TextField genreField;
+    private Button addGenreBtn;
+    private Button saveAddBtn;
+    private Button updateGenreBtn;
+    private Button saveUpdateBtn;
+    private Button cancelBtn;
 
     private GenreTab() {
         this.setText("Genre");
@@ -64,6 +65,19 @@ public class GenreTab extends Tab {
             refreshGenreTable();
             addGenreBtn.setDisable(true);
         });
+        saveUpdateBtn.setVisible(false);
+
+        //Cancel button
+        cancelBtn = new Button("Cancel");
+        cancelBtn.setOnAction(event -> {
+            genreField.setVisible(false);
+            saveAddBtn.setVisible(false);
+            saveUpdateBtn.setVisible(false);
+            cancelBtn.setVisible(false);
+            updateGenreBtn.setDisable(false);
+            addGenreBtn.setDisable(false);
+        });
+        cancelBtn.setVisible(false);
 
         TableColumn<Genre, String> genreColumn = new TableColumn<>("Genre");
         genreColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getName()));
