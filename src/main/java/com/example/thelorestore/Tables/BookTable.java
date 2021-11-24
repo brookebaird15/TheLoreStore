@@ -154,35 +154,19 @@ public class BookTable implements BookDAO {
     //TODO - is it possible to have all authors displayed in one column and all genres displayed in one column
     public ArrayList<DisplayBook> displayPrettyBooks() {
         ArrayList<DisplayBook> books = new ArrayList<>();
-        String query = "SELECT book.id, book.title, " +
-                "book.author_1, book.author_2, book.author_3, " +
-                "genre.genre as genre_1, " +
-                "genre.genre as genre_2, " +
-                "genre.genre as genre_3, " +
-                "publisher.company_name as publisher, " +
-                "book.year_published, " +
-                "status.status as status, " + "book.comment " +
-                "JOIN author on book.author_1 = author.id " +
-                "JOIN author on book.author_2 = author.id " +
-                "JOIN author on book.author_3 = author.id " +
-                "JOIN genre on book.genre_1 = genre.id " +
-                "JOIN genre on book.genre_2 = genre.id " +
-                "JOIN genre on book.genre_3 = genre.id " +
-                "JOIN publisher on book.publisher = publisher.id " +
-                "JOIN status on book.status = status.id " +
-                "ORDER BY item.id ASC";
+        String query = "SELECT * FROM " + DBTableValues.BOOK_VIEW;
         try {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
-//                books.add(new DisplayBook(
-//                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
-//                       // data.getString(author)
-//                        //data.getString(genre)
-//                        data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN),
-//                        data.getString(DBTableValues.BOOK_YEAR_COLUMN),
-//                        data.getString(DBTableValues.BOOK_STATUS_COLUMN),
-//                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
+                books.add(new DisplayBook(
+                        data.getString(DBTableValues.BOOK_VIEW_TITLE),
+                        data.getString(DBTableValues.BOOK_VIEW_AUTHOR),
+                        data.getString(DBTableValues.BOOK_VIEW_GENRE),
+                        data.getString(DBTableValues.BOOK_VIEW_PUBLISHER),
+                        data.getString(DBTableValues.BOOK_VIEW_YEAR),
+                        data.getString(DBTableValues.BOOK_VIEW_STATUS),
+                        data.getString(DBTableValues.BOOK_VIEW_COMMENT)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

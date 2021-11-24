@@ -28,6 +28,12 @@ public class BookTab extends Tab {
         TableColumn<DisplayBook, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getTitle()));
 
+        TableColumn<DisplayBook, String> authorColumn = new TableColumn<>("Author");
+        authorColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAuthor()));
+
+        TableColumn<DisplayBook, String> genreColumn = new TableColumn<>("Genre");
+        genreColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getGenre()));
+
         TableColumn<DisplayBook, String> yearColumn = new TableColumn<>("Year Published");
         yearColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getYear()));
 
@@ -37,11 +43,8 @@ public class BookTab extends Tab {
         TableColumn<DisplayBook, String> commentColumn = new TableColumn<>("Comments");
         commentColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getComment()));
 
-        tableView.getColumns().addAll(titleColumn, yearColumn, statusColumn, commentColumn);
-
-        //TODO - uncomment once displayPrettyBooks method sql resolved
-
-//        tableView.getItems().addAll(bookTable.displayPrettyBooks());
+        tableView.getColumns().addAll(titleColumn, authorColumn, genreColumn, yearColumn, statusColumn, commentColumn);
+        tableView.getItems().addAll(bookTable.displayPrettyBooks());
         root.setCenter(tableView);
 
         //editButtons box holds addItem and viewItem buttons
