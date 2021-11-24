@@ -22,7 +22,7 @@ public class BookTable implements BookDAO {
      * @param book is the book being added
      */
     @Override
-    public void createBook(Book book, Genre genre, Author author) {
+    public Book createBook(Book book) {
         String query = "INSERT INTO " + DBTableValues.BOOK_TABLE + "(" +
                 DBTableValues.BOOK_TITLE_COLUMN + ", " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + ", " +
@@ -34,14 +34,25 @@ public class BookTable implements BookDAO {
                 book.getYear() + "','" +
                 book.getStatus() + "','" +
                 book.getComment() + "')";
-        bookGenreTable.createBookGenreRelation(book, genre);
-        bookAuthorTable.createBookAuthorRelation(book, author);
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Book record inserted");
+            query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " ORDER BY " + DBTableValues.BOOK_ID_COLUMN + " DESC LIMIT 0,1";
+            Statement getBook = db.getConnection().createStatement();
+            ResultSet data = getBook.executeQuery(query);
+            if(data.next()) {
+                Book newestBook = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
+                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
+                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
+                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN));
+                return newestBook;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -71,12 +82,12 @@ public class BookTable implements BookDAO {
 
     /**
      * getBook() returns the book at the ISBN provided or null if no match
-     * @param isbn is the column id
+     * @param id is the column id
      * @return book | null
      */
     @Override
-    public Book getBook(int isbn) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + isbn;
+    public Book getBook(int id) {
+        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + id;
         try {
             Statement getBook = db.getConnection().createStatement();
             ResultSet data = getBook.executeQuery(query);

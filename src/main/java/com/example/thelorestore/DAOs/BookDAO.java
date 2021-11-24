@@ -11,7 +11,7 @@ public interface BookDAO {
      * Method for creating a new entry to the Book Table
      * @param book
      */
-    public void createBook(Book book, Genre genre, Author author);
+    public Book createBook(Book book);
 
     /**
      * Method for accessing all books in Book Table

@@ -26,6 +26,14 @@ public class Book {
         this.comment = comment;
     }
 
+    public Book(String title, int publisher, int year, int status, String comment) {
+        this.title = title;
+        this.publisher = publisher;
+        this.year = year;
+        this.status = status;
+        this.comment = comment;
+    }
+
     public Book(int id) {
         this.id = id;
     }

@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 
 public class BookTab extends Tab {
     private static BookTab tab;
-    public TableView tableView;
+    public static TableView tableView;
 
     //TODO - Book tab does not display data, issue with SQL syntax (likely from displayPrettyBooks method)
     private BookTab() {

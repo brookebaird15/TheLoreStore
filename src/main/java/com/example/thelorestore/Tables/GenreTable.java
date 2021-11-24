@@ -38,7 +38,7 @@ public class GenreTable implements GenreDAO {
      * @return
      */
     public ArrayList<Genre> getAllGenres() {
-        String query = "SELECT * FROM " + DBTableValues.GENRE_TABLE;
+        String query = "SELECT * FROM " + DBTableValues.GENRE_TABLE + " ORDER BY " + DBTableValues.GENRE_NAME_COLUMN + " ASC";
         genres = new ArrayList<>();
 
         //Database connect using createStatement, surrounded in a try-catch
