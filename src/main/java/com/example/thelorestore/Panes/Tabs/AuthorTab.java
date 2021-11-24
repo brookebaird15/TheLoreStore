@@ -109,18 +109,6 @@ public class AuthorTab extends Tab {
             cancelButton.setVisible(true);
         });
 
-        //saveUpdateButton saves changes made with update button
-//        saveUpdateButton = new Button("Save");
-//        saveUpdateButton.setOnAction(e-> {
-//
-//            saveAddButton.setVisible(false);
-//            nameFields.setVisible(false);
-//            refreshAuthTable();
-//            addAuthButton.setDisable(false);
-//            cancelButton.setVisible(false);
-//        });
-//        saveUpdateButton.setVisible(false);
-
         //updateAuthButton allows user to update an author
         updateAuthButton = new Button("Update Author");
         updateAuthButton.setOnAction(e -> {
