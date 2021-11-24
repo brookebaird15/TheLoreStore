@@ -164,7 +164,7 @@ public class BookTable implements BookDAO {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
-                books.add(new DisplayBook(data.getString(DBTableValues.BOOK_ID_COLUMN),
+                books.add(new DisplayBook(
                         data.getString(DBTableValues.BOOK_TITLE_COLUMN),
                         data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN),
                         data.getString(DBTableValues.BOOK_YEAR_COLUMN),

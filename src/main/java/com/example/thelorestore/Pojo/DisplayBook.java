@@ -1,28 +1,18 @@
 package com.example.thelorestore.Pojo;
 
 public class DisplayBook {
-    private String isbn;
     private String title;
     private String publisher;
     private String year;
     private String status;
     private String comment;
 
-    public DisplayBook(String isbn, String title, String publisher, String year, String status, String comment) {
-        this.isbn = isbn;
+    public DisplayBook(String title, String publisher, String year, String status, String comment) {
         this.title = title;
         this.publisher = publisher;
         this.year = year;
         this.status = status;
         this.comment = comment;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public String getTitle() {
