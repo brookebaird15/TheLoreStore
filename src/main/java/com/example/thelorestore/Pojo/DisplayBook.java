@@ -2,13 +2,17 @@ package com.example.thelorestore.Pojo;
 
 public class DisplayBook {
     private String title;
+    private String author;
+    private String genre;
     private String publisher;
     private String year;
     private String status;
     private String comment;
 
-    public DisplayBook(String title, String publisher, String year, String status, String comment) {
+    public DisplayBook(String title, String author, String genre, String publisher, String year, String status, String comment) {
         this.title = title;
+        this.author = author;
+        this.genre = genre;
         this.publisher = publisher;
         this.year = year;
         this.status = status;
@@ -21,6 +25,22 @@ public class DisplayBook {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public String getPublisher() {

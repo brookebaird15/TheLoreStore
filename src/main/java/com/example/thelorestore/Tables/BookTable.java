@@ -175,12 +175,14 @@ public class BookTable implements BookDAO {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
-                books.add(new DisplayBook(
-                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
-                        data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN),
-                        data.getString(DBTableValues.BOOK_YEAR_COLUMN),
-                        data.getString(DBTableValues.BOOK_STATUS_COLUMN),
-                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
+//                books.add(new DisplayBook(
+//                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+//                       // data.getString(author)
+//                        //data.getString(genre)
+//                        data.getString(DBTableValues.BOOK_PUBLISHER_COLUMN),
+//                        data.getString(DBTableValues.BOOK_YEAR_COLUMN),
+//                        data.getString(DBTableValues.BOOK_STATUS_COLUMN),
+//                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
