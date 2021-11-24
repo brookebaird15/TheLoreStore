@@ -37,7 +37,6 @@ public class PublisherTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
-        //TODO - add button to cancel add and update
 
         //saveAddButton saves changes made with the add button
         Button saveAddButton = new Button("Save");
