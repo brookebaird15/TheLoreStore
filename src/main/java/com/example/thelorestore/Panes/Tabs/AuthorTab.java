@@ -18,6 +18,9 @@ public class AuthorTab extends Tab {
     public TableView tableView;
     private Button addAuthButton;
     private Button updateAuthButton;
+    private Button cancelButton;
+    private Button saveAddButton;
+    private Button saveUpdateButton;
 
     private AuthorTab() {
         this.setText("Author");
@@ -51,10 +54,22 @@ public class AuthorTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
-        //TODO - add button to cancel add and update
+       //Cancel button to cancel out of making a change
+        cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(event -> {
+            firstField.setVisible(false);
+            middleField.setVisible(false);
+            lastField.setVisible(false);
+            saveAddButton.setVisible(false);
+            cancelButton.setVisible(false);
+            updateAuthButton.setDisable(false);
+            addAuthButton.setDisable(false);
+        });
+        cancelButton.setVisible(false);
+
 
         //saveAddButton saves changes made with the add button
-        Button saveAddButton = new Button("Save");
+        saveAddButton = new Button("Save");
         saveAddButton.setOnAction(e-> {
             String firstName = firstField.getText();
             String middleName = middleField.getText();
@@ -77,7 +92,7 @@ public class AuthorTab extends Tab {
         });
 
         //saveUpdateButton saves changes made with update button
-        Button saveUpdateButton = new Button("Save");
+        saveUpdateButton = new Button("Save");
         saveUpdateButton.setOnAction(e-> {
             int index = tableView.getSelectionModel().getSelectedIndex() + 1;
             String firstName = firstField.getText();
