@@ -39,6 +39,7 @@ public class AuthorTab extends Tab {
 
         tableView.getColumns().addAll(firstNameColumn, middleNameColumn, lastNameColumn);
         tableView.getItems().addAll(authorTable.getAllAuthors());
+        tableView.getSelectionModel().selectFirst();
         root.setCenter(tableView);
 
         //textfields to allow user input
@@ -80,6 +81,7 @@ public class AuthorTab extends Tab {
             nameFields.setVisible(false);
             refreshAuthTable();
             updateAuthButton.setDisable(false);
+            cancelButton.setVisible(false);
         });
         saveAddButton.setVisible(false);
 
@@ -89,6 +91,7 @@ public class AuthorTab extends Tab {
             nameFields.setVisible(true);
             saveAddButton.setVisible(true);
             updateAuthButton.setDisable(true);
+            cancelButton.setVisible(true);
         });
 
         //saveUpdateButton saves changes made with update button
@@ -104,6 +107,7 @@ public class AuthorTab extends Tab {
             nameFields.setVisible(false);
             refreshAuthTable();
             addAuthButton.setDisable(false);
+            cancelButton.setVisible(false);
         });
         saveUpdateButton.setVisible(false);
 
@@ -120,9 +124,10 @@ public class AuthorTab extends Tab {
             nameFields.setVisible(true);
             saveUpdateButton.setVisible(true);
             addAuthButton.setDisable(true);
+            cancelButton.setVisible(true);
         });
 
-        editButtons.getChildren().addAll(addAuthButton, saveAddButton, saveUpdateButton, updateAuthButton);
+        editButtons.getChildren().addAll(addAuthButton, saveAddButton, cancelButton, saveUpdateButton, updateAuthButton);
         editButtons.setAlignment(Pos.CENTER);
         editButtons.requestFocus();
 
