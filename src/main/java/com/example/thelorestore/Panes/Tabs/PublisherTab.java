@@ -58,6 +58,7 @@ public class PublisherTab extends Tab {
         //saveAddButton saves changes made with the add button
         saveButton = new Button("Save");
         saveButton.setOnAction(e-> {
+            //TODO - catch exception where user entry is too long
             if(updating) {
                 //TODO - need to retrieve item based on id - how?
                 int index = tableView.getSelectionModel().getSelectedIndex() + 1;
@@ -70,10 +71,15 @@ public class PublisherTab extends Tab {
                 publisherTable.createPublisher(publisher);
                 updatePubButton.setDisable(false);
             }
+            //hide fields and buttons
             saveButton.setVisible(false);
             publisherField.setVisible(false);
             cancelButton.setVisible(false);
+
+            //refresh table
             refreshPubTable();
+
+            //set updating back to false
             updating = false;
         });
         saveButton.setVisible(false);
@@ -87,20 +93,12 @@ public class PublisherTab extends Tab {
             cancelButton.setVisible(true);
         });
 
-        //saveUpdateButton saves changes made with the update button
-//        saveUpdateButton = new Button("Save");
-//        saveUpdateButton.setOnAction(e-> {
-//
-//        });
-//        saveUpdateButton.setVisible(false);
-
         //updatePubButton allows user to update a publisher
         updatePubButton = new Button("Update Publisher");
         updatePubButton.setOnAction(e -> {
             updating = true;
             publisherField.setText(tableView.getSelectionModel().getSelectedItem().toString());
             publisherField.setVisible(true);
-//            saveUpdateButton.setVisible(true);
             addPubButton.setDisable(true);
             cancelButton.setVisible(true);
             saveButton.setVisible(true);

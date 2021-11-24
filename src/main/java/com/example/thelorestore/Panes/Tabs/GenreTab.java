@@ -56,18 +56,27 @@ public class GenreTab extends Tab {
         //Save Button for Adding
         saveBtn = new Button("Save");
         saveBtn.setOnAction(event -> {
+            //TODO - get genre by id not index?
+            //TODO - catch exception where user entry is too long
             if(updating) {
                 Genre genre = new Genre(tableView.getSelectionModel().getSelectedIndex() + 1, genreField.getText());
                 genreTable.updateGenre(genre);
+                addGenreBtn.setDisable(false);
             } else {
                 Genre genre = new Genre(genreField.getText());
                 genreTable.createGenre(genre);
+                updateGenreBtn.setDisable(false);
             }
+            //set updating back to false
+            updating = false;
+
+            //hide field and buttons
             saveBtn.setVisible(false);
             genreField.setVisible(false);
-            refreshGenreTable();
-            updateGenreBtn.setDisable(false);
             cancelBtn.setVisible(false);
+
+            //refresh table
+            refreshGenreTable();
         });
         saveBtn.setVisible(false);
 
