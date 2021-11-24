@@ -15,8 +15,9 @@ public class PublisherTab extends Tab {
     private Button addPubButton;
     private Button updatePubButton;
     private Button cancelButton;
-    private Button saveAddButton;
-    private Button saveUpdateButton;
+    private Button saveButton;
+    private Boolean updating = false;
+//    private Button saveUpdateButton;
 
     private PublisherTab() {
         this.setText("Publisher");
@@ -45,8 +46,8 @@ public class PublisherTab extends Tab {
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e-> {
             publisherField.setVisible(false);
-            saveAddButton.setVisible(false);
-            saveUpdateButton.setVisible(false);
+            saveButton.setVisible(false);
+//            saveUpdateButton.setVisible(false);
             cancelButton.setVisible(false);
             updatePubButton.setDisable(false);
             addPubButton.setDisable(false);
@@ -55,54 +56,57 @@ public class PublisherTab extends Tab {
 
 
         //saveAddButton saves changes made with the add button
-        saveAddButton = new Button("Save");
-        saveAddButton.setOnAction(e-> {
-            Publisher publisher = new Publisher(publisherField.getText());
-            publisherTable.createPublisher(publisher);
-            saveAddButton.setVisible(false);
+        saveButton = new Button("Save");
+        saveButton.setOnAction(e-> {
+            if(updating) {
+                //TODO - need to retrieve item based on id - how?
+                int index = tableView.getSelectionModel().getSelectedIndex() + 1;
+                String pubName = publisherField.getText();
+                Publisher publisher = new Publisher(index, pubName);
+                publisherTable.updatePublisher(publisher);
+                addPubButton.setDisable(false);
+            } else {
+                Publisher publisher = new Publisher(publisherField.getText());
+                publisherTable.createPublisher(publisher);
+                updatePubButton.setDisable(false);
+            }
+            saveButton.setVisible(false);
             publisherField.setVisible(false);
-            refreshPubTable();
-            updatePubButton.setDisable(false);
             cancelButton.setVisible(false);
+            refreshPubTable();
+            updating = false;
         });
-        saveAddButton.setVisible(false);
+        saveButton.setVisible(false);
 
         //addPubButton allows user to add a publisher
         addPubButton = new Button("Add Publisher");
         addPubButton.setOnAction(e -> {
             publisherField.setVisible(true);
-            saveAddButton.setVisible(true);
+            saveButton.setVisible(true);
             updatePubButton.setDisable(true);
             cancelButton.setVisible(true);
         });
 
         //saveUpdateButton saves changes made with the update button
-        saveUpdateButton = new Button("Save");
-        saveUpdateButton.setOnAction(e-> {
-            //TODO - need to retrieve item based on id - how?
-            int index = tableView.getSelectionModel().getSelectedIndex() + 1;
-            String pubName = publisherField.getText();
-            Publisher publisher = new Publisher(index, pubName);
-            publisherTable.updatePublisher(publisher);
-            saveAddButton.setVisible(false);
-            publisherField.setVisible(false);
-            refreshPubTable();
-            addPubButton.setDisable(false);
-            cancelButton.setVisible(false);
-        });
-        saveUpdateButton.setVisible(false);
+//        saveUpdateButton = new Button("Save");
+//        saveUpdateButton.setOnAction(e-> {
+//
+//        });
+//        saveUpdateButton.setVisible(false);
 
         //updatePubButton allows user to update a publisher
         updatePubButton = new Button("Update Publisher");
         updatePubButton.setOnAction(e -> {
+            updating = true;
             publisherField.setText(tableView.getSelectionModel().getSelectedItem().toString());
             publisherField.setVisible(true);
-            saveUpdateButton.setVisible(true);
+//            saveUpdateButton.setVisible(true);
             addPubButton.setDisable(true);
             cancelButton.setVisible(true);
+            saveButton.setVisible(true);
         });
 
-        editButtons.getChildren().addAll(addPubButton, saveAddButton, cancelButton, saveUpdateButton, updatePubButton);
+        editButtons.getChildren().addAll(addPubButton, saveButton, cancelButton, updatePubButton);
         editButtons.setAlignment(Pos.CENTER);
 
         //pubFields box holds buttons and field for entry
