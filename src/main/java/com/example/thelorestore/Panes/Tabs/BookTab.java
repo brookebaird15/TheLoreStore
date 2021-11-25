@@ -48,6 +48,7 @@ public class BookTab extends Tab {
 
         tableView.getColumns().addAll(titleColumn, authorColumn, genreColumn, publisherColumn, yearColumn, statusColumn, commentColumn);
         tableView.getItems().addAll(bookTable.displayPrettyBooks());
+
         root.setCenter(tableView);
 
         //editButtons box holds addItem and viewItem buttons
