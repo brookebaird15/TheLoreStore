@@ -114,26 +114,30 @@ public class DBTableValues {
             + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + ")"
             + ");";
 
+    //TODO - use this to get all results except genre, author
+    //CREATE VIEW test_view2 AS SELECT b.id, b.title,
+    //p.company_name, b.year_published, s.status, COALESCE(b.comment, "") AS comment
+    //FROM book
+    //INNER JOIN book AS b
+    //INNER JOIN publisher AS p
+    //ON p.id=b.publisher
+    //INNER JOIN status AS s
+    //ON s.id=b.status
+
     public static final String CREATE_BOOK_VIEW =
             "CREATE VIEW " + BOOK_VIEW + " AS SELECT b."
-                    + BOOK_VIEW_TITLE + ", CONCAT(a."
-                    + AUTHOR_FIRST_COLUMN + ", ' ', COALESCE(a."
-                    + AUTHOR_MIDDLE_COLUMN + ", \"\"), ' ', a."
-                    + AUTHOR_LAST_COLUMN + " AS "
-                    + BOOK_VIEW_AUTHOR + ", g."
-                    + BOOK_VIEW_GENRE + ", p."
+                    + BOOK_VIEW_ID + ", b."
+                    + BOOK_VIEW_TITLE + ", p."
                     + BOOK_VIEW_PUBLISHER + ", b."
                     + BOOK_VIEW_YEAR + ", s."
                     + BOOK_VIEW_STATUS + ", COALESCE(b."
                     + BOOK_VIEW_COMMENT + ", \"\") AS "
-                    + BOOK_VIEW_COMMENT + " FROM "
-                    + BOOK_VIEW_GENRE + " AS g "
-                    + "INNER JOIN " + BOOK_GENRE_TABLE + " AS bgr ON g." + GENRE_ID_COLUMN + "=bgr." + GENRE_FK_ID_COLUMN
-                    + "INNER JOIN " + BOOK_TABLE + " AS b ON bgr." + BOOK_ID_COLUMN_FOR_GENRE + "=b." + BOOK_ID_COLUMN
-                    + "INNER JOIN " + PUBLISHER_TABLE + " AS p ON p." + PUBLISHER_ID_COLUMN + "=b." + BOOK_PUBLISHER_COLUMN
-                    + "INNER JOIN " + STATUS_TABLE + " AS s ON s." + STATUS_ID_COLUMN + "=b." + BOOK_STATUS_COLUMN
-                    + "INNER JOIN " + BOOK_AUTHOR_TABLE + " AS bar ON b." + BOOK_ID_COLUMN + "=bar." + BOOK_ID_COLUMN_FOR_AUTHOR
-                    + "INNER JOIN " + AUTHOR_TABLE + " AS a ON bar." + AUTHOR_FK_ID_COLUMN + "=a." + AUTHOR_ID_COLUMN;
+                    + BOOK_VIEW_COMMENT + " FROM " + BOOK_TABLE
+                    + " INNER JOIN " + BOOK_TABLE + " AS b"
+                    + " INNER JOIN " + PUBLISHER_TABLE + " AS p ON p." + PUBLISHER_ID_COLUMN + "=b." + BOOK_PUBLISHER_COLUMN
+                    + " INNER JOIN " + STATUS_TABLE + " AS s ON s." + STATUS_ID_COLUMN + "=b." + BOOK_STATUS_COLUMN;
+
+    //TODO - original sql written by darren - DO NOT DELETE
     //CREATE VIEW book_info AS SELECT b.title, CONCAT(a.first_name, ' ', COALESCE(a.middle_name, ""), ' ', a.last_name) AS author_name,
     // g.genre, p.company_name, b.year_published, s.status, COALESCE(b.comment, "") AS comment
     //FROM genre AS g INNER JOIN book_genre_relation AS bgr
@@ -144,6 +148,20 @@ public class DBTableValues {
     //ON p.id=b.publisher
     //INNER JOIN status AS s
     //ON s.id=b.status
+    //INNER JOIN book_author_relation AS bar
+    //ON b.id=bar.book_id
+    //INNER JOIN author AS a
+    //ON bar.author_id = a.id
+
+
+
+
+    //CONCAT(a.first_name, ' ', COALESCE(a.middle_name, ""), ' ', a.last_name) AS author_name,
+    //g.genre,
+    // FROM genre AS g INNER JOIN book_genre_relation AS bgr
+    // ON g.id=bgr.genre_id
+    //INNER JOIN book AS b
+    //ON bgr.book_id=b.id
     //INNER JOIN book_author_relation AS bar
     //ON b.id=bar.book_id
     //INNER JOIN author AS a

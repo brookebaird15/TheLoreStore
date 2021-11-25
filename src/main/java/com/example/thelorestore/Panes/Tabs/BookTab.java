@@ -34,6 +34,9 @@ public class BookTab extends Tab {
         TableColumn<DisplayBook, String> genreColumn = new TableColumn<>("Genre");
         genreColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getGenre()));
 
+        TableColumn<DisplayBook, String> publisherColumn = new TableColumn<>("Publisher");
+        publisherColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getPublisher()));
+
         TableColumn<DisplayBook, String> yearColumn = new TableColumn<>("Year Published");
         yearColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getYear()));
 
@@ -43,7 +46,7 @@ public class BookTab extends Tab {
         TableColumn<DisplayBook, String> commentColumn = new TableColumn<>("Comments");
         commentColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getComment()));
 
-        tableView.getColumns().addAll(titleColumn, authorColumn, genreColumn, yearColumn, statusColumn, commentColumn);
+        tableView.getColumns().addAll(titleColumn, authorColumn, genreColumn, publisherColumn, yearColumn, statusColumn, commentColumn);
         tableView.getItems().addAll(bookTable.displayPrettyBooks());
         root.setCenter(tableView);
 
