@@ -1,7 +1,6 @@
-package com.example.thelorestore.Panes.Tabs;
+package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Pojo.Author;
-import com.example.thelorestore.Pojo.Publisher;
 import com.example.thelorestore.Tables.AuthorTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
@@ -11,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.Arrays;
-import java.util.jar.JarEntry;
 
 public class AuthorTab extends Tab {
     private static AuthorTab tab;

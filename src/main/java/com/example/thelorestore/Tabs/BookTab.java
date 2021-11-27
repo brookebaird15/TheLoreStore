@@ -1,4 +1,4 @@
-package com.example.thelorestore.Panes.Tabs;
+package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Launcher;
 import com.example.thelorestore.Pojo.DisplayBook;

@@ -1,4 +1,4 @@
-package com.example.thelorestore.Panes.Tabs;
+package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Pojo.Publisher;
 import com.example.thelorestore.Tables.PublisherTable;

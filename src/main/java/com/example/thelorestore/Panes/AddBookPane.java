@@ -1,6 +1,6 @@
 package com.example.thelorestore.Panes;
 
-import com.example.thelorestore.Panes.Tabs.BookTab;
+import com.example.thelorestore.Tabs.BookTab;
 import com.example.thelorestore.Pojo.Author;
 import com.example.thelorestore.Pojo.Book;
 import com.example.thelorestore.Pojo.Genre;
