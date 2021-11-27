@@ -126,7 +126,7 @@ public class DBTableValues {
 
     public static final String CREATE_BOOK_VIEW =
             "CREATE VIEW " + BOOK_VIEW + " AS SELECT b."
-                    + BOOK_VIEW_ID + ", b."
+//                    + BOOK_VIEW_ID + ", b."
                     + BOOK_VIEW_TITLE + ", p."
                     + BOOK_VIEW_PUBLISHER + ", b."
                     + BOOK_VIEW_YEAR + ", s."

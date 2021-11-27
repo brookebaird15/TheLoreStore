@@ -154,14 +154,15 @@ public class BookTable implements BookDAO {
     //TODO - is it possible to have all authors displayed in one column and all genres displayed in one column
     public ArrayList<DisplayBook> displayPrettyBooks() {
         ArrayList<DisplayBook> books = new ArrayList<>();
-        ArrayList<String> genres;
-        ArrayList<String> authors;
+      //  ArrayList<String> genres;
+      //  ArrayList<String> authors;
         String query = "SELECT * FROM " + DBTableValues.BOOK_VIEW;
         try {
             Statement getBooks = db.getConnection().createStatement();
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
-                books.add(new DisplayBook(data.getInt(DBTableValues.BOOK_VIEW_ID),
+                books.add(new DisplayBook(
+//                        data.getInt(DBTableValues.BOOK_VIEW_ID),
                         data.getString(DBTableValues.BOOK_VIEW_TITLE),
                         data.getString(DBTableValues.BOOK_VIEW_PUBLISHER),
                         data.getString(DBTableValues.BOOK_VIEW_YEAR),
@@ -173,7 +174,7 @@ public class BookTable implements BookDAO {
             e.printStackTrace();
         }
 
-        for(DisplayBook book : books) {
+      //  for(DisplayBook book : books) {
 
 //            System.out.println(book.getTitle());
 //            genres = new ArrayList<>();
@@ -208,7 +209,7 @@ public class BookTable implements BookDAO {
 //            authorList = authorList.replace("[", "").replace("]", "");
 //            book.setAuthor(authorList);
 
-        }
+      //  }
         return books;
     }
 }

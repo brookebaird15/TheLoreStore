@@ -30,6 +30,14 @@ public class DisplayBook {
         this.comment = comment;
     }
 
+    public DisplayBook(String title, String publisher, String year, String status, String comment) {
+        this.title = title;
+        this.publisher = publisher;
+        this.year = year;
+        this.status = status;
+        this.comment = comment;
+    }
+
     public int getId() {
         return id;
     }
