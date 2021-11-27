@@ -1,7 +1,6 @@
-package com.example.thelorestore.Panes.Tabs;
+package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Pojo.Author;
-import com.example.thelorestore.Pojo.Publisher;
 import com.example.thelorestore.Tables.AuthorTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
@@ -11,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.Arrays;
-import java.util.jar.JarEntry;
 
 public class AuthorTab extends Tab {
     private static AuthorTab tab;
@@ -72,6 +70,7 @@ public class AuthorTab extends Tab {
         saveButton = new Button("Save");
         saveButton.setOnAction(e-> {
             if(updating) {
+                //TODO - get author by id not index?
                 int index = tableView.getSelectionModel().getSelectedIndex() + 1;
                 String firstName = firstField.getText();
                 String middleName = middleField.getText();
@@ -108,18 +107,6 @@ public class AuthorTab extends Tab {
             updateAuthButton.setDisable(true);
             cancelButton.setVisible(true);
         });
-
-        //saveUpdateButton saves changes made with update button
-//        saveUpdateButton = new Button("Save");
-//        saveUpdateButton.setOnAction(e-> {
-//
-//            saveAddButton.setVisible(false);
-//            nameFields.setVisible(false);
-//            refreshAuthTable();
-//            addAuthButton.setDisable(false);
-//            cancelButton.setVisible(false);
-//        });
-//        saveUpdateButton.setVisible(false);
 
         //updateAuthButton allows user to update an author
         updateAuthButton = new Button("Update Author");

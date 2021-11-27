@@ -12,8 +12,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class UpdateItemPane extends StackPane {
-    public UpdateItemPane() {
+public class UpdateBookPane extends StackPane {
+    public UpdateBookPane() {
         //A vbox to hold all the input boxes
         VBox inputFieldsBox = new VBox();
         //Vbox to hold title of book

@@ -1,17 +1,8 @@
 package com.example.thelorestore.Panes;
 
-import com.example.thelorestore.Panes.Tabs.AuthorTab;
-import com.example.thelorestore.Panes.Tabs.GenreTab;
-import com.example.thelorestore.Panes.Tabs.BookTab;
-import com.example.thelorestore.Panes.Tabs.PublisherTab;
-import com.example.thelorestore.Scenes.AddItemScene;
-import com.example.thelorestore.Scenes.UpdateItemScene;
-import com.example.thelorestore.Launcher;
-import javafx.geometry.Pos;
+import com.example.thelorestore.Tabs.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class MainTablePane extends BorderPane {
@@ -26,7 +17,8 @@ public class MainTablePane extends BorderPane {
         AuthorTab authorTab = AuthorTab.getInstance();
         GenreTab genreTab = GenreTab.getInstance();
         PublisherTab publisherTab = PublisherTab.getInstance();
-        tabPane.getTabs().addAll(bookTab, authorTab, genreTab, publisherTab);
+        StatsTab statsTab = StatsTab.getInstance();
+        tabPane.getTabs().addAll(bookTab, authorTab, genreTab, publisherTab, statsTab);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         this.setTop(tabPane);

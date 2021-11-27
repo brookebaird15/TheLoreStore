@@ -26,6 +26,9 @@ public class Database {
                 createTable(DBTableValues.PUBLISHER_TABLE, DBTableValues.CREATE_PUBLISHER_TABLE, connection);
                 createTable(DBTableValues.STATUS_TABLE, DBTableValues.CREATE_STATUS_TABLE, connection);
                 createTable(DBTableValues.BOOK_TABLE, DBTableValues.CREATE_BOOK_TABLE, connection);
+                createTable(DBTableValues.BOOK_GENRE_TABLE, DBTableValues.CREATE_BOOK_GENRE_TABLE, connection);
+                createTable(DBTableValues.BOOK_AUTHOR_TABLE, DBTableValues.CREATE_BOOK_AUTHOR_TABLE, connection);
+                createTable(DBTableValues.BOOK_VIEW, DBTableValues.CREATE_BOOK_VIEW, connection);
             } catch (Exception e) {
                 e.printStackTrace();
             }
