@@ -65,6 +65,7 @@ public class BookTab extends Tab {
         //viewItemButton directs user to ViewItemPane
         Button viewItemButton = new Button("Update Book");
         viewItemButton.setOnAction(e -> {
+            //TODO - selected book needs to select on book id, not index (repeating or removed book entries will change index vs id)
             selectedBook = bookTable.getBook(tableView.getSelectionModel().getSelectedIndex());
             Launcher.mainStage.setScene(new UpdateItemScene());
         });
