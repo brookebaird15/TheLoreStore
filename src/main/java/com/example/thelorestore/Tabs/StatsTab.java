@@ -9,7 +9,7 @@ public class StatsTab extends Tab {
     public PieChart statusChart;
 
     private StatsTab() {
-
+        this.setText("Statistics");
     }
 
     public static StatsTab getInstance() {

@@ -47,7 +47,6 @@ public class PublisherTab extends Tab {
         cancelButton.setOnAction(e-> {
             publisherField.setVisible(false);
             saveButton.setVisible(false);
-//            saveUpdateButton.setVisible(false);
             cancelButton.setVisible(false);
             updatePubButton.setDisable(false);
             addPubButton.setDisable(false);

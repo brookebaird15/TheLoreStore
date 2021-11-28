@@ -1,19 +1,30 @@
 package com.example.thelorestore.Panes;
 
+import com.example.thelorestore.Pojo.Author;
+import com.example.thelorestore.Pojo.Book;
+import com.example.thelorestore.Pojo.Genre;
+import com.example.thelorestore.Pojo.Publisher;
 import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
+import com.example.thelorestore.Tables.AuthorTable;
+import com.example.thelorestore.Tables.GenreTable;
+import com.example.thelorestore.Tables.PublisherTable;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import static com.example.thelorestore.Tabs.BookTab.selectedBook;
+
 public class UpdateBookPane extends StackPane {
     public UpdateBookPane() {
+        AuthorTable authorTable = new AuthorTable();
+        GenreTable genreTable = new GenreTable();
+        PublisherTable publisherTable = new PublisherTable();
+
         //A vbox to hold all the input boxes
         VBox inputFieldsBox = new VBox();
         //Vbox to hold title of book
@@ -40,20 +51,73 @@ public class UpdateBookPane extends StackPane {
         Text yearTxt = new Text("Year Published");
         Text commentTxt = new Text("Comment");
 
-        //Textfields to allow for input of each category
+        //Textfields and combo boxes to allow for input of each category
         TextField titleTextField = new TextField();
-        TextField authorTextField = new TextField();
-        TextField genreTextField = new TextField();
-        TextField publisherTextField = new TextField();
+        titleTextField.setText(selectedBook.getTitle());
+
+        ComboBox<Author> authorList = new ComboBox<>();
+        authorList.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
+
+        ComboBox<Genre> genreList = new ComboBox<>();
+        genreList.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
+
+        ComboBox<Publisher> publisherList = new ComboBox<>();
+        publisherList.setItems(FXCollections.observableArrayList(publisherTable.getAllPublishers()));
+
         TextField yearTextField = new TextField();
-        TextField commentTextField = new TextField();
+        yearTextField.setText(String.valueOf(selectedBook.getYear()));
+        Text warningText = new Text("Please enter a valid year");
+        warningText.setVisible(false);
+
+        TextArea commentTextField = new TextArea();
+        commentTextField.setText(selectedBook.getComment());
+
+        //Checkboxes for the status
+        //TODO - have current status button selected on screen load?
+        RadioButton radioButton1 = new RadioButton("Unread");
+        RadioButton radioButton2 = new RadioButton("In Progress");
+        RadioButton radioButton3 = new RadioButton("Completed");
+        ToggleGroup buttonGroup = new ToggleGroup();
+        radioButton1.setToggleGroup(buttonGroup);
+        radioButton2.setToggleGroup(buttonGroup);
+        radioButton3.setToggleGroup(buttonGroup);
 
         //An Update button to update info and return user to Main Table
         Button updateBtn = new Button("Update Item");
         updateBtn.setOnAction(event -> {
-            /*** TODO
-             * Create an update function
-             */
+            //TODO - allow user to update author, pub, genre
+
+            //variables to hold update values
+            String updateTitle = titleTextField.getText();
+            int updatePub = publisherList.getSelectionModel().getSelectedItem().getId();
+            String updateComment = commentTextField.getText();
+            int updateYear = 0;
+
+            //checks for valid year input
+            //TODO - limit input to 4 characters
+            try {
+                updateYear = Integer.parseInt(yearTextField.getText().trim());
+                warningText.setVisible(false);
+            } catch (NumberFormatException exception) {
+                warningText.setVisible(true);
+                yearTextField.setText("");
+                return;
+            }
+
+            int updateStatus = 0;
+            if(radioButton1.isSelected()) {
+                updateStatus = 1;
+            }
+            if(radioButton2.isSelected()) {
+                updateStatus = 2;
+            }
+            if(radioButton3.isSelected()) {
+                updateStatus = 3;
+            }
+
+            //book value to be updated
+            Book updateBook = new Book(updateTitle, updatePub, updateYear, updateStatus, updateComment);
+
             Launcher.mainStage.setScene(new MainTableScene());
         });
 
@@ -71,13 +135,13 @@ public class UpdateBookPane extends StackPane {
         title.getChildren().addAll(titleTxt, titleTextField);
         title.setSpacing(5);
 
-        author.getChildren().addAll(authorTxt, authorTextField);
+        author.getChildren().addAll(authorTxt, authorList);
         author.setSpacing(5);
 
-        genre.getChildren().addAll(genreTxt, genreTextField);
+        genre.getChildren().addAll(genreTxt, genreList);
         genre.setSpacing(5);
 
-        publisher.getChildren().addAll(publisherTxt, publisherTextField);
+        publisher.getChildren().addAll(publisherTxt, publisherList);
         publisher.setSpacing(5);
 
         yearPublished.getChildren().addAll(yearTxt, yearTextField);
@@ -86,21 +150,13 @@ public class UpdateBookPane extends StackPane {
         commentBox.getChildren().addAll(commentTxt, commentTextField);
         commentBox.setSpacing(5);
 
-        //Checkboxes for the status
-        RadioButton radioButton1 = new RadioButton("Unread");
-        RadioButton radioButton2 = new RadioButton("In Progress");
-        RadioButton radioButton3 = new RadioButton("Completed");
-        ToggleGroup buttonGroup = new ToggleGroup();
-        radioButton1.setToggleGroup(buttonGroup);
-        radioButton2.setToggleGroup(buttonGroup);
-        radioButton3.setToggleGroup(buttonGroup);
         //Hbox for the radio buttons
         HBox checkboxes = new HBox();
         checkboxes.setSpacing(5);
         checkboxes.getChildren().addAll(radioButton1, radioButton2, radioButton3);
 
         //Vboxes get added to the input field box
-        inputFieldsBox.getChildren().addAll(title, author, genre, yearPublished, commentBox, checkboxes, buttons);
+        inputFieldsBox.getChildren().addAll(title, author, genre, publisher, yearPublished, commentBox, checkboxes, buttons);
         inputFieldsBox.setAlignment(Pos.CENTER);
         inputFieldsBox.setMaxWidth(500);
         inputFieldsBox.setSpacing(20);

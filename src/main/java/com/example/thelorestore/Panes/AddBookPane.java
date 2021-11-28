@@ -69,7 +69,7 @@ public class AddBookPane extends StackPane {
 
         VBox commentBox = new VBox();
         Text commentText = new Text("Comment");
-        TextField commentInput = new TextField();
+        TextArea commentInput = new TextArea();
         commentBox.getChildren().addAll(commentText, commentInput);
         commentBox.setSpacing(5);
 
@@ -99,6 +99,8 @@ public class AddBookPane extends StackPane {
             int bookPublisher = publisherList.getSelectionModel().getSelectedItem().getId();
             int bookYear = 0;
 
+            //checks for valid year input
+            //TODO - limit input to 4 characters
             try {
                 bookYear = Integer.parseInt(yearInput.getText().trim());
                 warningText.setVisible(false);
