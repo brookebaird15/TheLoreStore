@@ -8,17 +8,19 @@ import com.example.thelorestore.Scenes.UpdateItemScene;
 import com.example.thelorestore.Tables.BookTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+
+import java.util.jar.JarEntry;
 
 public class BookTab extends Tab {
     private static BookTab tab;
     public static TableView tableView;
     public static Book selectedBook;
+    private VBox confirmation;
 
     //TODO - Book tab does not display data, issue with SQL syntax (likely from displayPrettyBooks method)
     private BookTab() {
@@ -69,12 +71,46 @@ public class BookTab extends Tab {
             selectedBook = bookTable.getBook(tableView.getSelectionModel().getSelectedIndex());
             Launcher.mainStage.setScene(new UpdateItemScene());
         });
-        editButtons.getChildren().addAll(addItemButton, viewItemButton);
-        editButtons.setAlignment(Pos.CENTER);
-        editButtons.setSpacing(500);
-        editButtons.requestFocus();
 
-        root.setBottom(editButtons);
+        //btn to confirm user wants to delete book
+        Button confirmButton = new Button("Yes - Delete Book");
+        confirmButton.setOnAction(e-> {
+            bookTable.deleteBook(selectedBook);
+            confirmation.setVisible(false);
+        });
+
+        //button to cancel deletion
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(e-> {
+            confirmation.setVisible(false);
+        });
+
+        //text prompt to notify user
+        Text confirmationPrompt = new Text("Are you sure you want to delete this book?");
+
+        //box to hold delete confirmation buttons
+        HBox confirmationButtons = new HBox();
+        confirmationButtons.getChildren().addAll(confirmButton, cancelButton);
+
+        //box to hold confirm prompt and buttons
+        confirmation = new VBox();
+        confirmation.getChildren().addAll(confirmationPrompt, confirmationButtons);
+        confirmation.setVisible(false);
+
+        //button to delete book from table
+        Button deleteItemButton = new Button("Delete Book");
+        deleteItemButton.setOnAction(e-> {
+            confirmation.setVisible(true);
+        });
+
+        editButtons.getChildren().addAll(addItemButton, viewItemButton, deleteItemButton);
+        editButtons.setAlignment(Pos.CENTER);
+        editButtons.setSpacing(200);
+
+        VBox allButtons = new VBox();
+        allButtons.getChildren().addAll(editButtons, confirmation);
+
+        root.setBottom(allButtons);
 
         this.setContent(root);
     }
