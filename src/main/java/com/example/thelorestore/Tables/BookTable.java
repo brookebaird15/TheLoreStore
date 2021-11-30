@@ -160,6 +160,7 @@ public class BookTable implements BookDAO {
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
                 books.add(new DisplayBook(
+                        data.getInt(DBTableValues.BOOK_VIEW_ID),
                         data.getString(DBTableValues.BOOK_VIEW_TITLE),
                         data.getString(DBTableValues.BOOK_VIEW_AUTHOR),
                         data.getString(DBTableValues.BOOK_VIEW_GENRE),
