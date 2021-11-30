@@ -82,6 +82,14 @@ public class UpdateBookPane extends StackPane {
         radioButton2.setToggleGroup(buttonGroup);
         radioButton3.setToggleGroup(buttonGroup);
 
+        if(selectedBook.getStatus().equals("unread")) {
+            radioButton1.setSelected(true);
+        } else if (selectedBook.getStatus().equals("in progress")) {
+            radioButton2.setSelected(true);
+        } else if (selectedBook.getStatus().equals("completed")) {
+            radioButton3.setSelected(true);
+        }
+
         //An Update button to update info and return user to Main Table
         Button updateBtn = new Button("Update Item");
         updateBtn.setOnAction(event -> {

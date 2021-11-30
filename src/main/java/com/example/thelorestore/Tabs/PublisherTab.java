@@ -42,7 +42,7 @@ public class PublisherTab extends Tab {
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
-
+        //cancel button to cancel add/update
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e-> {
             publisherField.setVisible(false);
@@ -54,16 +54,14 @@ public class PublisherTab extends Tab {
         cancelButton.setVisible(false);
 
 
-        //saveAddButton saves changes made with the add button
+        //save button to commit changes
         saveButton = new Button("Save");
         saveButton.setOnAction(e-> {
             //TODO - catch exception where user entry is too long
             if(updating) {
-                //TODO - need to retrieve item based on id - how?
-                int index = tableView.getSelectionModel().getSelectedIndex() + 1;
-                String pubName = publisherField.getText();
-                Publisher publisher = new Publisher(index, pubName);
-                publisherTable.updatePublisher(publisher);
+                Publisher selection = (Publisher) tableView.getSelectionModel().getSelectedItem();
+                selection.setCompanyName(publisherField.getText());
+                publisherTable.updatePublisher(selection);
                 addPubButton.setDisable(false);
             } else {
                 Publisher publisher = new Publisher(publisherField.getText());
@@ -115,12 +113,19 @@ public class PublisherTab extends Tab {
         this.setContent(root);
     }
 
+    /**
+     * Refreshes table with new or updated publisher
+     */
     public void refreshPubTable() {
         PublisherTable table = new PublisherTable();
         tableView.getItems().clear();
         tableView.getItems().addAll(table.getAllPublishers());
     }
 
+    /**
+     * Generates new tab if one does not exist
+     * @return PublisherTab
+     */
     public static PublisherTab getInstance() {
         if (tab == null) {
             tab = new PublisherTab();

@@ -19,7 +19,7 @@ import java.util.jar.JarEntry;
 public class BookTab extends Tab {
     private static BookTab tab;
     public static TableView tableView;
-    public static Book selectedBook;
+    public static DisplayBook selectedBook;
     private VBox confirmation;
 
     //TODO - Book tab does not display data, issue with SQL syntax (likely from displayPrettyBooks method)
@@ -67,15 +67,16 @@ public class BookTab extends Tab {
         //viewItemButton directs user to ViewItemPane
         Button viewItemButton = new Button("Update Book");
         viewItemButton.setOnAction(e -> {
-            //TODO - selected book needs to select on book id, not index (repeating or removed book entries will change index vs id)
-            selectedBook = bookTable.getBook(tableView.getSelectionModel().getSelectedIndex());
+            selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
             Launcher.mainStage.setScene(new UpdateItemScene());
         });
 
         //btn to confirm user wants to delete book
         Button confirmButton = new Button("Yes - Delete Book");
         confirmButton.setOnAction(e-> {
-            bookTable.deleteBook(selectedBook);
+            //delete the book at the selected book ID
+            Book deleteBook = new Book(selectedBook.getId());
+            bookTable.deleteBook(deleteBook);
             confirmation.setVisible(false);
         });
 

@@ -65,18 +65,16 @@ public class AuthorTab extends Tab {
         });
         cancelButton.setVisible(false);
 
-
-        //saveAddButton saves changes made with the add button
+        //save button to commit changes
         saveButton = new Button("Save");
         saveButton.setOnAction(e-> {
             if(updating) {
                 //TODO - get author by id not index?
-                int index = tableView.getSelectionModel().getSelectedIndex() + 1;
-                String firstName = firstField.getText();
-                String middleName = middleField.getText();
-                String lastName = lastField.getText();
-                Author author = new Author(index, firstName, middleName, lastName);
-                authorTable.updateAuthor(author);
+                Author selection = (Author) tableView.getSelectionModel().getSelectedItem();
+                selection.setFirstName(firstField.getText());
+                selection.setMiddleName(middleField.getText());
+                selection.setLastName(lastField.getText());
+                authorTable.updateAuthor(selection);
                 addAuthButton.setDisable(false);
             } else {
                 String firstName = firstField.getText();
@@ -138,12 +136,19 @@ public class AuthorTab extends Tab {
         this.setContent(root);
     }
 
+    /**
+     * Refreshes auth table with new or updated author
+     */
     public void refreshAuthTable() {
         AuthorTable table = new AuthorTable();
         tableView.getItems().clear();
         tableView.getItems().addAll(table.getAllAuthors());
     }
 
+    /**
+     * Generates new tab if one does not already exist
+     * @return AuthorTab
+     */
     public static AuthorTab getInstance() {
         if (tab == null) {
             tab = new AuthorTab();

@@ -42,6 +42,7 @@ public class DBTableValues {
     public static final String BOOK_STATUS_COLUMN = "status";
     public static final String BOOK_COMMENT_COLUMN = "comment";
 
+    //book view
     public static final String BOOK_VIEW = "book_info1";
     public static final String BOOK_VIEW_ID = "id";
     public static final String BOOK_VIEW_TITLE = "title";
@@ -57,64 +58,69 @@ public class DBTableValues {
      * PUBLISHER TABLE - ID, COMPANY
      * GENRE TABLE - ID, GENRE
      * AUTHOR TABLE - ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME
-     * BOOK TABLE - ID, TITLE, AUTHOR_1, AUTHOR_2, AUTHOR_3, GENRE_1, GENRE_2, GENRE_3, PUBLISHER, YEAR_PUBLISHED, READ, COMMENTS
+     * BOOK TABLE - ID, TITLE, PUBLISHER, YEAR_PUBLISHED, STATUS, COMMENT
+     * BOOK_GENRE_RELATION TABLE - BOOK_ID, GENRE_ID
+     * BOOK_AUTHOR_RELATION TABLE - BOOK_ID, AUTHOR_ID
+     * STATUS TABLE - ID, STATUS
+     * BOOK VIEW - ID, TITLE, AUTHOR_NAME, GENRE, COMPANY_NAME, YEAR_PUBLISHED, STATUS, COMMENT
      */
 
     public static final String CREATE_AUTHOR_TABLE =
-            "CREATE TABLE " + AUTHOR_TABLE + " ("
-                    + AUTHOR_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
-                    + AUTHOR_FIRST_COLUMN + " VARCHAR(50) NOT NULL, "
-                    + AUTHOR_MIDDLE_COLUMN + " VARCHAR(50), "
-                    + AUTHOR_LAST_COLUMN + " VARCHAR(50) NOT NULL, "
-                    + "PRIMARY KEY(" + AUTHOR_ID_COLUMN + ")" + ");";
+        "CREATE TABLE " + AUTHOR_TABLE + " ("
+        + AUTHOR_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+        + AUTHOR_FIRST_COLUMN + " VARCHAR(50) NOT NULL, "
+        + AUTHOR_MIDDLE_COLUMN + " VARCHAR(50), "
+        + AUTHOR_LAST_COLUMN + " VARCHAR(50) NOT NULL, "
+        + "PRIMARY KEY(" + AUTHOR_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_BOOK_AUTHOR_TABLE =
-            "CREATE TABLE " + BOOK_AUTHOR_TABLE + " ("
-                    + BOOK_ID_COLUMN_FOR_AUTHOR + " int NOT NULL, "
-                    + AUTHOR_FK_ID_COLUMN + " int NOT NULL,"
-                    + "FOREIGN KEY (" + BOOK_ID_COLUMN_FOR_AUTHOR + ") REFERENCES " + BOOK_TABLE + "(" + BOOK_ID_COLUMN + "),"
-                    + "FOREIGN KEY (" + AUTHOR_FK_ID_COLUMN + ") REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
-                    + "PRIMARY KEY(" + BOOK_ID_COLUMN_FOR_AUTHOR + ", " + AUTHOR_FK_ID_COLUMN + ")" + ");";
+        "CREATE TABLE " + BOOK_AUTHOR_TABLE + " ("
+        + BOOK_ID_COLUMN_FOR_AUTHOR + " int NOT NULL, "
+        + AUTHOR_FK_ID_COLUMN + " int NOT NULL,"
+        + "FOREIGN KEY (" + BOOK_ID_COLUMN_FOR_AUTHOR + ") REFERENCES " + BOOK_TABLE + "(" + BOOK_ID_COLUMN + "),"
+        + "FOREIGN KEY (" + AUTHOR_FK_ID_COLUMN + ") REFERENCES " + AUTHOR_TABLE + "(" + AUTHOR_ID_COLUMN + "),"
+        + "PRIMARY KEY(" + BOOK_ID_COLUMN_FOR_AUTHOR + ", " + AUTHOR_FK_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_GENRE_TABLE =
-            "CREATE TABLE " + GENRE_TABLE + " ("
-                    + GENRE_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
-                    + GENRE_NAME_COLUMN + " VARCHAR(30) NOT NULL, "
-                    + "PRIMARY KEY(" + GENRE_ID_COLUMN + ")" + ");";
+        "CREATE TABLE " + GENRE_TABLE + " ("
+        + GENRE_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+        + GENRE_NAME_COLUMN + " VARCHAR(30) NOT NULL, "
+        + "PRIMARY KEY(" + GENRE_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_BOOK_GENRE_TABLE =
-            "CREATE TABLE " + BOOK_GENRE_TABLE + " ("
-                    + BOOK_ID_COLUMN_FOR_GENRE + " int NOT NULL, "
-                    + GENRE_FK_ID_COLUMN + " int NOT NULL,"
-                    + "FOREIGN KEY (" + BOOK_ID_COLUMN_FOR_GENRE + ") REFERENCES " + BOOK_TABLE + "(" + BOOK_ID_COLUMN + "),"
-                    + "FOREIGN KEY (" + GENRE_FK_ID_COLUMN + ") REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
-                    + "PRIMARY KEY(" + BOOK_ID_COLUMN_FOR_GENRE + ", " + GENRE_FK_ID_COLUMN + ")" + ");";
+        "CREATE TABLE " + BOOK_GENRE_TABLE + " ("
+        + BOOK_ID_COLUMN_FOR_GENRE + " int NOT NULL, "
+        + GENRE_FK_ID_COLUMN + " int NOT NULL,"
+        + "FOREIGN KEY (" + BOOK_ID_COLUMN_FOR_GENRE + ") REFERENCES " + BOOK_TABLE + "(" + BOOK_ID_COLUMN + "),"
+        + "FOREIGN KEY (" + GENRE_FK_ID_COLUMN + ") REFERENCES " + GENRE_TABLE + "(" + GENRE_ID_COLUMN + "),"
+        + "PRIMARY KEY(" + BOOK_ID_COLUMN_FOR_GENRE + ", " + GENRE_FK_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_STATUS_TABLE =
-            "CREATE TABLE " + STATUS_TABLE + " ("
-                    + STATUS_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
-                    + STATUS_NAME_COLUMN + " VARCHAR(15) NOT NULL, "
-                    + "PRIMARY KEY(" + STATUS_ID_COLUMN + ")" + ");";
+        "CREATE TABLE " + STATUS_TABLE + " ("
+        + STATUS_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+        + STATUS_NAME_COLUMN + " VARCHAR(15) NOT NULL, "
+        + "PRIMARY KEY(" + STATUS_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_PUBLISHER_TABLE =
-            "CREATE TABLE " + PUBLISHER_TABLE + " ("
-            + PUBLISHER_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
-            + PUBLISHER_COMPANY_COLUMN + " VARCHAR(50) NOT NULL, "
-            + "PRIMARY KEY(" + PUBLISHER_ID_COLUMN + ")" + ");";
+        "CREATE TABLE " + PUBLISHER_TABLE + " ("
+        + PUBLISHER_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
+        + PUBLISHER_COMPANY_COLUMN + " VARCHAR(50) NOT NULL, "
+        + "PRIMARY KEY(" + PUBLISHER_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_BOOK_TABLE =
-            "CREATE TABLE " + BOOK_TABLE + " ("
-            + BOOK_ID_COLUMN + " int NOT NULL AUTO_INCREMENT PRIMARY KEY,"
-            + BOOK_TITLE_COLUMN + " VARCHAR(255) NOT NULL, "
-            + BOOK_PUBLISHER_COLUMN + " int NOT NULL, "
-            + BOOK_YEAR_COLUMN + " int(4) NOT NULL, "
-            + BOOK_STATUS_COLUMN + " int NOT NULL, "
-            + BOOK_COMMENT_COLUMN + " VARCHAR(1000),"
-            + "FOREIGN KEY (" + BOOK_STATUS_COLUMN + ")" + " REFERENCES " + STATUS_TABLE + "(" + STATUS_ID_COLUMN + "),"
-            + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + ")"
-            + ");";
+        "CREATE TABLE " + BOOK_TABLE + " ("
+        + BOOK_ID_COLUMN + " int NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+        + BOOK_TITLE_COLUMN + " VARCHAR(255) NOT NULL, "
+        + BOOK_PUBLISHER_COLUMN + " int NOT NULL, "
+        + BOOK_YEAR_COLUMN + " int(4) NOT NULL, "
+        + BOOK_STATUS_COLUMN + " int NOT NULL, "
+        + BOOK_COMMENT_COLUMN + " VARCHAR(1000),"
+        + "FOREIGN KEY (" + BOOK_STATUS_COLUMN + ")" + " REFERENCES " + STATUS_TABLE + "(" + STATUS_ID_COLUMN + "),"
+        + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + ")"
+        + ");";
 
-    public static final String CREATE_BOOK_VIEW = "CREATE VIEW " + BOOK_VIEW + " AS SELECT "
+    public static final String CREATE_BOOK_VIEW =
+        "CREATE VIEW " + BOOK_VIEW + " AS SELECT "
         + "b." + BOOK_ID_COLUMN + ", "
         + "b." + BOOK_TITLE_COLUMN + ", "
         + "CONCAT(a." + AUTHOR_FIRST_COLUMN + ", ' ', COALESCE(a." + AUTHOR_MIDDLE_COLUMN + ", \"\"), ' ', a." + AUTHOR_LAST_COLUMN + ") AS " + BOOK_VIEW_AUTHOR + ", "
@@ -131,6 +137,7 @@ public class DBTableValues {
         + "ON b." + BOOK_ID_COLUMN + "=bar." + BOOK_ID_COLUMN_FOR_AUTHOR + " "
         + "INNER JOIN " + AUTHOR_TABLE + " AS a "
         + "ON bar." + AUTHOR_FK_ID_COLUMN + " = a." + AUTHOR_ID_COLUMN;
+
 //    CREATE VIEW book_info AS SELECT b.title, CONCAT(a.first_name, ' ', COALESCE(a.middle_name, ""), ' ', a.last_name) AS author_name,
 //     g.genre, p.company_name, b.year_published, s.status, COALESCE(b.comment, "") AS comment
 //    FROM genre AS g INNER JOIN book_genre_relation AS bgr
