@@ -59,14 +59,14 @@ public class BookTab extends Tab {
         HBox editButtons = new HBox();
 
         //addItemButton directs user to AddItemPane
-        Button addItemButton = new Button("Add Book");
-        addItemButton.setOnAction(e -> {
+        Button addBookBtn = new Button("Add Book");
+        addBookBtn.setOnAction(e -> {
             Launcher.mainStage.setScene(new AddItemScene());
         });
 
         //viewItemButton directs user to ViewItemPane
-        Button viewItemButton = new Button("Update Book");
-        viewItemButton.setOnAction(e -> {
+        Button updateBookBtn = new Button("Update Book");
+        updateBookBtn.setOnAction(e -> {
             selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
             Launcher.mainStage.setScene(new UpdateItemScene());
         });
@@ -75,9 +75,11 @@ public class BookTab extends Tab {
         Button confirmButton = new Button("Yes - Delete Book");
         confirmButton.setOnAction(e-> {
             //delete the book at the selected book ID
+            selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
             Book deleteBook = new Book(selectedBook.getId());
             bookTable.deleteBook(deleteBook);
             confirmation.setVisible(false);
+            refreshBookTable();
         });
 
         //button to cancel deletion
@@ -104,7 +106,7 @@ public class BookTab extends Tab {
             confirmation.setVisible(true);
         });
 
-        editButtons.getChildren().addAll(addItemButton, viewItemButton, deleteItemButton);
+        editButtons.getChildren().addAll(addBookBtn, updateBookBtn, deleteItemButton);
         editButtons.setAlignment(Pos.CENTER);
         editButtons.setSpacing(200);
 
@@ -121,5 +123,11 @@ public class BookTab extends Tab {
             tab = new BookTab();
         }
         return tab;
+    }
+
+    public static void refreshBookTable() {
+        BookTable table = new BookTable();
+        BookTab.tableView.getItems().clear();
+        BookTab.tableView.getItems().addAll(table.displayPrettyBooks());
     }
 }

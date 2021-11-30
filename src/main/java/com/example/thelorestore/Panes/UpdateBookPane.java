@@ -9,6 +9,7 @@ import com.example.thelorestore.Launcher;
 import com.example.thelorestore.Tables.AuthorTable;
 import com.example.thelorestore.Tables.GenreTable;
 import com.example.thelorestore.Tables.PublisherTable;
+import com.example.thelorestore.Tabs.BookTab;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -91,7 +92,7 @@ public class UpdateBookPane extends StackPane {
         }
 
         //An Update button to update info and return user to Main Table
-        Button updateBtn = new Button("Update Item");
+        Button updateBtn = new Button("Update Book");
         updateBtn.setOnAction(event -> {
             //TODO - allow user to update author, pub, genre
 
@@ -126,6 +127,7 @@ public class UpdateBookPane extends StackPane {
             //book value to be updated
             Book updateBook = new Book(updateTitle, updatePub, updateYear, updateStatus, updateComment);
 
+            BookTab.refreshBookTable();
             Launcher.mainStage.setScene(new MainTableScene());
         });
 

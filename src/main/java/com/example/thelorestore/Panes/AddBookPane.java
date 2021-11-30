@@ -37,7 +37,6 @@ public class AddBookPane extends StackPane {
 
         VBox author = new VBox();
         Text authorText = new Text("Author");
-//        TextField authorInput = new TextField();
         ComboBox<Author> authorList = new ComboBox<>();
         authorList.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
         author.getChildren().addAll(authorText, authorList);
@@ -45,7 +44,6 @@ public class AddBookPane extends StackPane {
 
         VBox genre = new VBox();
         Text genreText = new Text("Genre");
-//        TextField genreInput = new TextField();
         ComboBox<Genre> genreList = new ComboBox<>();
         genreList.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
         genre.getChildren().addAll(genreText, genreList);
@@ -53,7 +51,6 @@ public class AddBookPane extends StackPane {
 
         VBox publisher = new VBox();
         Text publisherText = new Text("Publisher");
-//        TextField publisherInput = new TextField();
         ComboBox<Publisher> publisherList = new ComboBox<>();
         publisherList.setItems(FXCollections.observableArrayList(publisherTable.getAllPublishers()));
         publisher.getChildren().addAll(publisherText, publisherList);
@@ -81,6 +78,7 @@ public class AddBookPane extends StackPane {
         radioButton1.setToggleGroup(buttonGroup);
         radioButton2.setToggleGroup(buttonGroup);
         radioButton3.setToggleGroup(buttonGroup);
+
         //Hbox for the radio buttons
         HBox checkboxes = new HBox();
         checkboxes.setSpacing(5);
@@ -133,7 +131,7 @@ public class AddBookPane extends StackPane {
             bookGenreTable.createBookGenreRelation(newestBook, insertGenre);
             bookAuthorTable.createBookAuthorRelation(newestBook, insertAuthor);
 
-            refreshBookTable();
+            BookTab.refreshBookTable();
             Launcher.mainStage.setScene(new MainTableScene());
         });
 
@@ -153,10 +151,6 @@ public class AddBookPane extends StackPane {
         this.getChildren().addAll(inputFields);
     }
 
-    public void refreshBookTable() {
-        BookTable table = new BookTable();
-        BookTab.tableView.getItems().clear();
-        BookTab.tableView.getItems().addAll(table.displayPrettyBooks());
-    }
+
 
 }

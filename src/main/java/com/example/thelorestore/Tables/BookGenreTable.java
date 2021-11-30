@@ -7,10 +7,7 @@ import com.example.thelorestore.Pojo.Book;
 import com.example.thelorestore.Pojo.BookGenre;
 import com.example.thelorestore.Pojo.Genre;
 
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class BookGenreTable implements BookGenreDAO {
@@ -89,5 +86,19 @@ public class BookGenreTable implements BookGenreDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getGenreCount(int genre) {
+        int count = -1;
+        try {
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT * FROM " + DBTableValues.BOOK_GENRE_TABLE
+                    + " WHERE " + DBTableValues.GENRE_FK_ID_COLUMN + " = '" + genre + "'", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet data = getCount.executeQuery();
+            data.last();
+            count = data.getRow();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
