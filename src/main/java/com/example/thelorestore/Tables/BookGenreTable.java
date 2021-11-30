@@ -88,6 +88,11 @@ public class BookGenreTable implements BookGenreDAO {
         }
     }
 
+    /**
+     * Counts the number of books with a specified genre
+     * @param genre is the genre id being counted
+     * @return count - the number of books with that genre
+     */
     public int getGenreCount(int genre) {
         int count = -1;
         try {

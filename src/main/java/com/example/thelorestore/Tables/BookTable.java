@@ -5,6 +5,7 @@ import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Pojo.*;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -173,5 +174,24 @@ public class BookTable implements BookDAO {
             e.printStackTrace();
         }
         return books;
+    }
+
+    /**
+     * Counts the number of books with each 'status'
+     * @param status is the status id being counted
+     * @return count - number of books with that status
+     */
+    public int getStatusCount(int status) {
+        int count = -1;
+        try {
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT * FROM " + DBTableValues.BOOK_TABLE
+                    + " WHERE " + DBTableValues.BOOK_STATUS_COLUMN + " = '" + status + "'", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet data = getCount.executeQuery();
+            data.last();
+            count = data.getRow();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
