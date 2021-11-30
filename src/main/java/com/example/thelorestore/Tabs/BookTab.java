@@ -79,6 +79,7 @@ public class BookTab extends Tab {
             Book deleteBook = new Book(selectedBook.getId());
             bookTable.deleteBook(deleteBook);
             confirmation.setVisible(false);
+            //TODO - table does not refresh on deletion
             refreshBookTable();
         });
 

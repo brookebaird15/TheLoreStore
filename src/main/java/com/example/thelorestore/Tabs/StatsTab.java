@@ -76,7 +76,6 @@ public class StatsTab extends Tab {
         }
 
         ObservableList<PieChart.Data> genreData = FXCollections.observableArrayList(data);
-
         genreChart.setData(genreData);
     }
 
@@ -101,7 +100,6 @@ public class StatsTab extends Tab {
         }
 
         ObservableList<PieChart.Data> statusData = FXCollections.observableArrayList(data);
-
         statusChart.setData(statusData);
     }
 

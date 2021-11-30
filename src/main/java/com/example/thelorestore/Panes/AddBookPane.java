@@ -16,9 +16,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+
 public class AddBookPane extends StackPane {
 
     public AddBookPane() {
+        ArrayList<Author> addedAuthors = new ArrayList<>();
+        ArrayList<Genre> addedGenres = new ArrayList<>();
+
         //inputFields box holds all inputs for pane
         VBox inputFields = new VBox();
 
@@ -35,19 +40,51 @@ public class AddBookPane extends StackPane {
         title.getChildren().addAll(titleText, titleInput);
         title.setSpacing(5);
 
-        VBox author = new VBox();
+        VBox authorBox = new VBox();
         Text authorText = new Text("Author");
         ComboBox<Author> authorList = new ComboBox<>();
         authorList.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
-        author.getChildren().addAll(authorText, authorList);
-        author.setSpacing(5);
+        Text authorDisplay = new Text("");
+        Button addAuthBtn = new Button("+");
 
-        VBox genre = new VBox();
+        //button to add authors to a list
+        addAuthBtn.setOnAction(e-> {
+            Author addedAuthor = authorList.getSelectionModel().getSelectedItem();
+            //add author name to display list
+            authorDisplay.setText(authorDisplay.getText() + addedAuthor.toString() + ", ");
+            //add author to arraylist of authors
+            addedAuthors.add(addedAuthor);
+        });
+
+        //hbox to hold author input fields and display
+        HBox addAuthBox = new HBox();
+        addAuthBox.getChildren().addAll(authorList, addAuthBtn, authorDisplay);
+
+        authorBox.getChildren().addAll(authorText, addAuthBox);
+        authorBox.setSpacing(5);
+
+        VBox genreBox = new VBox();
         Text genreText = new Text("Genre");
         ComboBox<Genre> genreList = new ComboBox<>();
         genreList.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
-        genre.getChildren().addAll(genreText, genreList);
-        genre.setSpacing(5);
+        Text genreDisplay = new Text("");
+        Button addGenreBtn = new Button("+");
+
+        //button to add genres to a list
+        addGenreBtn.setOnAction(e-> {
+            Genre addedGenre = genreList.getSelectionModel().getSelectedItem();
+            //add genre to display list
+            genreDisplay.setText(genreDisplay.getText() + addedGenre.toString() + ", ");
+            //add genre to arraylist of genres
+            addedGenres.add(addedGenre);
+        });
+
+        //hbox to hold genre input and display
+        HBox addGenreBox = new HBox();
+        addGenreBox.getChildren().addAll(genreList, addGenreBtn, genreDisplay);
+
+        genreBox.getChildren().addAll(genreText, addGenreBox);
+        genreBox.setSpacing(5);
 
         VBox publisher = new VBox();
         Text publisherText = new Text("Publisher");
@@ -88,12 +125,9 @@ public class AddBookPane extends StackPane {
         HBox buttons = new HBox();
 
         //Add button saves info and returns user to Main Table
-        Button addButton = new Button("Add Item");
+        Button addButton = new Button("Add Book");
         addButton.setOnAction(e -> {
-            //TODO: create add button function
-            String bookTitle = titleText.getText();
-            int bookAuthor = authorList.getSelectionModel().getSelectedItem().getId();
-            int bookGenre = genreList.getSelectionModel().getSelectedItem().getId();
+            String bookTitle = titleInput.getText();
             int bookPublisher = publisherList.getSelectionModel().getSelectedItem().getId();
             int bookYear = 0;
 
@@ -121,15 +155,19 @@ public class AddBookPane extends StackPane {
 
             String comment = commentInput.getText();
 
-            System.out.println(bookTitle + " " + bookAuthor + " " + bookGenre + " " + bookPublisher + " " + bookYear + " " + bookStatus + " " + comment);
-            Genre insertGenre = new Genre(bookGenre);
-            Author insertAuthor = new Author(bookAuthor);
+            //create and insert new book
             Book insertBook = new Book(bookTitle, bookPublisher, bookYear, bookStatus, comment);
             Book newestBook = bookTable.createBook(insertBook);
 
-            //TODO - need to get book id after it is added to db
-            bookGenreTable.createBookGenreRelation(newestBook, insertGenre);
-            bookAuthorTable.createBookAuthorRelation(newestBook, insertAuthor);
+            //for each genre added to the list, create a link in the book/genre table
+            for(Genre genre: addedGenres) {
+                bookGenreTable.createBookGenreRelation(newestBook, genre);
+            }
+
+            //for each author added to the list, create a link in the book/author table
+            for(Author author : addedAuthors) {
+                bookAuthorTable.createBookAuthorRelation(newestBook, author);
+            }
 
             BookTab.refreshBookTable();
             Launcher.mainStage.setScene(new MainTableScene());
@@ -143,14 +181,11 @@ public class AddBookPane extends StackPane {
         buttons.getChildren().addAll(addButton, cancelButton);
         buttons.setSpacing(50);
 
-        inputFields.getChildren().addAll(title, author, genre, publisher, year, commentBox, checkboxes, buttons);
+        inputFields.getChildren().addAll(title, authorBox, genreBox, publisher, year, commentBox, checkboxes, buttons);
         inputFields.setAlignment(Pos.CENTER);
         inputFields.setMaxWidth(500);
         inputFields.setSpacing(20);
 
         this.getChildren().addAll(inputFields);
     }
-
-
-
 }
