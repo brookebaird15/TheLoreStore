@@ -148,7 +148,9 @@ public class BookTable implements BookDAO {
      */
     @Override
     public void deleteBook(Book book) {
-        String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book;
+        String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+        bookGenreTable.removeGenreRelation(book);
+        bookAuthorTable.removeAuthorRelation(book);
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Deleted record");
@@ -162,8 +164,7 @@ public class BookTable implements BookDAO {
      * @return books
      */
 
-    //TODO - check if sql statement correct
-    //TODO - is it possible to have all authors displayed in one column and all genres displayed in one column
+    //TODO - have all authors displayed in one column and all genres displayed in one column
     public ArrayList<DisplayBook> displayPrettyBooks() {
         ArrayList<DisplayBook> books = new ArrayList<>();
         String query = "SELECT * FROM " + DBTableValues.BOOK_VIEW;

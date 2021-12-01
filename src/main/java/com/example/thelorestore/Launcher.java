@@ -17,9 +17,6 @@ public class Launcher extends Application {
         mainStage = stage;
         mainStage.setScene(new LoginScene());
         mainStage.setResizable(false);
-        /** TODO
-         * Update the title to better represent the application use
-         */
         mainStage.setTitle("The Lore Store: Inventory Manager");
         mainStage.show();
     }

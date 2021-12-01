@@ -30,7 +30,6 @@ public class BookTab extends Tab {
     public static boolean updating = false;
     public static boolean adding = false;
 
-    //TODO - Book tab does not display data, issue with SQL syntax (likely from displayPrettyBooks method)
     private BookTab() {
         this.setText("Books");
         BookTable bookTable = new BookTable();
@@ -99,7 +98,6 @@ public class BookTab extends Tab {
             Book deleteBook = new Book(selectedBook.getId());
             bookTable.deleteBook(deleteBook);
             confirmation.setVisible(false);
-            //TODO - table does not refresh on deletion
             refreshBookTable();
         });
 

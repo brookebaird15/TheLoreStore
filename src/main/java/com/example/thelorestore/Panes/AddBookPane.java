@@ -56,6 +56,7 @@ public class AddBookPane extends BorderPane {
         authorDisplay.setPrefWidth(150);
         authorDisplay.setPrefHeight(100);
 
+        //TODO - prevent adding duplicate authors
         //button to add authors to a list
         Button addAuthBtn = new Button("+");
         addAuthBtn.setOnAction(e-> {
@@ -104,6 +105,7 @@ public class AddBookPane extends BorderPane {
         genreDisplay.setPrefHeight(100);
         genreDisplay.setPrefWidth(150);
 
+        //TODO - prevent adding duplicate genres
         //button to add genres to a list
         Button addGenreBtn = new Button("+");
         addGenreBtn.setOnAction(e-> {
@@ -150,7 +152,7 @@ public class AddBookPane extends BorderPane {
 
         VBox year = new VBox();
         Text yearText = new Text("Year Published");
-        Text yearWarningText = new Text("Please enter a valid year");
+        Text yearWarningText = new Text("Please enter a valid year - YYYY");
         TextField yearInput = new TextField();
         year.getChildren().addAll(yearText, yearInput, yearWarningText);
         year.setSpacing(5);
@@ -220,7 +222,11 @@ public class AddBookPane extends BorderPane {
             int bookYear = 0;
 
             //checks for valid year input
-            //TODO - limit input to 4 characters
+            if(yearInput.getText().trim().length() != 4) {
+                yearWarningText.setVisible(true);
+                yearInput.setText("");
+                validInput = false;
+            }
             try {
                 bookYear = Integer.parseInt(yearInput.getText().trim());
                 yearWarningText.setVisible(false);
