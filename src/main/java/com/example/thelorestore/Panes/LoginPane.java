@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 //Extend StackPane
@@ -135,6 +136,11 @@ public class LoginPane extends StackPane {
         return translateTransition;
     }
 
+    /**
+     * Connection to the database and querying the account information where if it matches the input text
+     * proceed onto main table
+     * @author Brooke Baird
+     */
     public void loginValidation(){
         db.getConnection();
 
@@ -158,8 +164,8 @@ public class LoginPane extends StackPane {
                 }
             }
 
-        } catch (Exception e){
-
+        } catch (SQLException e){
+            e.printStackTrace();
         }
     }
 
