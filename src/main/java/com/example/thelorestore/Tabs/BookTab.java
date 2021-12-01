@@ -69,11 +69,12 @@ public class BookTab extends Tab {
         //addItemButton directs user to AddItemPane
         Button addBookBtn = new Button("Add Book");
         addBookBtn.setOnAction(e -> {
+            bookAuthors = new ArrayList<>();
+            bookGenres = new ArrayList<>();
             updating = false;
             adding = true;
             selectedBook = null;
             Launcher.mainStage.setScene(new AddUpdateBookScene());
-
         });
 
         //updateBookBtn directs user to UpdateBookPane
