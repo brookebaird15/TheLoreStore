@@ -1,5 +1,7 @@
 package com.example.thelorestore.Panes;
 
+import com.example.thelorestore.Database.DBTableValues;
+import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import javafx.animation.SequentialTransition;
@@ -19,16 +21,20 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 //Extend StackPane
 public class LoginPane extends StackPane {
+    Database db = Database.getInstance();
+    TextField userTextField = new TextField();
+    TextField pwTextField = new PasswordField();
+    Label successfulLogin = new Label("");
     public LoginPane(){
-
         Text user = new Text("Username");
         Text password = new Text("Password");
-        Label successfulLogin = new Label("");
         //Textfield for username and password entry
-        TextField userTextField = new TextField();
-        TextField pwTextField = new PasswordField();
+
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
 
 //        New login button
@@ -37,10 +43,10 @@ public class LoginPane extends StackPane {
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
 //                    Launcher.mainStage.setScene(new MainTableScene());
-                    if (userTextField.getText().isBlank() == false && pwTextField.getText().isBlank() == false){
-                        successfulLogin.setText("You tried to log in!");
+                    if (userTextField.getText().isBlank() == false && !pwTextField.getText().isBlank()){
+                        loginValidation();
                     } else {
-                        successfulLogin.setText("Please enter a username and password");
+                        successfulLogin.setText("Invalid login. Please try again.");
                     }
                 });
         //Cancel button
@@ -128,6 +134,33 @@ public class LoginPane extends StackPane {
         translateTransition.setFromY(fromY);
         translateTransition.setToY(toY);
         return translateTransition;
+    }
+
+    public void loginValidation(){
+        db.getConnection();
+
+        String verifyLogin = "SELECT count(1) FROM useraccounts WHERE username = '"
+                + userTextField.getText() + "'AND password = '"
+                + pwTextField.getText() + "'";
+
+        try {
+            Statement getAccount = db.getConnection().createStatement();
+            //Handle the query
+            ResultSet accountData = getAccount.executeQuery(verifyLogin);
+
+            //Process the query
+            while(accountData.next()){
+                if (accountData.getInt(1) == 1){
+                    successfulLogin.setText("Login successful.");
+                    
+                } else {
+                    successfulLogin.setText("Invalid login. Please try again.");
+                }
+            }
+
+        } catch (Exception e){
+
+        }
     }
 
 }
