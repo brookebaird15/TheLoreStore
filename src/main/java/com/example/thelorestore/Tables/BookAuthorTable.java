@@ -100,16 +100,35 @@ public class BookAuthorTable implements BookAuthorDAO {
     }
 
     @Override
-    public void updateBookAuthorRelation(Book book, Author author) {
-        String query = "UPDATE " + DBTableValues.BOOK_AUTHOR_TABLE + " SET " +
-                DBTableValues.GENRE_FK_ID_COLUMN + " = " + author.getId() +
-                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+    public void removeAuthorRelation(Book book) {
+        String query = "DELETE FROM " + DBTableValues.BOOK_AUTHOR_TABLE  + " WHERE " + DBTableValues.BOOK_ID_COLUMN_FOR_AUTHOR + " = " + book.getId();
         try {
-            Statement updateRelation = db.getConnection().createStatement();
-            updateRelation.executeUpdate(query);
-            System.out.println("Book/author relation updated");
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Author relation deleted");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    //String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book;
+    //        try {
+    //            db.getConnection().createStatement().execute(query);
+    //            System.out.println("Deleted record");
+    //        } catch (SQLException e) {
+    //            e.printStackTrace();
+    //        }
+
+//    @Override
+//    public void updateBookAuthorRelation(Book book, Author author) {
+//        String query = "UPDATE " + DBTableValues.BOOK_AUTHOR_TABLE + " SET " +
+//                DBTableValues.GENRE_FK_ID_COLUMN + " = " + author.getId() +
+//                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+//        try {
+//            Statement updateRelation = db.getConnection().createStatement();
+//            updateRelation.executeUpdate(query);
+//            System.out.println("Book/author relation updated");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

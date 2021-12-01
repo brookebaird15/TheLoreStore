@@ -112,7 +112,7 @@ public class BookTable implements BookDAO {
      * @param book is the book being updated
      */
     @Override
-    public void updateBook(Book book, Genre genre, Author author) {
+    public Book updateBook(Book book) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
                 DBTableValues.BOOK_TITLE_COLUMN + " = '" + book.getTitle() + "', " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + " = '" + book.getPublisher() + "', " +
@@ -120,15 +120,26 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_STATUS_COLUMN + " = '" + book.getStatus() + "', " +
                 DBTableValues.BOOK_COMMENT_COLUMN + " = '" + book.getComment() +
                 "' WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
-        bookGenreTable.updateGenreRelation(book, genre);
-        bookAuthorTable.updateBookAuthorRelation(book, author);
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
             System.out.println("Book updated");
+//            query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " ORDER BY " + DBTableValues.BOOK_ID_COLUMN + " DESC LIMIT 0,1";
+//            Statement getBook = db.getConnection().createStatement();
+//            ResultSet data = getBook.executeQuery(query);
+//            if(data.next()) {
+//                Book updatedBook = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+//                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
+//                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN));
+//                return updatedBook;
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**

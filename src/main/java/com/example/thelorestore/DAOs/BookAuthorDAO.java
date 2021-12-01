@@ -9,5 +9,6 @@ public interface BookAuthorDAO {
     public void createBookAuthorRelation(Book book, Author author);
     public ArrayList<Book> getAllBooksForAuthor(int authorId);
     public ArrayList<Author> getAllAuthorsForBook(int bookId);
-    public void updateBookAuthorRelation(Book book, Author author);
+//    public void updateBookAuthorRelation(Book book, Author author);
+    public void removeAuthorRelation(Book book);
 }

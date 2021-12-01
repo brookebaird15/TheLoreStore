@@ -1,15 +1,13 @@
 package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Launcher;
-import com.example.thelorestore.Pojo.Author;
-import com.example.thelorestore.Pojo.Book;
-import com.example.thelorestore.Pojo.DisplayBook;
-import com.example.thelorestore.Pojo.Genre;
+import com.example.thelorestore.Pojo.*;
 import com.example.thelorestore.Scenes.AddItemScene;
 import com.example.thelorestore.Scenes.UpdateItemScene;
 import com.example.thelorestore.Tables.BookAuthorTable;
 import com.example.thelorestore.Tables.BookGenreTable;
 import com.example.thelorestore.Tables.BookTable;
+import com.example.thelorestore.Tables.PublisherTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -27,7 +25,10 @@ public class BookTab extends Tab {
     public static DisplayBook selectedBook;
     public static ArrayList<Author> bookAuthors;
     public static ArrayList<Genre> bookGenres;
+    public static Publisher bookPub;
     private VBox confirmation;
+    public static boolean updating = false;
+    public static boolean adding = false;
 
     //TODO - Book tab does not display data, issue with SQL syntax (likely from displayPrettyBooks method)
     private BookTab() {
@@ -35,6 +36,7 @@ public class BookTab extends Tab {
         BookTable bookTable = new BookTable();
         BookAuthorTable bookAuthorTable = new BookAuthorTable();
         BookGenreTable bookGenreTable = new BookGenreTable();
+        PublisherTable publisherTable = new PublisherTable();
         BorderPane root = new BorderPane();
         tableView = new TableView();
 
@@ -70,7 +72,11 @@ public class BookTab extends Tab {
         //addItemButton directs user to AddItemPane
         Button addBookBtn = new Button("Add Book");
         addBookBtn.setOnAction(e -> {
+            updating = false;
+            adding = true;
+            selectedBook = null;
             Launcher.mainStage.setScene(new AddItemScene());
+
         });
 
         //updateBookBtn directs user to UpdateBookPane
@@ -79,7 +85,10 @@ public class BookTab extends Tab {
             selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
             bookAuthors = bookAuthorTable.getAllAuthorsForBook(selectedBook.getId());
             bookGenres = bookGenreTable.getAllGenresForBook(selectedBook.getId());
-            Launcher.mainStage.setScene(new UpdateItemScene());
+            bookPub = publisherTable.getPublisher(selectedBook.getId());
+            updating = true;
+            adding = false;
+            Launcher.mainStage.setScene(new AddItemScene());
         });
 
         //btn to confirm user wants to delete book

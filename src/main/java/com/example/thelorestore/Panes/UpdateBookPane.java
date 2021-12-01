@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 
 import static com.example.thelorestore.Tabs.BookTab.selectedBook;
 
+//TODO - DELETE CLASS IF NOT NEEDED
 public class UpdateBookPane extends StackPane {
     public UpdateBookPane() {
         AuthorTable authorTable = new AuthorTable();
@@ -58,6 +59,7 @@ public class UpdateBookPane extends StackPane {
 
         ComboBox<Author> authorList = new ComboBox<>();
         authorList.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
+
 
         ComboBox<Genre> genreList = new ComboBox<>();
         genreList.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));

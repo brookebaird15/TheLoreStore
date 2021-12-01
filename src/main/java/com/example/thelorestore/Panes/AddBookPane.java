@@ -18,11 +18,14 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
+import static com.example.thelorestore.Tabs.BookTab.*;
+
 public class AddBookPane extends StackPane {
 
     public AddBookPane() {
-        ArrayList<Author> addedAuthors = new ArrayList<>();
-        ArrayList<Genre> addedGenres = new ArrayList<>();
+        //ArrayLists to hold authors and genres
+        ArrayList<Author> authorList = new ArrayList<>();
+        ArrayList<Genre> genreList = new ArrayList<>();
 
         //inputFields box holds all inputs for pane
         VBox inputFields = new VBox();
@@ -42,46 +45,46 @@ public class AddBookPane extends StackPane {
 
         VBox authorBox = new VBox();
         Text authorText = new Text("Author");
-        ComboBox<Author> authorList = new ComboBox<>();
-        authorList.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
+        ComboBox<Author> authorCombo = new ComboBox<>();
+        authorCombo.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
         Text authorDisplay = new Text("");
         Button addAuthBtn = new Button("+");
 
         //button to add authors to a list
         addAuthBtn.setOnAction(e-> {
-            Author addedAuthor = authorList.getSelectionModel().getSelectedItem();
+            Author addedAuthor = authorCombo.getSelectionModel().getSelectedItem();
             //add author name to display list
             authorDisplay.setText(authorDisplay.getText() + addedAuthor.toString() + ", ");
             //add author to arraylist of authors
-            addedAuthors.add(addedAuthor);
+            authorList.add(addedAuthor);
         });
 
         //hbox to hold author input fields and display
         HBox addAuthBox = new HBox();
-        addAuthBox.getChildren().addAll(authorList, addAuthBtn, authorDisplay);
+        addAuthBox.getChildren().addAll(authorCombo, addAuthBtn, authorDisplay);
 
         authorBox.getChildren().addAll(authorText, addAuthBox);
         authorBox.setSpacing(5);
 
         VBox genreBox = new VBox();
         Text genreText = new Text("Genre");
-        ComboBox<Genre> genreList = new ComboBox<>();
-        genreList.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
+        ComboBox<Genre> genreCombo = new ComboBox<>();
+        genreCombo.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
         Text genreDisplay = new Text("");
         Button addGenreBtn = new Button("+");
 
         //button to add genres to a list
         addGenreBtn.setOnAction(e-> {
-            Genre addedGenre = genreList.getSelectionModel().getSelectedItem();
+            Genre addedGenre = genreCombo.getSelectionModel().getSelectedItem();
             //add genre to display list
             genreDisplay.setText(genreDisplay.getText() + addedGenre.toString() + ", ");
             //add genre to arraylist of genres
-            addedGenres.add(addedGenre);
+            genreList.add(addedGenre);
         });
 
         //hbox to hold genre input and display
         HBox addGenreBox = new HBox();
-        addGenreBox.getChildren().addAll(genreList, addGenreBtn, genreDisplay);
+        addGenreBox.getChildren().addAll(genreCombo, addGenreBtn, genreDisplay);
 
         genreBox.getChildren().addAll(genreText, addGenreBox);
         genreBox.setSpacing(5);
@@ -121,12 +124,39 @@ public class AddBookPane extends StackPane {
         checkboxes.setSpacing(5);
         checkboxes.getChildren().addAll(radioButton1, radioButton2, radioButton3);
 
+        if(updating) {
+            //set fields by default if updating a book
+            titleInput.setText(selectedBook.getTitle());
+            publisherList.getSelectionModel().select(bookPub);
+            yearInput.setText(selectedBook.getYear());
+            commentInput.setText(selectedBook.getComment());
+            if(selectedBook.getStatus().equals("unread")) {
+                radioButton1.setSelected(true);
+            } else if (selectedBook.getStatus().equals("in progress")) {
+                radioButton2.setSelected(true);
+            } else if (selectedBook.getStatus().equals("completed")) {
+                radioButton3.setSelected(true);
+            }
+
+            //TODO - displays book authors and genres but does not update them?
+            //TODO - also, add a way for user to remove author/genre? <- is it necessary????
+            for(Author author : bookAuthors) {
+                authorDisplay.setText(authorDisplay.getText() + author.toString() + ", ");
+                System.out.println(author);
+            }
+
+            for(Genre genre : bookGenres) {
+                genreDisplay.setText(genreDisplay.getText() + genre.toString() + ", ");
+                System.out.println(genre);
+            }
+        }
+
         //buttons box holds all buttons for pane
         HBox buttons = new HBox();
 
-        //Add button saves info and returns user to Main Table
-        Button addButton = new Button("Add Book");
-        addButton.setOnAction(e -> {
+        //button saves info and returns user to Main Table
+        Button saveButton = new Button("Save Book");
+        saveButton.setOnAction(e -> {
             String bookTitle = titleInput.getText();
             int bookPublisher = publisherList.getSelectionModel().getSelectedItem().getId();
             int bookYear = 0;
@@ -155,18 +185,45 @@ public class AddBookPane extends StackPane {
 
             String comment = commentInput.getText();
 
-            //create and insert new book
+            //book to be inserted
             Book insertBook = new Book(bookTitle, bookPublisher, bookYear, bookStatus, comment);
-            Book newestBook = bookTable.createBook(insertBook);
 
-            //for each genre added to the list, create a link in the book/genre table
-            for(Genre genre: addedGenres) {
-                bookGenreTable.createBookGenreRelation(newestBook, genre);
+            if(adding) {
+                //create and return new book
+                Book newestBook = bookTable.createBook(insertBook);
+
+                //for each genre added to the list, create a link in the book/genre table
+                for(Genre genre: genreList) {
+                    bookGenreTable.createBookGenreRelation(newestBook, genre);
+                }
+
+                //for each author added to the list, create a link in the book/author table
+                for(Author author : authorList) {
+                    bookAuthorTable.createBookAuthorRelation(newestBook, author);
+                }
             }
 
-            //for each author added to the list, create a link in the book/author table
-            for(Author author : addedAuthors) {
-                bookAuthorTable.createBookAuthorRelation(newestBook, author);
+            if(updating) {
+                insertBook.setId(selectedBook.getId());
+
+                //update book
+                bookTable.updateBook(insertBook);
+
+                //remove all previous relations
+                bookGenreTable.removeGenreRelation(insertBook);
+                bookAuthorTable.removeAuthorRelation(insertBook);
+
+                //add updated genre relations
+                for(Genre genre: genreList) {
+                    System.out.println("UPDATE GENRE: " + genre);
+                    bookGenreTable.createBookGenreRelation(insertBook, genre);
+                }
+
+                //add updated author relations
+                for(Author author: authorList) {
+                    System.out.println("UPDATE AUTHOR: " + author);
+                    bookAuthorTable.createBookAuthorRelation(insertBook, author);
+                }
             }
 
             BookTab.refreshBookTable();
@@ -177,8 +234,9 @@ public class AddBookPane extends StackPane {
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e -> {
             Launcher.mainStage.setScene(new MainTableScene());
+            BookTab.updating = false;
         });
-        buttons.getChildren().addAll(addButton, cancelButton);
+        buttons.getChildren().addAll(saveButton, cancelButton);
         buttons.setSpacing(50);
 
         inputFields.getChildren().addAll(title, authorBox, genreBox, publisher, year, commentBox, checkboxes, buttons);

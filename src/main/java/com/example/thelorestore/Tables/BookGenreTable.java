@@ -92,18 +92,29 @@ public class BookGenreTable implements BookGenreDAO {
     }
 
     @Override
-    public void updateGenreRelation(Book book, Genre genre) {
-        String query = "UPDATE " + DBTableValues.BOOK_GENRE_TABLE + " SET " +
-                DBTableValues.GENRE_FK_ID_COLUMN + " = " + genre.getId() +
-                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+    public void removeGenreRelation(Book book) {
+        String query = "DELETE FROM " + DBTableValues.BOOK_GENRE_TABLE  + " WHERE " + DBTableValues.BOOK_ID_COLUMN_FOR_GENRE + " = " + book.getId();
         try {
-            Statement updateRelation = db.getConnection().createStatement();
-            updateRelation.executeUpdate(query);
-            System.out.println("Book/genre relation updated");
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Genre relation deleted");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+//    @Override
+//    public void updateGenreRelation(Book book, Genre genre) {
+//        String query = "UPDATE " + DBTableValues.BOOK_GENRE_TABLE + " SET " +
+//                DBTableValues.GENRE_FK_ID_COLUMN + " = " + genre.getId() +
+//                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+//        try {
+//            Statement updateRelation = db.getConnection().createStatement();
+//            updateRelation.executeUpdate(query);
+//            System.out.println("Book/genre relation updated");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Counts the number of books with a specified genre
