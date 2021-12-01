@@ -20,7 +20,7 @@ public class Launcher extends Application {
         /** TODO
          * Update the title to better represent the application use
          */
-        mainStage.setTitle("The Lore Store: Inventory Manager");
+        mainStage.setTitle("Personal Book Tracker - by Ashley McCallum and Brooke Baird");
         mainStage.show();
     }
 }

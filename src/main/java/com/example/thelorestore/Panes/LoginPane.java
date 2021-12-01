@@ -25,6 +25,7 @@ public class LoginPane extends StackPane {
         Text user = new Text("Username");
         Text password = new Text("Password");
         Label successfulLogin = new Label("");
+        successfulLogin.setStyle("-fx-font: 14 arial;");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
 
 //        New login button
@@ -32,10 +33,8 @@ public class LoginPane extends StackPane {
         loginBtn.setMaxSize(150, 100);
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
-                    Launcher.mainStage.setScene(new MainTableScene());
-                    /*** TODO
-
-                     */
+//                    Launcher.mainStage.setScene(new MainTableScene());
+                    successfulLogin.setText("You tried to log in!");
                 });
         //Cancel button
         Button cancelBtn = new Button("Cancel");
@@ -70,12 +69,16 @@ public class LoginPane extends StackPane {
          * @author Brooke Baird
          */
         VBox loginBox = new VBox();
-            loginBox.setStyle( "-fx-background-color: rgba(255,255,255,0.5)");
-            loginBox.getChildren().addAll(usernameBox, passwordBox, loginBtn, cancelBtn, success);
+            loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.5);"+
+                    "-fx-font-size: 16;"+
+                    "-fx-padding: 25;"+
+                    "-fx-background-radius: 50;"+
+                    "-fx-border-radius: 50;");
+            loginBox.getChildren().addAll(success, usernameBox, passwordBox, loginBtn, cancelBtn);
             loginBox.setAlignment(Pos.CENTER);
             loginBox.setSpacing(10);
-            loginBox.setMaxWidth(200);
-            loginBox.setMaxHeight(200);
+            loginBox.setMaxSize(250, 250);
+
 
             this.getChildren().addAll(booksImage, loginBox);
 
