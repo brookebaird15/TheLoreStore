@@ -15,12 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 //Extend StackPane
 public class LoginPane extends StackPane {
     public LoginPane(){
-        
+
         Text user = new Text("Username");
         Text password = new Text("Password");
         Label successfulLogin = new Label("");
@@ -28,6 +29,7 @@ public class LoginPane extends StackPane {
 
 //        New login button
         Button loginBtn = new Button("Log in");
+        loginBtn.setMaxSize(150, 100);
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
                     Launcher.mainStage.setScene(new MainTableScene());
@@ -35,6 +37,15 @@ public class LoginPane extends StackPane {
 
                      */
                 });
+        //Cancel button
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.setMaxSize(150, 100);
+        //When pressed, exits the program
+        cancelBtn.setOnAction(event -> {
+           System.exit(0);
+        });
+
+        //Textfield for username and password entry
             TextField userTextField = new TextField();
             TextField pwTextField = new TextField();
 
@@ -60,7 +71,7 @@ public class LoginPane extends StackPane {
          */
         VBox loginBox = new VBox();
             loginBox.setStyle( "-fx-background-color: rgba(255,255,255,0.5)");
-            loginBox.getChildren().addAll(usernameBox, passwordBox, loginBtn, success);
+            loginBox.getChildren().addAll(usernameBox, passwordBox, loginBtn, cancelBtn, success);
             loginBox.setAlignment(Pos.CENTER);
             loginBox.setSpacing(10);
             loginBox.setMaxWidth(200);
@@ -112,7 +123,5 @@ public class LoginPane extends StackPane {
         translateTransition.setToY(toY);
         return translateTransition;
     }
-
-
 
 }
