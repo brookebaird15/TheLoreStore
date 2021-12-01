@@ -9,8 +9,10 @@ import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import com.example.thelorestore.Tables.*;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -20,13 +22,13 @@ import java.util.ArrayList;
 
 import static com.example.thelorestore.Tabs.BookTab.*;
 
-public class AddBookPane extends StackPane {
+public class AddBookPane extends BorderPane {
 
     private ComboBox<Author> currentAuthCombo;
     private ComboBox<Genre> currentGenreCombo;
+    private boolean validInput = true;
 
     public AddBookPane() {
-
         //inputFields box holds all inputs for pane
         VBox inputFields = new VBox();
 
@@ -49,7 +51,10 @@ public class AddBookPane extends StackPane {
         //combobox to hold all authors
         ComboBox<Author> authorCombo = new ComboBox<>();
         authorCombo.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
-        Text authorDisplay = new Text("");
+        TextArea authorDisplay = new TextArea();
+        authorDisplay.setEditable(false);
+        authorDisplay.setPrefWidth(150);
+        authorDisplay.setPrefHeight(100);
 
         //button to add authors to a list
         Button addAuthBtn = new Button("+");
@@ -80,10 +85,12 @@ public class AddBookPane extends StackPane {
 
         //hbox to hold author input fields and display
         HBox addAuthBox = new HBox();
-        addAuthBox.getChildren().addAll(authorCombo, addAuthBtn, authorDisplay, currentAuthCombo, removeAuthBtn);
+        addAuthBox.getChildren().addAll(authorCombo, addAuthBtn);
+        HBox rmvAuthBox = new HBox();
+        rmvAuthBox.getChildren().addAll(currentAuthCombo, removeAuthBtn);
 
         //holds all author related items
-        authorBox.getChildren().addAll(authorText, addAuthBox);
+        authorBox.getChildren().addAll(authorText, addAuthBox, authorDisplay, rmvAuthBox);
         authorBox.setSpacing(5);
 
         VBox genreBox = new VBox();
@@ -92,7 +99,10 @@ public class AddBookPane extends StackPane {
         //combobox to hold all genres
         ComboBox<Genre> genreCombo = new ComboBox<>();
         genreCombo.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
-        Text genreDisplay = new Text("");
+        TextArea genreDisplay = new TextArea();
+        genreDisplay.setEditable(false);
+        genreDisplay.setPrefHeight(100);
+        genreDisplay.setPrefWidth(150);
 
         //button to add genres to a list
         Button addGenreBtn = new Button("+");
@@ -123,10 +133,12 @@ public class AddBookPane extends StackPane {
 
         //hbox to hold genre input and display
         HBox addGenreBox = new HBox();
-        addGenreBox.getChildren().addAll(genreCombo, addGenreBtn, genreDisplay, currentGenreCombo, removeGenreBtn);
+        addGenreBox.getChildren().addAll(genreCombo, addGenreBtn);
+        HBox rmvGenreBox = new HBox();
+        rmvGenreBox.getChildren().addAll(currentGenreCombo, removeGenreBtn);
 
         //holds all genre related items
-        genreBox.getChildren().addAll(genreText, addGenreBox);
+        genreBox.getChildren().addAll(genreText, addGenreBox, genreDisplay, rmvGenreBox);
         genreBox.setSpacing(5);
 
         VBox publisher = new VBox();
@@ -138,11 +150,11 @@ public class AddBookPane extends StackPane {
 
         VBox year = new VBox();
         Text yearText = new Text("Year Published");
-        Text warningText = new Text("Please enter a valid year");
+        Text yearWarningText = new Text("Please enter a valid year");
         TextField yearInput = new TextField();
-        year.getChildren().addAll(yearText, yearInput, warningText);
+        year.getChildren().addAll(yearText, yearInput, yearWarningText);
         year.setSpacing(5);
-        warningText.setVisible(false);
+        yearWarningText.setVisible(false);
 
         VBox commentBox = new VBox();
         Text commentText = new Text("Comment");
@@ -163,6 +175,9 @@ public class AddBookPane extends StackPane {
         HBox checkboxes = new HBox();
         checkboxes.setSpacing(5);
         checkboxes.getChildren().addAll(radioButton1, radioButton2, radioButton3);
+
+        Text authorGenreWarningText = new Text("Author and genre cannot be empty");
+        authorGenreWarningText.setVisible(false);
 
         if(updating) {
             //set fields by default if updating a book
@@ -208,10 +223,12 @@ public class AddBookPane extends StackPane {
             //TODO - limit input to 4 characters
             try {
                 bookYear = Integer.parseInt(yearInput.getText().trim());
-                warningText.setVisible(false);
+                yearWarningText.setVisible(false);
+                validInput = true;
             } catch (NumberFormatException exception) {
-                warningText.setVisible(true);
+                yearWarningText.setVisible(true);
                 yearInput.setText("");
+                validInput = false;
                 return;
             }
 
@@ -228,53 +245,64 @@ public class AddBookPane extends StackPane {
 
             String comment = commentInput.getText();
 
-            //book to be inserted
-            Book insertBook = new Book(bookTitle, bookPublisher, bookYear, bookStatus, comment);
+            //if author and genre are not empty, allow book to be created
+            if(!bookAuthors.isEmpty() && !bookGenres.isEmpty()) {
+                validInput = true;
+                //book to be inserted
+                Book insertBook = new Book(bookTitle, bookPublisher, bookYear, bookStatus, comment);
 
-            if(adding) {
-                //create and return new book
-                Book newestBook = bookTable.createBook(insertBook);
+                if(adding) {
+                    //create and return new book
+                    Book newestBook = bookTable.createBook(insertBook);
 
-                //for each genre added to the list, create a link in the book/genre table
-                for(Genre genre: bookGenres) {
-                    bookGenreTable.createBookGenreRelation(newestBook, genre);
+                    //for each genre added to the list, create a link in the book/genre table
+                    for(Genre genre: bookGenres) {
+                        bookGenreTable.createBookGenreRelation(newestBook, genre);
+                    }
+
+                    //for each author added to the list, create a link in the book/author table
+                    for(Author author : bookAuthors) {
+                        bookAuthorTable.createBookAuthorRelation(newestBook, author);
+                    }
                 }
 
-                //for each author added to the list, create a link in the book/author table
-                for(Author author : bookAuthors) {
-                    bookAuthorTable.createBookAuthorRelation(newestBook, author);
+                if(updating) {
+                    insertBook.setId(selectedBook.getId());
+
+                    //update book
+                    bookTable.updateBook(insertBook);
+
+                    //remove all previous relations
+                    bookGenreTable.removeGenreRelation(insertBook);
+                    bookAuthorTable.removeAuthorRelation(insertBook);
+
+                    //add updated genre relations
+                    for(Genre genre: bookGenres) {
+                        System.out.println("UPDATE GENRE: " + genre);
+                        bookGenreTable.createBookGenreRelation(insertBook, genre);
+                    }
+
+                    //add updated author relations
+                    for(Author author: bookAuthors) {
+                        System.out.println("UPDATE AUTHOR: " + author);
+                        bookAuthorTable.createBookAuthorRelation(insertBook, author);
+                    }
                 }
+            } else {
+                authorGenreWarningText.setVisible(true);
+                validInput = false;
             }
 
-            if(updating) {
-                insertBook.setId(selectedBook.getId());
-
-                //update book
-                bookTable.updateBook(insertBook);
-
-                //remove all previous relations
-                bookGenreTable.removeGenreRelation(insertBook);
-                bookAuthorTable.removeAuthorRelation(insertBook);
-
-                //add updated genre relations
-                for(Genre genre: bookGenres) {
-                    System.out.println("UPDATE GENRE: " + genre);
-                    bookGenreTable.createBookGenreRelation(insertBook, genre);
-                }
-
-                //add updated author relations
-                for(Author author: bookAuthors) {
-                    System.out.println("UPDATE AUTHOR: " + author);
-                    bookAuthorTable.createBookAuthorRelation(insertBook, author);
-                }
+            if(validInput) {
+                removeGenreBtn.setVisible(false);
+                currentGenreCombo.setVisible(false);
+                removeAuthBtn.setVisible(false);
+                currentAuthCombo.setVisible(false);
+                authorGenreWarningText.setVisible(false);
+                BookTab.refreshBookTable();
+                Launcher.mainStage.setScene(new MainTableScene());
             }
 
-            removeGenreBtn.setVisible(false);
-            currentGenreCombo.setVisible(false);
-            removeAuthBtn.setVisible(false);
-            currentAuthCombo.setVisible(false);
-            BookTab.refreshBookTable();
-            Launcher.mainStage.setScene(new MainTableScene());
         });
 
         //Cancel button returns user to Main Table
@@ -287,12 +315,17 @@ public class AddBookPane extends StackPane {
         buttons.getChildren().addAll(saveButton, cancelButton);
         buttons.setSpacing(50);
 
-        inputFields.getChildren().addAll(title, authorBox, genreBox, publisher, year, commentBox, checkboxes, buttons);
+        inputFields.getChildren().addAll(title, publisher, year, commentBox, checkboxes, buttons);
         inputFields.setAlignment(Pos.CENTER);
         inputFields.setMaxWidth(500);
         inputFields.setSpacing(20);
 
-        this.getChildren().addAll(inputFields);
+        VBox authorGenreBox = new VBox();
+        authorGenreBox.getChildren().addAll(authorBox, genreBox);
+        authorGenreBox.setAlignment(Pos.CENTER);
+        this.setLeft(inputFields);
+        this.setRight(authorGenreBox);
+        this.setBottom(authorGenreWarningText);
     }
 
     /**
