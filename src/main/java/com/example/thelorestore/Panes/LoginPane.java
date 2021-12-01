@@ -42,7 +42,6 @@ public class LoginPane extends StackPane {
         loginBtn.setMaxSize(150, 100);
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
-//                    Launcher.mainStage.setScene(new MainTableScene());
                     if (userTextField.getText().isBlank() == false && !pwTextField.getText().isBlank()){
                         loginValidation();
                     } else {
@@ -152,7 +151,8 @@ public class LoginPane extends StackPane {
             while(accountData.next()){
                 if (accountData.getInt(1) == 1){
                     successfulLogin.setText("Login successful.");
-                    
+                    Launcher.mainStage.setScene(new MainTableScene());
+
                 } else {
                     successfulLogin.setText("Invalid login. Please try again.");
                 }
