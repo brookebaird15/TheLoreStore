@@ -106,18 +106,6 @@ public class DBTableValues {
         "(NULL, 'in progress'), " +
         "(NULL, 'completed');";
 
-    //        CREATE TABLE status (
-    //            id INT NOT NULL AUTO_INCREMENT,
-    //            status VARCHAR(15) NOT NULL,
-    //            PRIMARY KEY(id)
-    //            );
-    //
-    //            INSERT INTO status (id, status)
-    //VALUES
-    //(NULL, 'unread'),
-    //(NULL, 'in progress'),
-    //(NULL, 'completed');
-
     public static final String CREATE_PUBLISHER_TABLE =
         "CREATE TABLE " + PUBLISHER_TABLE + " ("
         + PUBLISHER_ID_COLUMN + " int NOT NULL AUTO_INCREMENT, "
@@ -135,25 +123,6 @@ public class DBTableValues {
         + "FOREIGN KEY (" + BOOK_STATUS_COLUMN + ")" + " REFERENCES " + STATUS_TABLE + "(" + STATUS_ID_COLUMN + "),"
         + "FOREIGN KEY (" + BOOK_PUBLISHER_COLUMN + ")" + " REFERENCES " + PUBLISHER_TABLE + "(" + PUBLISHER_ID_COLUMN + ")"
         + ");";
-
-//    public static final String CREATE_BOOK_VIEW =
-//        "CREATE VIEW " + BOOK_VIEW + " AS SELECT "
-//        + "b." + BOOK_ID_COLUMN + ", "
-//        + "b." + BOOK_TITLE_COLUMN + ", "
-//        + "CONCAT(a." + AUTHOR_FIRST_COLUMN + ", ' ', COALESCE(a." + AUTHOR_MIDDLE_COLUMN + ", \"\"), ' ', a." + AUTHOR_LAST_COLUMN + ") AS " + BOOK_VIEW_AUTHOR + ", "
-//        + "g." + GENRE_NAME_COLUMN + ", p." + PUBLISHER_COMPANY_COLUMN + ", b." + BOOK_YEAR_COLUMN + ", s." + STATUS_NAME_COLUMN + ", COALESCE(b." + BOOK_COMMENT_COLUMN + ", \"\") AS " + BOOK_VIEW_COMMENT + " "
-//        + "FROM " + GENRE_TABLE + " AS g INNER JOIN " + BOOK_GENRE_TABLE + " AS bgr "
-//        + "ON g." + GENRE_ID_COLUMN + "=bgr." + GENRE_FK_ID_COLUMN + " "
-//        + "INNER JOIN " + BOOK_TABLE + " AS b "
-//        + "ON bgr." + BOOK_ID_COLUMN_FOR_GENRE + "=b." + BOOK_ID_COLUMN + " "
-//        + "INNER JOIN " + PUBLISHER_TABLE + " AS p "
-//        + "ON p." + PUBLISHER_ID_COLUMN + "=b." + BOOK_PUBLISHER_COLUMN + " "
-//        + "INNER JOIN " + STATUS_TABLE + " AS s "
-//        + "ON s." + STATUS_ID_COLUMN + "=b." + BOOK_STATUS_COLUMN + " "
-//        + "INNER JOIN " + BOOK_AUTHOR_TABLE + " AS bar "
-//        + "ON b." + BOOK_ID_COLUMN + "=bar." + BOOK_ID_COLUMN_FOR_AUTHOR + " "
-//        + "INNER JOIN " + AUTHOR_TABLE + " AS a "
-//        + "ON bar." + AUTHOR_FK_ID_COLUMN + " = a." + AUTHOR_ID_COLUMN;
 
     public static final String CREATE_BOOK_VIEW =
             "CREATE VIEW " + BOOK_VIEW + " AS SELECT" +

@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -32,7 +31,9 @@ public class LoginPane extends StackPane {
         Button loginBtn = new Button("Log in");
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
-                    Launcher.mainStage.setScene(new MainTableScene());
+            MainTableScene mainTableScene = new MainTableScene();
+            mainTableScene.getStylesheets().add(Launcher.stylesheet);
+                    Launcher.mainStage.setScene(mainTableScene);
                     /*** TODO
                      * Check login credentials for logging into database
                      */
