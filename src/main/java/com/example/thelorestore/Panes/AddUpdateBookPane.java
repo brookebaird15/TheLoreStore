@@ -65,7 +65,6 @@ public class AddUpdateBookPane extends BorderPane {
             authorDisplay.setText(authorDisplay.getText() + addedAuthor.toString() + "\n");
             //add author to arraylist of authors
             bookAuthors.add(addedAuthor);
-
             refreshAuthCombo(currentAuthCombo, bookAuthors);
         });
 
