@@ -7,6 +7,8 @@ import com.example.thelorestore.Pojo.DisplayBook;
 import com.example.thelorestore.Pojo.Genre;
 import com.example.thelorestore.Scenes.AddItemScene;
 import com.example.thelorestore.Scenes.UpdateItemScene;
+import com.example.thelorestore.Tables.BookAuthorTable;
+import com.example.thelorestore.Tables.BookGenreTable;
 import com.example.thelorestore.Tables.BookTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
@@ -31,6 +33,8 @@ public class BookTab extends Tab {
     private BookTab() {
         this.setText("Books");
         BookTable bookTable = new BookTable();
+        BookAuthorTable bookAuthorTable = new BookAuthorTable();
+        BookGenreTable bookGenreTable = new BookGenreTable();
         BorderPane root = new BorderPane();
         tableView = new TableView();
 
@@ -73,8 +77,8 @@ public class BookTab extends Tab {
         Button updateBookBtn = new Button("Update Book");
         updateBookBtn.setOnAction(e -> {
             selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
-            bookAuthors = new ArrayList<>();
-            bookGenres = new ArrayList<>();
+            bookAuthors = bookAuthorTable.getAllAuthorsForBook(selectedBook.getId());
+            bookGenres = bookGenreTable.getAllGenresForBook(selectedBook.getId());
             Launcher.mainStage.setScene(new UpdateItemScene());
         });
 
