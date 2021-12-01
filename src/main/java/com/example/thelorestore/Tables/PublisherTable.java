@@ -60,14 +60,15 @@ public class PublisherTable implements PublisherDAO {
 
     /**
      * Publisher object returns the publisher at ID and returns null if no match
-     * @param publisherID
+     * @param bookId
      * @return
      */
     @Override
-    public Publisher getPublisher(int publisherID) {
-        String query = "SELECT * FROM " + DBTableValues.PUBLISHER_ID_COLUMN + " WHERE "
-                + DBTableValues.PUBLISHER_ID_COLUMN + " = "
-                + publisherID;
+    public Publisher getPublisher(int bookId) {
+        String query = "SELECT * FROM " + DBTableValues.PUBLISHER_TABLE + " INNER JOIN " + DBTableValues.BOOK_TABLE
+                + " ON " + DBTableValues.PUBLISHER_TABLE + "." + DBTableValues.PUBLISHER_ID_COLUMN
+                + " = " + DBTableValues.BOOK_TABLE + "." + DBTableValues.BOOK_PUBLISHER_COLUMN
+                + " WHERE " + DBTableValues.BOOK_TABLE + "." + DBTableValues.BOOK_ID_COLUMN + " = " + bookId;
         Statement getPublisher = null;
 
         //Statement being created and caught in try-catch
@@ -80,6 +81,7 @@ public class PublisherTable implements PublisherDAO {
                         data.getInt(DBTableValues.PUBLISHER_ID_COLUMN),
                         data.getString(DBTableValues.PUBLISHER_COMPANY_COLUMN)
                 );
+                return publisher;
             }
         } catch (SQLException e) {
             e.printStackTrace();

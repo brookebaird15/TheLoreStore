@@ -15,6 +15,10 @@ public class Publisher {
         this.companyName = companyName;
     }
 
+    public Publisher(int id) {
+        this.id = id;
+    }
+
     public Publisher(String companyName) {
         this.companyName = companyName;
     }

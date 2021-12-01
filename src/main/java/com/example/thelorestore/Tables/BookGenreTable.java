@@ -4,13 +4,9 @@ import com.example.thelorestore.DAOs.BookGenreDAO;
 import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Pojo.Book;
-import com.example.thelorestore.Pojo.BookGenre;
 import com.example.thelorestore.Pojo.Genre;
 
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class BookGenreTable implements BookGenreDAO {
@@ -19,6 +15,11 @@ public class BookGenreTable implements BookGenreDAO {
     ArrayList<Book> books;
     ArrayList<Genre> genres;
 
+    /**
+     * Creates an entry in the book_genre_relation table for a specified book and genre
+     * @param book is the book
+     * @param genre is the genre
+     */
     @Override
     public void createBookGenreRelation(Book book, Genre genre) {
         String query = "INSERT INTO " + DBTableValues.BOOK_GENRE_TABLE + "(" +
@@ -33,10 +34,15 @@ public class BookGenreTable implements BookGenreDAO {
         }
     }
 
+    /**
+     * Retrieves all books with a specified genre
+     * @param genreId is the genre being queried
+     * @return ArrayList of books
+     */
     @Override
-    public ArrayList<Book> getAllBooksForGenre(BookGenre bookGenre) {
+    public ArrayList<Book> getAllBooksForGenre(int genreId) {
         String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE "
-                + DBTableValues.BOOK_ID_COLUMN + " = " + bookGenre.getBook();
+                + DBTableValues.BOOK_ID_COLUMN + " = " + genreId;
         books = new ArrayList<>();
         try {
             Statement getBooks = db.getConnection().createStatement();
@@ -55,10 +61,18 @@ public class BookGenreTable implements BookGenreDAO {
         return books;
     }
 
+    /**
+     * Retrieves all genres for a specified book
+     * @param bookId is the book being queried
+     * @return ArrayList of genres
+     */
     @Override
-    public ArrayList<Genre> getAllGenresForBook(BookGenre bookGenre) {
-        String query = "SELECT * FROM " + DBTableValues.GENRE_TABLE + " WHERE "
-                + DBTableValues.GENRE_ID_COLUMN + " = " + bookGenre.getGenre();
+    public ArrayList<Genre> getAllGenresForBook(int bookId) {
+        String query = "SELECT " + DBTableValues.GENRE_ID_COLUMN + ", " + DBTableValues.GENRE_NAME_COLUMN
+                + " FROM " + DBTableValues.GENRE_TABLE + " INNER JOIN " + DBTableValues.BOOK_GENRE_TABLE
+                + " ON " + DBTableValues.GENRE_TABLE + "." + DBTableValues.GENRE_ID_COLUMN
+                + " = " + DBTableValues.BOOK_GENRE_TABLE + "." + DBTableValues.GENRE_FK_ID_COLUMN
+                + " WHERE " + DBTableValues.BOOK_GENRE_TABLE + "." + DBTableValues.BOOK_ID_COLUMN_FOR_GENRE + " = " + bookId;
         genres = new ArrayList<>();
         try {
             Statement getGenres = db.getConnection().createStatement();
@@ -78,16 +92,46 @@ public class BookGenreTable implements BookGenreDAO {
     }
 
     @Override
-    public void updateGenreRelation(Book book, Genre genre) {
-        String query = "UPDATE " + DBTableValues.BOOK_GENRE_TABLE + " SET " +
-                DBTableValues.GENRE_FK_ID_COLUMN + " = " + genre.getId() +
-                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+    public void removeGenreRelation(Book book) {
+        String query = "DELETE FROM " + DBTableValues.BOOK_GENRE_TABLE  + " WHERE " + DBTableValues.BOOK_ID_COLUMN_FOR_GENRE + " = " + book.getId();
         try {
-            Statement updateRelation = db.getConnection().createStatement();
-            updateRelation.executeUpdate(query);
-            System.out.println("Book/genre relation updated");
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Genre relation deleted");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+//    @Override
+//    public void updateGenreRelation(Book book, Genre genre) {
+//        String query = "UPDATE " + DBTableValues.BOOK_GENRE_TABLE + " SET " +
+//                DBTableValues.GENRE_FK_ID_COLUMN + " = " + genre.getId() +
+//                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
+//        try {
+//            Statement updateRelation = db.getConnection().createStatement();
+//            updateRelation.executeUpdate(query);
+//            System.out.println("Book/genre relation updated");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    /**
+     * Counts the number of books with a specified genre
+     * @param genre is the genre id being counted
+     * @return count - the number of books with that genre
+     */
+    public int getGenreCount(int genre) {
+        int count = -1;
+        try {
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT * FROM " + DBTableValues.BOOK_GENRE_TABLE
+                    + " WHERE " + DBTableValues.GENRE_FK_ID_COLUMN + " = '" + genre + "'", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet data = getCount.executeQuery();
+            data.last();
+            count = data.getRow();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

@@ -28,7 +28,7 @@ public interface BookDAO {
      * Method for updating book information in Book Table
      * @param book
      */
-    public void updateBook(Book book, Genre genre, Author author);
+    public Book updateBook(Book book);
 
     /**
      * Method for removing a book from the Book Table

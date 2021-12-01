@@ -5,6 +5,7 @@ import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Pojo.*;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -111,7 +112,7 @@ public class BookTable implements BookDAO {
      * @param book is the book being updated
      */
     @Override
-    public void updateBook(Book book, Genre genre, Author author) {
+    public Book updateBook(Book book) {
         String query = "UPDATE " + DBTableValues.BOOK_TABLE + " SET " +
                 DBTableValues.BOOK_TITLE_COLUMN + " = '" + book.getTitle() + "', " +
                 DBTableValues.BOOK_PUBLISHER_COLUMN + " = '" + book.getPublisher() + "', " +
@@ -119,15 +120,26 @@ public class BookTable implements BookDAO {
                 DBTableValues.BOOK_STATUS_COLUMN + " = '" + book.getStatus() + "', " +
                 DBTableValues.BOOK_COMMENT_COLUMN + " = '" + book.getComment() +
                 "' WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
-        bookGenreTable.updateGenreRelation(book, genre);
-        bookAuthorTable.updateBookAuthorRelation(book, author);
         try {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
             System.out.println("Book updated");
+//            query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " ORDER BY " + DBTableValues.BOOK_ID_COLUMN + " DESC LIMIT 0,1";
+//            Statement getBook = db.getConnection().createStatement();
+//            ResultSet data = getBook.executeQuery(query);
+//            if(data.next()) {
+//                Book updatedBook = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+//                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
+//                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN));
+//                return updatedBook;
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -160,6 +172,7 @@ public class BookTable implements BookDAO {
             ResultSet data = getBooks.executeQuery(query);
             while(data.next()) {
                 books.add(new DisplayBook(
+                        data.getInt(DBTableValues.BOOK_VIEW_ID),
                         data.getString(DBTableValues.BOOK_VIEW_TITLE),
                         data.getString(DBTableValues.BOOK_VIEW_AUTHOR),
                         data.getString(DBTableValues.BOOK_VIEW_GENRE),
@@ -172,5 +185,24 @@ public class BookTable implements BookDAO {
             e.printStackTrace();
         }
         return books;
+    }
+
+    /**
+     * Counts the number of books with each 'status'
+     * @param status is the status id being counted
+     * @return count - number of books with that status
+     */
+    public int getStatusCount(int status) {
+        int count = -1;
+        try {
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT * FROM " + DBTableValues.BOOK_TABLE
+                    + " WHERE " + DBTableValues.BOOK_STATUS_COLUMN + " = '" + status + "'", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet data = getCount.executeQuery();
+            data.last();
+            count = data.getRow();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
