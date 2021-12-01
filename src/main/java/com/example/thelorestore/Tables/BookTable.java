@@ -144,6 +144,8 @@ public class BookTable implements BookDAO {
 
     /**
      * deleteBook() deletes the book with the specified id
+     * First removes genre and author references in respective joining tables
+     * Second deletes record
      * @param book is the book being deleted
      */
     @Override

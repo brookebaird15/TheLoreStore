@@ -2,8 +2,7 @@ package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Launcher;
 import com.example.thelorestore.Pojo.*;
-import com.example.thelorestore.Scenes.AddItemScene;
-import com.example.thelorestore.Scenes.UpdateItemScene;
+import com.example.thelorestore.Scenes.AddUpdateBookScene;
 import com.example.thelorestore.Tables.BookAuthorTable;
 import com.example.thelorestore.Tables.BookGenreTable;
 import com.example.thelorestore.Tables.BookTable;
@@ -17,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
-import java.util.jar.JarEntry;
 
 public class BookTab extends Tab {
     private static BookTab tab;
@@ -74,7 +72,7 @@ public class BookTab extends Tab {
             updating = false;
             adding = true;
             selectedBook = null;
-            Launcher.mainStage.setScene(new AddItemScene());
+            Launcher.mainStage.setScene(new AddUpdateBookScene());
 
         });
 
@@ -87,7 +85,7 @@ public class BookTab extends Tab {
             bookPub = publisherTable.getPublisher(selectedBook.getId());
             updating = true;
             adding = false;
-            Launcher.mainStage.setScene(new AddItemScene());
+            Launcher.mainStage.setScene(new AddUpdateBookScene());
         });
 
         //btn to confirm user wants to delete book

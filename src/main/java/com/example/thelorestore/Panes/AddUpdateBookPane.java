@@ -22,13 +22,13 @@ import java.util.ArrayList;
 
 import static com.example.thelorestore.Tabs.BookTab.*;
 
-public class AddBookPane extends BorderPane {
+public class AddUpdateBookPane extends BorderPane {
 
     private ComboBox<Author> currentAuthCombo;
     private ComboBox<Genre> currentGenreCombo;
     private boolean validInput = true;
 
-    public AddBookPane() {
+    public AddUpdateBookPane() {
         //inputFields box holds all inputs for pane
         VBox inputFields = new VBox();
 
@@ -65,6 +65,7 @@ public class AddBookPane extends BorderPane {
             authorDisplay.setText(authorDisplay.getText() + addedAuthor.toString() + "\n");
             //add author to arraylist of authors
             bookAuthors.add(addedAuthor);
+
             refreshAuthCombo(currentAuthCombo, bookAuthors);
         });
 
