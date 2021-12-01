@@ -8,6 +8,7 @@ import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,13 +20,10 @@ import javafx.util.Duration;
 //Extend StackPane
 public class LoginPane extends StackPane {
     public LoginPane(){
-
+        
         Text user = new Text("Username");
         Text password = new Text("Password");
-
-        /** TODO
-         * Make title for login screen
-         */
+        Label successfulLogin = new Label("");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
 
 //        New login button
@@ -34,7 +32,7 @@ public class LoginPane extends StackPane {
         loginBtn.setOnAction(event -> {
                     Launcher.mainStage.setScene(new MainTableScene());
                     /*** TODO
-                     * Check login credentials for logging into database
+
                      */
                 });
             TextField userTextField = new TextField();
@@ -50,6 +48,11 @@ public class LoginPane extends StackPane {
             usernameBox.setAlignment(Pos.CENTER);
             passwordBox.setAlignment(Pos.CENTER);
 
+        //Add the successful login to the pane VBox
+        VBox success = new VBox();
+        success.getChildren().add(successfulLogin);
+        success.setAlignment(Pos.CENTER);
+
 
         /**
          * Login box to host the username, password textfields and login button
@@ -57,7 +60,7 @@ public class LoginPane extends StackPane {
          */
         VBox loginBox = new VBox();
             loginBox.setStyle( "-fx-background-color: rgba(255,255,255,0.5)");
-            loginBox.getChildren().addAll(usernameBox, passwordBox, loginBtn);
+            loginBox.getChildren().addAll(usernameBox, passwordBox, loginBtn, success);
             loginBox.setAlignment(Pos.CENTER);
             loginBox.setSpacing(10);
             loginBox.setMaxWidth(200);
