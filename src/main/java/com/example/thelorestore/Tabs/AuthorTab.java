@@ -18,7 +18,6 @@ public class AuthorTab extends Tab {
     private Button updateAuthButton;
     private Button cancelButton;
     private Button saveButton;
-//    private Button saveUpdateButton;
     private boolean updating;
 
     private AuthorTab() {

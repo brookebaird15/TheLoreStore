@@ -1,8 +1,10 @@
 package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Launcher;
+import com.example.thelorestore.Pojo.Author;
 import com.example.thelorestore.Pojo.Book;
 import com.example.thelorestore.Pojo.DisplayBook;
+import com.example.thelorestore.Pojo.Genre;
 import com.example.thelorestore.Scenes.AddItemScene;
 import com.example.thelorestore.Scenes.UpdateItemScene;
 import com.example.thelorestore.Tables.BookTable;
@@ -14,12 +16,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.jar.JarEntry;
 
 public class BookTab extends Tab {
     private static BookTab tab;
     public static TableView tableView;
     public static DisplayBook selectedBook;
+    public static ArrayList<Author> bookAuthors;
+    public static ArrayList<Genre> bookGenres;
     private VBox confirmation;
 
     //TODO - Book tab does not display data, issue with SQL syntax (likely from displayPrettyBooks method)
@@ -64,10 +69,12 @@ public class BookTab extends Tab {
             Launcher.mainStage.setScene(new AddItemScene());
         });
 
-        //viewItemButton directs user to ViewItemPane
+        //updateBookBtn directs user to UpdateBookPane
         Button updateBookBtn = new Button("Update Book");
         updateBookBtn.setOnAction(e -> {
             selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
+            bookAuthors = new ArrayList<>();
+            bookGenres = new ArrayList<>();
             Launcher.mainStage.setScene(new UpdateItemScene());
         });
 
