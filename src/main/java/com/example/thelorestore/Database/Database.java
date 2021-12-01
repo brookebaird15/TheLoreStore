@@ -21,6 +21,7 @@ public class Database {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DBConst.DB_NAME + "?serverTimezone=UTC", DBConst.DB_USER, DBConst.DB_PASS);
                 System.out.println("Connection created");
+                createTable(DBTableValues.USERACCOUNTS_TABLE, DBTableValues.CREATE_USERACCOUNTS_TABLE, connection);
                 createTable(DBTableValues.AUTHOR_TABLE, DBTableValues.CREATE_AUTHOR_TABLE, connection);
                 createTable(DBTableValues.GENRE_TABLE, DBTableValues.CREATE_GENRE_TABLE, connection);
                 createTable(DBTableValues.PUBLISHER_TABLE, DBTableValues.CREATE_PUBLISHER_TABLE, connection);
@@ -29,6 +30,7 @@ public class Database {
                 createTable(DBTableValues.BOOK_GENRE_TABLE, DBTableValues.CREATE_BOOK_GENRE_TABLE, connection);
                 createTable(DBTableValues.BOOK_AUTHOR_TABLE, DBTableValues.CREATE_BOOK_AUTHOR_TABLE, connection);
                 createTable(DBTableValues.BOOK_VIEW, DBTableValues.CREATE_BOOK_VIEW, connection);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

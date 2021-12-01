@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,7 +26,9 @@ public class LoginPane extends StackPane {
         Text user = new Text("Username");
         Text password = new Text("Password");
         Label successfulLogin = new Label("");
-        successfulLogin.setStyle("-fx-font: 14 arial;");
+        //Textfield for username and password entry
+        TextField userTextField = new TextField();
+        TextField pwTextField = new PasswordField();
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
 
 //        New login button
@@ -34,7 +37,11 @@ public class LoginPane extends StackPane {
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
 //                    Launcher.mainStage.setScene(new MainTableScene());
-                    successfulLogin.setText("You tried to log in!");
+                    if (userTextField.getText().isBlank() == false && pwTextField.getText().isBlank() == false){
+                        successfulLogin.setText("You tried to log in!");
+                    } else {
+                        successfulLogin.setText("Please enter a username and password");
+                    }
                 });
         //Cancel button
         Button cancelBtn = new Button("Cancel");
@@ -43,10 +50,6 @@ public class LoginPane extends StackPane {
         cancelBtn.setOnAction(event -> {
            System.exit(0);
         });
-
-        //Textfield for username and password entry
-            TextField userTextField = new TextField();
-            TextField pwTextField = new TextField();
 
             //The vboxes used to set content in middle, holds username & password
             VBox usernameBox = new VBox();
@@ -77,7 +80,7 @@ public class LoginPane extends StackPane {
             loginBox.getChildren().addAll(success, usernameBox, passwordBox, loginBtn, cancelBtn);
             loginBox.setAlignment(Pos.CENTER);
             loginBox.setSpacing(10);
-            loginBox.setMaxSize(250, 250);
+            loginBox.setMaxSize(350, 250);
 
 
             this.getChildren().addAll(booksImage, loginBox);

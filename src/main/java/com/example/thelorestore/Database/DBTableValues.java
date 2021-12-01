@@ -1,6 +1,12 @@
 package com.example.thelorestore.Database;
 
 public class DBTableValues {
+    //UserAccounts Table
+    public static final String USERACCOUNTS_TABLE = "useraccounts";
+    public static final String USERACCOUNTS_ID_COLUMN = "id";
+    public static final String USERACCOUNTS_USERNAME = "username";
+    public static final String USERACCOUNTS_PASSWORD = "password";
+
     //Publisher Table
     public static final String PUBLISHER_TABLE = "publisher";
     public static final String PUBLISHER_ID_COLUMN = "id";
@@ -54,11 +60,19 @@ public class DBTableValues {
 
     /**
      * Table Create Statements
+     * USER ACCOUNTS TABLE - ID, USERNAME, PASSWORD
      * PUBLISHER TABLE - ID, COMPANY
      * GENRE TABLE - ID, GENRE
      * AUTHOR TABLE - ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME
      * BOOK TABLE - ID, TITLE, AUTHOR_1, AUTHOR_2, AUTHOR_3, GENRE_1, GENRE_2, GENRE_3, PUBLISHER, YEAR_PUBLISHED, READ, COMMENTS
      */
+
+    public static final String CREATE_USERACCOUNTS_TABLE =
+            "CREATE TABLE " + USERACCOUNTS_TABLE + " ("
+                    + USERACCOUNTS_ID_COLUMN + " int UNSIGNED NOT NULL AUTO_INCREMENT, "
+                    + USERACCOUNTS_USERNAME + " VARCHAR(45) NOT NULL, "
+                    + USERACCOUNTS_PASSWORD + " VARCHAR(45) NOT NULL, "
+                    + "PRIMARY KEY(" + USERACCOUNTS_ID_COLUMN + ")" + ");";
 
     public static final String CREATE_AUTHOR_TABLE =
             "CREATE TABLE " + AUTHOR_TABLE + " ("
