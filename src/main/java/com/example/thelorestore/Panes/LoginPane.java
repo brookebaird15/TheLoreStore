@@ -168,37 +168,4 @@ public class LoginPane extends StackPane {
         translateTransition.setToY(toY);
         return translateTransition;
     }
-
-    /**
-     * Connection to the database and querying the account information where if it matches the input text
-     * proceed onto main table
-     * @author Brooke Baird
-     */
-//    public void loginValidation(){
-//        db.getConnection();
-//
-//        String verifyLogin = "SELECT count(1) FROM useraccounts WHERE username = '"
-//                + userTextField.getText() + "'AND password = '"
-//                + pwTextField.getText() + "'";
-//
-//        try {
-//            Statement getAccount = db.getConnection().createStatement();
-//            //Handle the query
-//            ResultSet accountData = getAccount.executeQuery(verifyLogin);
-//
-//            //Process the query
-//            while(accountData.next()){
-//                if (accountData.getInt(1) == 1){
-//                    successfulLogin.setText("Login successful.");
-//                    Launcher.mainStage.setScene(new MainTableScene());
-//
-//                } else {
-//                    successfulLogin.setText("Invalid login. Please try again.");
-//                }
-//            }
-//
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//    }
 }

@@ -9,9 +9,12 @@ import javafx.stage.Stage;
 public class Launcher extends Application {
 
     public static Stage mainStage;
+    public static String stylesheet;
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        stylesheet = getClass().getResource("CSS/stylesheet.css").toExternalForm();
 
         //TODO - change project name and title
         mainStage = stage;
