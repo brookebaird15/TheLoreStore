@@ -1,6 +1,7 @@
 package com.example.thelorestore;
 
 import com.example.thelorestore.Database.Database;
+import com.example.thelorestore.Panes.LoginPane;
 import com.example.thelorestore.Scenes.LoginScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -16,11 +17,12 @@ public class Launcher extends Application {
         stylesheet = getClass().getResource("CSS/stylesheet.css").toExternalForm();
 
         //TODO - change project name and title
-        Database.getInstance();
         mainStage = stage;
         mainStage.setScene(new LoginScene());
         mainStage.setResizable(false);
-        mainStage.setTitle("The Lore Store: Inventory Manager");
+        mainStage.setTitle("Personal Book Tracker - by Ashley McCallum and Brooke Baird");
         mainStage.show();
+        mainStage.setOnCloseRequest(e-> {
+        });
     }
 }

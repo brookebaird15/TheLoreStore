@@ -1,6 +1,12 @@
 package com.example.thelorestore.Database;
 
 public class DBTableValues {
+    //UserAccounts Table
+    public static final String USERACCOUNTS_TABLE = "useraccounts";
+    public static final String USERACCOUNTS_ID_COLUMN = "id";
+    public static final String USERACCOUNTS_USERNAME = "username";
+    public static final String USERACCOUNTS_PASSWORD = "password";
+
     //Publisher Table
     public static final String PUBLISHER_TABLE = "publisher";
     public static final String PUBLISHER_ID_COLUMN = "id";
