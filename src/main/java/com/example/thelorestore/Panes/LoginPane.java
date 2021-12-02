@@ -3,53 +3,41 @@ package com.example.thelorestore.Panes;
 import com.example.thelorestore.Database.DBConst;
 import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
-import com.example.thelorestore.Scenes.LoginScene;
 import com.example.thelorestore.Scenes.MainTableScene;
-import com.example.thelorestore.Launcher;
+
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.example.thelorestore.Launcher.mainStage;
 
-//Extend StackPane
 public class LoginPane extends StackPane {
-//    Database db;
 
     public static File loginFile = new File("credentials.txt");
     public static Text loginError = new Text("Invalid login - please try again");
-//    boolean loggedIn = false;
+    public static TextField userTextField = new TextField();
+    public static TextField pwTextField = new PasswordField();
+    public static TextField dbTextField = new TextField();
 
     public LoginPane(){
         Text user = new Text("Username");
         Text password = new Text("Password");
         Text database = new Text("Database Name");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
-        TextField userTextField = new TextField();
-        TextField pwTextField = new PasswordField();
-        TextField dbTextField = new TextField();
-
         loginError.setVisible(false);
 
         //New login button
@@ -103,6 +91,13 @@ public class LoginPane extends StackPane {
             moveImage.play();
         }
 
+    /**
+     * Logs the credentials entered to a text file
+     * @param file is the file credentials are written to
+     * @param user is the username input field
+     * @param pass is the password input field
+     * @param database is the database name input field
+     */
     public void logCredentials(File file, TextField user, TextField pass, TextField database) {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
@@ -114,18 +109,28 @@ public class LoginPane extends StackPane {
         }
     }
 
+    //TODO - delete dbconst? no longer constants and can be written to anywhere
+    /**
+     * Reads the credentials from a text file
+     * Assigns them to the DBCONST variables
+     * Attempts login, if successful moves user to MainTableScene
+     * @param file is the file being read from
+     */
     public void validateLogin(File file) {
         ArrayList<String> credentials = new ArrayList<>();
         try {
             Scanner input = new Scanner(file);
             input.useDelimiter("\n");
+            //read values from file
             while (input.hasNext()) {
                 credentials.add(input.next());
             }
+            //assign credentials
             DBConst.DB_USER = credentials.get(0);
             DBConst.DB_PASS = credentials.get(1);
             DBConst.DB_NAME = credentials.get(2);
             input.close();
+            //delete login file once assigned
             loginFile.delete();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
