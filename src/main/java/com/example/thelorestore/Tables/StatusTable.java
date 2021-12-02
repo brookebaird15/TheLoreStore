@@ -5,6 +5,7 @@ import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Pojo.Status;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,4 +56,6 @@ public class StatusTable implements StatusDAO {
         }
         return null;
     }
+
+
 }

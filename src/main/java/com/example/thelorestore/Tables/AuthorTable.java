@@ -42,7 +42,11 @@ public class AuthorTable implements AuthorDAO {
      */
     @Override
     public ArrayList<Author> getAllAuthors() {
-        String query = "SELECT * FROM " + DBTableValues.AUTHOR_TABLE;
+        String query = "SELECT " + DBTableValues.AUTHOR_ID_COLUMN + ", "
+                + DBTableValues.AUTHOR_FIRST_COLUMN
+                + ", COALESCE(" + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", \"\") AS " + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", "
+                + DBTableValues.AUTHOR_LAST_COLUMN + " FROM "
+                + DBTableValues.AUTHOR_TABLE;
         authors = new ArrayList<>();
         try {
             Statement getAuthors = db.getConnection().createStatement();
@@ -66,7 +70,11 @@ public class AuthorTable implements AuthorDAO {
      */
     @Override
     public Author getAuthor(int id) {
-        String query = "SELECT * FROM " + DBTableValues.AUTHOR_TABLE + " WHERE " + DBTableValues.AUTHOR_ID_COLUMN + " = " + id;
+        String query = "SELECT " + DBTableValues.AUTHOR_ID_COLUMN + ", "
+                + DBTableValues.AUTHOR_FIRST_COLUMN
+                + ", COALESCE(" + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", \"\") AS " + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", "
+                + DBTableValues.AUTHOR_LAST_COLUMN + " FROM "
+                + DBTableValues.AUTHOR_TABLE + " WHERE " + DBTableValues.AUTHOR_ID_COLUMN + " = " + id;
         try {
             Statement getAuthor = db.getConnection().createStatement();
             ResultSet data = getAuthor.executeQuery(query);

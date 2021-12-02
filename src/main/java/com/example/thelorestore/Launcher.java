@@ -17,9 +17,6 @@ public class Launcher extends Application {
         mainStage = stage;
         mainStage.setScene(new LoginScene());
         mainStage.setResizable(false);
-        /** TODO
-         * Update the title to better represent the application use
-         */
         mainStage.setTitle("Personal Book Tracker - by Ashley McCallum and Brooke Baird");
         mainStage.show();
     }

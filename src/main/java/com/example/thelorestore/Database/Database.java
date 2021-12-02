@@ -30,7 +30,7 @@ public class Database {
                 createTable(DBTableValues.BOOK_GENRE_TABLE, DBTableValues.CREATE_BOOK_GENRE_TABLE, connection);
                 createTable(DBTableValues.BOOK_AUTHOR_TABLE, DBTableValues.CREATE_BOOK_AUTHOR_TABLE, connection);
                 createTable(DBTableValues.BOOK_VIEW, DBTableValues.CREATE_BOOK_VIEW, connection);
-
+                insertStatusItems(DBTableValues.INSERT_INTO_STATUS, connection);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,6 +80,19 @@ public class Database {
             createTable = connection.createStatement();
             createTable.execute(tableQuery);
             System.out.println("The " + tableName + " table has been inserted");
+        }
+    }
+
+    private void insertStatusItems(String tableQuery, Connection connection) throws SQLException {
+        String query = "SELECT * FROM " + DBTableValues.STATUS_TABLE;
+        Statement checkItems = connection.createStatement();
+        ResultSet data = checkItems.executeQuery(query);
+        if(data.next()) {
+            System.out.println("Status table already populated");
+        } else {
+            Statement insertItems = connection.createStatement();
+            insertItems.executeUpdate(tableQuery);
+            System.out.println("Status table items inserted");
         }
     }
 }

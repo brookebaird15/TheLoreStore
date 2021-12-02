@@ -16,7 +16,6 @@ public class GenreTab extends Tab {
     private Button addGenreBtn;
     private Button saveBtn;
     private Button updateGenreBtn;
-//    private Button saveUpdateBtn;
     private Button cancelBtn;
     private boolean updating;
 
@@ -53,14 +52,14 @@ public class GenreTab extends Tab {
             cancelBtn.setVisible(true);
         });
 
-        //Save Button for Adding
+        //Save Button to commit changes
         saveBtn = new Button("Save");
         saveBtn.setOnAction(event -> {
-            //TODO - get genre by id not index?
             //TODO - catch exception where user entry is too long
             if(updating) {
-                Genre genre = new Genre(tableView.getSelectionModel().getSelectedIndex() + 1, genreField.getText());
-                genreTable.updateGenre(genre);
+                Genre selection = (Genre) tableView.getSelectionModel().getSelectedItem();
+                selection.setName(genreField.getText());
+                genreTable.updateGenre(selection);
                 addGenreBtn.setDisable(false);
             } else {
                 Genre genre = new Genre(genreField.getText());
