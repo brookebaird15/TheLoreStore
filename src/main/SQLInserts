@@ -4,6 +4,10 @@ VALUES
 (NULL, 'in progress'),
 (NULL, 'completed');
 
+INSERT INTO useraccounts (username, password) VALUES ('booklover123', 'bilbo')
+INSERT INTO useraccounts (username, password) VALUES ('tolkiensrings', 'thehobbit')
+
+
 INSERT INTO genre (id, genre) VALUES (NULL, 'Fantasy');
 INSERT INTO genre (id, genre) VALUES (NULL, 'Non-Fiction');
 INSERT INTO genre (id, genre) VALUES (NULL, 'Science Fiction');
