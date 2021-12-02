@@ -14,15 +14,12 @@ public class Launcher extends Application {
     public void start(Stage stage) throws Exception {
 
         //TODO - change project name and title
-        Database.getInstance();
         mainStage = stage;
         mainStage.setScene(new LoginScene());
         mainStage.setResizable(false);
         mainStage.setTitle("Personal Book Tracker - by Ashley McCallum and Brooke Baird");
         mainStage.show();
         mainStage.setOnCloseRequest(e-> {
-            //deletes credentials.txt on close
-            LoginPane.loginFile.delete();
         });
     }
 }

@@ -3,6 +3,7 @@ package com.example.thelorestore.Panes;
 import com.example.thelorestore.Database.DBConst;
 import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
+import com.example.thelorestore.Scenes.LoginScene;
 import com.example.thelorestore.Scenes.MainTableScene;
 import com.example.thelorestore.Launcher;
 import javafx.animation.SequentialTransition;
@@ -18,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -29,40 +31,35 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.example.thelorestore.Launcher.mainStage;
+
 //Extend StackPane
 public class LoginPane extends StackPane {
-    Database db;
-    private TextField userTextField = new TextField();
-    private TextField pwTextField = new PasswordField();
-    private TextField dbTextField = new TextField();
-    private Label successfulLogin = new Label("");
+//    Database db;
+
     public static File loginFile = new File("credentials.txt");
+    public static Text loginError = new Text("Invalid login - please try again");
+//    boolean loggedIn = false;
 
     public LoginPane(){
         Text user = new Text("Username");
         Text password = new Text("Password");
         Text database = new Text("Database Name");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
+        TextField userTextField = new TextField();
+        TextField pwTextField = new PasswordField();
+        TextField dbTextField = new TextField();
+
+        loginError.setVisible(false);
 
         //New login button
         Button loginBtn = new Button("Log in");
         loginBtn.setMaxSize(150, 100);
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
-                    if (!userTextField.getText().isBlank() && !pwTextField.getText().isBlank()) {
-                        logCredentials(loginFile, userTextField, pwTextField, dbTextField);
-//                        loginValidation();
-                    } else {
-                        successfulLogin.setText("Invalid login. Please try again.");
-                    }
-                });
-//        //Cancel button
-//        Button cancelBtn = new Button("Cancel");
-//        cancelBtn.setMaxSize(150, 100);
-//        //When pressed, exits the program
-//        cancelBtn.setOnAction(event -> {
-//           System.exit(0);
-//        });
+            logCredentials(loginFile, userTextField, pwTextField, dbTextField);
+            validateLogin(loginFile);
+        });
 
         //The vboxes used to set content in middle, holds username & password
         VBox usernameBox = new VBox();
@@ -76,22 +73,16 @@ public class LoginPane extends StackPane {
         usernameBox.setAlignment(Pos.CENTER);
         passwordBox.setAlignment(Pos.CENTER);
 
-        //Add the successful login to the pane VBox
-        VBox success = new VBox();
-        success.getChildren().add(successfulLogin);
-        success.setAlignment(Pos.CENTER);
-
         /**
          * Login box to host the username, password textfields and login button
          * @author Brooke Baird
          */
         VBox loginBox = new VBox();
         loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.5);"+
-                "-fx-font-size: 16;"+
                 "-fx-padding: 25;"+
                 "-fx-background-radius: 50;"+
                 "-fx-border-radius: 50;");
-        loginBox.getChildren().addAll(success, usernameBox, passwordBox, databaseBox, loginBtn);
+        loginBox.getChildren().addAll(loginError, usernameBox, passwordBox, databaseBox, loginBtn);
         loginBox.setAlignment(Pos.CENTER);
         loginBox.setSpacing(10);
         loginBox.setMaxSize(350, 250);
@@ -124,7 +115,6 @@ public class LoginPane extends StackPane {
     }
 
     public void validateLogin(File file) {
-//        Scanner input = new Scanner(file);
         ArrayList<String> credentials = new ArrayList<>();
         try {
             Scanner input = new Scanner(file);
@@ -136,10 +126,12 @@ public class LoginPane extends StackPane {
             DBConst.DB_PASS = credentials.get(1);
             DBConst.DB_NAME = credentials.get(2);
             input.close();
+            loginFile.delete();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+        Database.getInstance();
+        mainStage.setScene(new MainTableScene());
     }
 
     /**

@@ -1,4 +1,5 @@
 package com.example.thelorestore.Database;
+import com.example.thelorestore.Panes.LoginPane;
 import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
@@ -31,6 +32,15 @@ public class Database {
                 createTable(DBTableValues.BOOK_VIEW, DBTableValues.CREATE_BOOK_VIEW, connection);
                 insertStatusItems(DBTableValues.INSERT_INTO_STATUS, connection);
             } catch (Exception e) {
+                LoginPane.loginError.setVisible(true);
+                try {
+
+                    connection.endRequest();
+                    System.out.println("request ended");
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
                 e.printStackTrace();
             }
         }
