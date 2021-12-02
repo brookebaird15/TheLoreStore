@@ -21,51 +21,59 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 //Extend StackPane
 public class LoginPane extends StackPane {
-    Database db = Database.getInstance();
-    TextField userTextField = new TextField();
-    TextField pwTextField = new PasswordField();
-    Label successfulLogin = new Label("");
+    private TextField userTextField = new TextField();
+    private TextField pwTextField = new PasswordField();
+    private TextField dbTextField = new TextField();
+    private Label successfulLogin = new Label("");
+    File loginFile = new File("credentials.txt");
+
     public LoginPane(){
         Text user = new Text("Username");
         Text password = new Text("Password");
-        //Textfield for username and password entry
-
+        Text database = new Text("Database Name");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
 
-//        New login button
+        //New login button
         Button loginBtn = new Button("Log in");
         loginBtn.setMaxSize(150, 100);
         //Event Handling of login button to the main table
         loginBtn.setOnAction(event -> {
-                    if (userTextField.getText().isBlank() == false && !pwTextField.getText().isBlank()){
-                        loginValidation();
+                    if (!userTextField.getText().isBlank() && !pwTextField.getText().isBlank()) {
+                        logCredentials(loginFile, userTextField, pwTextField, dbTextField);
+//                        loginValidation();
                     } else {
                         successfulLogin.setText("Invalid login. Please try again.");
                     }
                 });
-        //Cancel button
-        Button cancelBtn = new Button("Cancel");
-        cancelBtn.setMaxSize(150, 100);
-        //When pressed, exits the program
-        cancelBtn.setOnAction(event -> {
-           System.exit(0);
-        });
+//        //Cancel button
+//        Button cancelBtn = new Button("Cancel");
+//        cancelBtn.setMaxSize(150, 100);
+//        //When pressed, exits the program
+//        cancelBtn.setOnAction(event -> {
+//           System.exit(0);
+//        });
 
-            //The vboxes used to set content in middle, holds username & password
-            VBox usernameBox = new VBox();
-            VBox passwordBox = new VBox();
-            usernameBox.getChildren().addAll(user, userTextField);
-            passwordBox.getChildren().addAll(password, pwTextField);
+        //The vboxes used to set content in middle, holds username & password
+        VBox usernameBox = new VBox();
+        VBox passwordBox = new VBox();
+        VBox databaseBox = new VBox();
+        usernameBox.getChildren().addAll(user, userTextField);
+        passwordBox.getChildren().addAll(password, pwTextField);
+        databaseBox.getChildren().addAll(database, dbTextField);
 
-            //Setting the alignments for username & password vboxes
-            usernameBox.setAlignment(Pos.CENTER);
-            passwordBox.setAlignment(Pos.CENTER);
+        //Setting the alignments for username & password vboxes
+        usernameBox.setAlignment(Pos.CENTER);
+        passwordBox.setAlignment(Pos.CENTER);
 
         //Add the successful login to the pane VBox
         VBox success = new VBox();
@@ -78,18 +86,17 @@ public class LoginPane extends StackPane {
          * @author Brooke Baird
          */
         VBox loginBox = new VBox();
-            loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.5);"+
-                    "-fx-font-size: 16;"+
-                    "-fx-padding: 25;"+
-                    "-fx-background-radius: 50;"+
-                    "-fx-border-radius: 50;");
-            loginBox.getChildren().addAll(success, usernameBox, passwordBox, loginBtn, cancelBtn);
-            loginBox.setAlignment(Pos.CENTER);
-            loginBox.setSpacing(10);
-            loginBox.setMaxSize(350, 250);
+        loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.5);"+
+                "-fx-font-size: 16;"+
+                "-fx-padding: 25;"+
+                "-fx-background-radius: 50;"+
+                "-fx-border-radius: 50;");
+        loginBox.getChildren().addAll(success, usernameBox, passwordBox, databaseBox, loginBtn);
+        loginBox.setAlignment(Pos.CENTER);
+        loginBox.setSpacing(10);
+        loginBox.setMaxSize(350, 250);
 
-
-            this.getChildren().addAll(booksImage, loginBox);
+        this.getChildren().addAll(booksImage, loginBox);
 
         //Animations for background
         /**
@@ -105,6 +112,20 @@ public class LoginPane extends StackPane {
             moveImage.play();
         }
 
+    public void logCredentials(File file, TextField user, TextField pass, TextField database) {
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
+            out.write(user.getText() + "\n" + pass.getText() + "\n" + database.getText());
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean validateLogin(File file) {
+        return false;
+    }
 
     /**
      * Translate the object on the X axis of the screen
@@ -141,32 +162,31 @@ public class LoginPane extends StackPane {
      * proceed onto main table
      * @author Brooke Baird
      */
-    public void loginValidation(){
-        db.getConnection();
-
-        String verifyLogin = "SELECT count(1) FROM useraccounts WHERE username = '"
-                + userTextField.getText() + "'AND password = '"
-                + pwTextField.getText() + "'";
-
-        try {
-            Statement getAccount = db.getConnection().createStatement();
-            //Handle the query
-            ResultSet accountData = getAccount.executeQuery(verifyLogin);
-
-            //Process the query
-            while(accountData.next()){
-                if (accountData.getInt(1) == 1){
-                    successfulLogin.setText("Login successful.");
-                    Launcher.mainStage.setScene(new MainTableScene());
-
-                } else {
-                    successfulLogin.setText("Invalid login. Please try again.");
-                }
-            }
-
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
+//    public void loginValidation(){
+//        db.getConnection();
+//
+//        String verifyLogin = "SELECT count(1) FROM useraccounts WHERE username = '"
+//                + userTextField.getText() + "'AND password = '"
+//                + pwTextField.getText() + "'";
+//
+//        try {
+//            Statement getAccount = db.getConnection().createStatement();
+//            //Handle the query
+//            ResultSet accountData = getAccount.executeQuery(verifyLogin);
+//
+//            //Process the query
+//            while(accountData.next()){
+//                if (accountData.getInt(1) == 1){
+//                    successfulLogin.setText("Login successful.");
+//                    Launcher.mainStage.setScene(new MainTableScene());
+//
+//                } else {
+//                    successfulLogin.setText("Invalid login. Please try again.");
+//                }
+//            }
+//
+//        } catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
 }
