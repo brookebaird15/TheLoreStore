@@ -1,5 +1,6 @@
 package com.example.thelorestore.Panes;
 
+import com.example.thelorestore.Database.DBConst;
 import com.example.thelorestore.Database.DBTableValues;
 import com.example.thelorestore.Database.Database;
 import com.example.thelorestore.Scenes.MainTableScene;
@@ -21,21 +22,21 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 //Extend StackPane
 public class LoginPane extends StackPane {
+    Database db;
     private TextField userTextField = new TextField();
     private TextField pwTextField = new PasswordField();
     private TextField dbTextField = new TextField();
     private Label successfulLogin = new Label("");
-    File loginFile = new File("credentials.txt");
+    public static File loginFile = new File("credentials.txt");
 
     public LoginPane(){
         Text user = new Text("Username");
@@ -80,7 +81,6 @@ public class LoginPane extends StackPane {
         success.getChildren().add(successfulLogin);
         success.setAlignment(Pos.CENTER);
 
-
         /**
          * Login box to host the username, password textfields and login button
          * @author Brooke Baird
@@ -123,8 +123,23 @@ public class LoginPane extends StackPane {
         }
     }
 
-    public boolean validateLogin(File file) {
-        return false;
+    public void validateLogin(File file) {
+//        Scanner input = new Scanner(file);
+        ArrayList<String> credentials = new ArrayList<>();
+        try {
+            Scanner input = new Scanner(file);
+            input.useDelimiter("\n");
+            while (input.hasNext()) {
+                credentials.add(input.next());
+            }
+            DBConst.DB_USER = credentials.get(0);
+            DBConst.DB_PASS = credentials.get(1);
+            DBConst.DB_NAME = credentials.get(2);
+            input.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

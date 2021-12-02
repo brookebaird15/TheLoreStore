@@ -1,6 +1,7 @@
 package com.example.thelorestore;
 
 import com.example.thelorestore.Database.Database;
+import com.example.thelorestore.Panes.LoginPane;
 import com.example.thelorestore.Scenes.LoginScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -19,5 +20,9 @@ public class Launcher extends Application {
         mainStage.setResizable(false);
         mainStage.setTitle("Personal Book Tracker - by Ashley McCallum and Brooke Baird");
         mainStage.show();
+        mainStage.setOnCloseRequest(e-> {
+            //deletes credentials.txt on close
+            LoginPane.loginFile.delete();
+        });
     }
 }
