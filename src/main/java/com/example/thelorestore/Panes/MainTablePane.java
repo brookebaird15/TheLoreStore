@@ -8,8 +8,7 @@ import javafx.scene.layout.VBox;
 public class MainTablePane extends BorderPane {
 
     public MainTablePane() {
-        //contents box holds all pane contents
-        VBox contents = new VBox();
+       this.setId("main");
 
         //tabs for top of table
         TabPane tabPane = new TabPane();

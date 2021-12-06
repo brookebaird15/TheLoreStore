@@ -75,6 +75,9 @@ public class AuthorTab extends Tab {
             cancelButton.setVisible(false);
             updateAuthButton.setDisable(false);
             addAuthButton.setDisable(false);
+            firstField.setText("");
+            middleField.setText("");
+            lastField.setText("");
         });
         cancelButton.setVisible(false);
 

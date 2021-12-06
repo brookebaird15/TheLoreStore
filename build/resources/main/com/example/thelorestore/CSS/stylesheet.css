@@ -1,4 +1,32 @@
-.tab-pane {
-    -fx-background-color: green;
+.root {
+    -fx-font-family: "Agency FB";
+}
 
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: red;
+
+}
+
+#main {
+    -fx-background-color: orange;
+}
+
+#login {
+
+}
+
+#login-box {
+    -fx-background-color: rgba(255,255,255,0.25);
+    -fx-padding: 25;
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+}
+
+/*#login-error {*/
+/*    -fx-border-color: yellow;*/
+/*    -fx-text-fill: white;*/
+/*}*/
+
+#add-update {
+    -fx-background-color: purple;
 }

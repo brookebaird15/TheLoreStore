@@ -34,11 +34,13 @@ public class LoginPane extends StackPane {
     public static TextField dbTextField = new TextField();
 
     public LoginPane(){
+        this.setId("login");
         Text user = new Text("Username");
         Text password = new Text("Password");
         Text database = new Text("Database Name");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
         loginError.setVisible(false);
+        loginError.setId("login-error");
 
         //New login button
         Button loginBtn = new Button("Log in");
@@ -67,10 +69,8 @@ public class LoginPane extends StackPane {
          * @author Brooke Baird
          */
         VBox loginBox = new VBox();
-        loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.5);"+
-                "-fx-padding: 25;"+
-                "-fx-background-radius: 50;"+
-                "-fx-border-radius: 50;");
+        loginBox.setId("login-box");
+        loginBox.setStyle("");
         loginBox.getChildren().addAll(loginError, usernameBox, passwordBox, databaseBox, loginBtn);
         loginBox.setAlignment(Pos.CENTER);
         loginBox.setSpacing(10);

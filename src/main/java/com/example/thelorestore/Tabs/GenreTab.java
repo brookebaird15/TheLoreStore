@@ -126,6 +126,7 @@ public class GenreTab extends Tab {
             cancelBtn.setVisible(false);
             updateGenreBtn.setDisable(false);
             addGenreBtn.setDisable(false);
+            genreField.setText("");
         });
         cancelBtn.setVisible(false);
 

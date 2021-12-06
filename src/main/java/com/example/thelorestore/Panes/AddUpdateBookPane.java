@@ -29,6 +29,7 @@ public class AddUpdateBookPane extends BorderPane {
     private boolean validInput = true;
 
     public AddUpdateBookPane() {
+        this.setId("add-update");
         //inputFields box holds all inputs for pane
         VBox inputFields = new VBox();
 

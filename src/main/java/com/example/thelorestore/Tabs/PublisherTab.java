@@ -54,6 +54,7 @@ public class PublisherTab extends Tab {
             cancelButton.setVisible(false);
             updatePubButton.setDisable(false);
             addPubButton.setDisable(false);
+            publisherField.setText("");
         });
         cancelButton.setVisible(false);
 
