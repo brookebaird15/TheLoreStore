@@ -9,6 +9,5 @@ public interface BookGenreDAO {
     public void createBookGenreRelation(Book book, Genre genre);
     public ArrayList<Book> getAllBooksForGenre(int genreId);
     public ArrayList<Genre> getAllGenresForBook(int bookId);
-//    public void updateGenreRelation(Book book, Genre genre);
     public void removeGenreRelation(Book book);
 }

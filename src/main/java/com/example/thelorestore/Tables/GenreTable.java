@@ -60,35 +60,6 @@ public class GenreTable implements GenreDAO {
     }
 
     /**
-     * Method to grab one entry from the table
-     * @param genreID
-     * @return
-     */
-    @Override
-    public Genre getGenre(int genreID) {
-        String query = "SELECT * FROM " + DBTableValues.GENRE_TABLE + " WHERE "
-                + DBTableValues.GENRE_ID_COLUMN + " = "
-                + genreID;
-        Statement getGenre = null;
-
-        //Statement being created and connected to database, caught in try-catch
-        try {
-            getGenre = db.getConnection().createStatement();
-            ResultSet data = getGenre.executeQuery(query);
-
-            if (data.next()){
-                Genre genre = new Genre(
-                        data.getInt(DBTableValues.GENRE_ID_COLUMN),
-                        data.getString(DBTableValues.GENRE_NAME_COLUMN)
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * updateGenre() updates the genre information to the values provided
      * @param genre is the genre being updated
      */

@@ -14,17 +14,6 @@ public interface BookDAO {
     public Book createBook(Book book);
 
     /**
-     * Method for accessing all books in Book Table
-     */
-    public ArrayList<Book> getAllBooks();
-
-    /**
-     * Method for accessing one book in Book Table
-     * @param isbn
-     */
-    public Book getBook(int isbn);
-
-    /**
      * Method for updating book information in Book Table
      * @param book
      */

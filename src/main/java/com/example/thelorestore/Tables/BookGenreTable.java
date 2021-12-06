@@ -29,6 +29,8 @@ public class BookGenreTable implements BookGenreDAO {
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Book/genre relation created");
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            System.out.println("GENRE: " + genre + " already in table");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -41,8 +43,10 @@ public class BookGenreTable implements BookGenreDAO {
      */
     @Override
     public ArrayList<Book> getAllBooksForGenre(int genreId) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE "
-                + DBTableValues.BOOK_ID_COLUMN + " = " + genreId;
+        String query = "SELECT b.* FROM " + DBTableValues.BOOK_TABLE + " AS b INNER JOIN "
+        + DBTableValues.BOOK_GENRE_TABLE + " AS bgr ON b." + DBTableValues.BOOK_ID_COLUMN + "=bgr." + DBTableValues.BOOK_ID_COLUMN_FOR_GENRE
+        + " INNER JOIN " + DBTableValues.GENRE_TABLE + " AS g ON bgr." + DBTableValues.GENRE_FK_ID_COLUMN + "=g." + DBTableValues.GENRE_ID_COLUMN
+        + " WHERE g." + DBTableValues.GENRE_ID_COLUMN + "=" + genreId;
         books = new ArrayList<>();
         try {
             Statement getBooks = db.getConnection().createStatement();
@@ -101,20 +105,6 @@ public class BookGenreTable implements BookGenreDAO {
             e.printStackTrace();
         }
     }
-
-//    @Override
-//    public void updateGenreRelation(Book book, Genre genre) {
-//        String query = "UPDATE " + DBTableValues.BOOK_GENRE_TABLE + " SET " +
-//                DBTableValues.GENRE_FK_ID_COLUMN + " = " + genre.getId() +
-//                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
-//        try {
-//            Statement updateRelation = db.getConnection().createStatement();
-//            updateRelation.executeUpdate(query);
-//            System.out.println("Book/genre relation updated");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     /**
      * Counts the number of books with a specified genre

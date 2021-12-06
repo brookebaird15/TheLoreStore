@@ -45,8 +45,8 @@ public class AuthorTable implements AuthorDAO {
         String query = "SELECT " + DBTableValues.AUTHOR_ID_COLUMN + ", "
                 + DBTableValues.AUTHOR_FIRST_COLUMN
                 + ", COALESCE(" + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", \"\") AS " + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", "
-                + DBTableValues.AUTHOR_LAST_COLUMN + " FROM "
-                + DBTableValues.AUTHOR_TABLE;
+                + DBTableValues.AUTHOR_LAST_COLUMN + " FROM " + DBTableValues.AUTHOR_TABLE
+                + " ORDER BY " + DBTableValues.AUTHOR_LAST_COLUMN + " ASC";
         authors = new ArrayList<>();
         try {
             Statement getAuthors = db.getConnection().createStatement();
@@ -61,34 +61,6 @@ public class AuthorTable implements AuthorDAO {
             e.printStackTrace();
         }
         return authors;
-    }
-
-    /**
-     * getAuthor() returns the author at the ID provided or null if no match
-     * @param id is the column id
-     * @return author | null
-     */
-    @Override
-    public Author getAuthor(int id) {
-        String query = "SELECT " + DBTableValues.AUTHOR_ID_COLUMN + ", "
-                + DBTableValues.AUTHOR_FIRST_COLUMN
-                + ", COALESCE(" + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", \"\") AS " + DBTableValues.AUTHOR_MIDDLE_COLUMN + ", "
-                + DBTableValues.AUTHOR_LAST_COLUMN + " FROM "
-                + DBTableValues.AUTHOR_TABLE + " WHERE " + DBTableValues.AUTHOR_ID_COLUMN + " = " + id;
-        try {
-            Statement getAuthor = db.getConnection().createStatement();
-            ResultSet data = getAuthor.executeQuery(query);
-            if(data.next()) {
-                Author author = new Author(data.getInt(DBTableValues.AUTHOR_ID_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_FIRST_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_MIDDLE_COLUMN),
-                        data.getString(DBTableValues.AUTHOR_LAST_COLUMN));
-                return author;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**

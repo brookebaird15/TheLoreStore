@@ -9,6 +9,7 @@ import com.example.thelorestore.Pojo.Genre;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -32,6 +33,8 @@ public class BookAuthorTable implements BookAuthorDAO {
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Book/author relation created");
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            System.out.println("AUTHOR: " + author + " already in table");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,8 +47,10 @@ public class BookAuthorTable implements BookAuthorDAO {
      */
     @Override
     public ArrayList<Book> getAllBooksForAuthor(int authorId) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE "
-                + DBTableValues.BOOK_ID_COLUMN + " = " + authorId;
+        String query = "SELECT b.* FROM " + DBTableValues.BOOK_TABLE + " AS b INNER JOIN "
+                + DBTableValues.BOOK_AUTHOR_TABLE + " AS bar ON b." + DBTableValues.BOOK_ID_COLUMN + "=bar." + DBTableValues.BOOK_ID_COLUMN_FOR_AUTHOR
+                + " INNER JOIN " + DBTableValues.AUTHOR_TABLE + " AS a ON bar." + DBTableValues.AUTHOR_FK_ID_COLUMN + "=a." + DBTableValues.AUTHOR_ID_COLUMN
+                + " WHERE a." + DBTableValues.AUTHOR_ID_COLUMN + "=" + authorId;
         books = new ArrayList<>();
         try {
             Statement getBooks = db.getConnection().createStatement();
@@ -109,26 +114,4 @@ public class BookAuthorTable implements BookAuthorDAO {
             e.printStackTrace();
         }
     }
-
-    //String query = "DELETE FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book;
-    //        try {
-    //            db.getConnection().createStatement().execute(query);
-    //            System.out.println("Deleted record");
-    //        } catch (SQLException e) {
-    //            e.printStackTrace();
-    //        }
-
-//    @Override
-//    public void updateBookAuthorRelation(Book book, Author author) {
-//        String query = "UPDATE " + DBTableValues.BOOK_AUTHOR_TABLE + " SET " +
-//                DBTableValues.GENRE_FK_ID_COLUMN + " = " + author.getId() +
-//                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
-//        try {
-//            Statement updateRelation = db.getConnection().createStatement();
-//            updateRelation.executeUpdate(query);
-//            System.out.println("Book/author relation updated");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

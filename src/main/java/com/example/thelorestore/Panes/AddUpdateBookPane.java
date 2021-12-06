@@ -24,6 +24,8 @@ public class AddUpdateBookPane extends BorderPane {
 
     private ComboBox<Author> currentAuthCombo;
     private ComboBox<Genre> currentGenreCombo;
+    private ArrayList<Genre> allGenres;
+    private ArrayList<Author> allAuthors;
     private boolean validInput = true;
 
     public AddUpdateBookPane() {
@@ -36,6 +38,8 @@ public class AddUpdateBookPane extends BorderPane {
         BookTable bookTable = new BookTable();
         BookGenreTable bookGenreTable = new BookGenreTable();
         BookAuthorTable bookAuthorTable = new BookAuthorTable();
+        allGenres = genreTable.getAllGenres();
+        allAuthors = authorTable.getAllAuthors();
 
         VBox title = new VBox();
         Text titleText = new Text("Title");
@@ -47,44 +51,44 @@ public class AddUpdateBookPane extends BorderPane {
         Text authorText = new Text("Author");
 
         //combobox to hold all authors
-        ComboBox<Author> authorCombo = new ComboBox<>();
-        authorCombo.setItems(FXCollections.observableArrayList(authorTable.getAllAuthors()));
+        ComboBox<Author> allAuthorCombo = new ComboBox<>();
+        allAuthorCombo.setItems(FXCollections.observableArrayList(allAuthors));
         TextArea authorDisplay = new TextArea();
         authorDisplay.setEditable(false);
         authorDisplay.setPrefWidth(150);
         authorDisplay.setPrefHeight(100);
 
-        //TODO - prevent adding duplicate authors
         //button to add authors to a list
         Button addAuthBtn = new Button("+");
         addAuthBtn.setOnAction(e-> {
-            Author addedAuthor = authorCombo.getSelectionModel().getSelectedItem();
+            Author addedAuthor = allAuthorCombo.getSelectionModel().getSelectedItem();
             //add author name to display list
             authorDisplay.setText(authorDisplay.getText() + addedAuthor.toString() + "\n");
             //add author to arraylist of authors
-            bookAuthors.add(addedAuthor);
-            refreshAuthCombo(currentAuthCombo, bookAuthors);
+            currentAuthors.add(addedAuthor);
+            //refresh combobox
+            refreshAuthCombo(currentAuthCombo, currentAuthors);
         });
 
         //combobox to hold current authors
         currentAuthCombo = new ComboBox<>();
-        currentAuthCombo.setItems(FXCollections.observableArrayList(bookAuthors));
+        currentAuthCombo.setItems(FXCollections.observableArrayList(currentAuthors));
         currentAuthCombo.setVisible(false);
 
         //button to remove authors from current auth list
         Button removeAuthBtn = new Button("-");
         removeAuthBtn.setOnAction(e-> {
             Author removedAuthor = currentAuthCombo.getSelectionModel().getSelectedItem();
-            bookAuthors.remove(removedAuthor);
-            authorDisplay.setText(bookAuthors.toString().replace("[", "")
+            currentAuthors.remove(removedAuthor);
+            authorDisplay.setText(currentAuthors.toString().replace("[", "")
                     .replace("]", "").replace(",", "\n"));
-            refreshAuthCombo(currentAuthCombo, bookAuthors);
+            refreshAuthCombo(currentAuthCombo, currentAuthors);
         });
         removeAuthBtn.setVisible(false);
 
         //hbox to hold author input fields and display
         HBox addAuthBox = new HBox();
-        addAuthBox.getChildren().addAll(authorCombo, addAuthBtn);
+        addAuthBox.getChildren().addAll(allAuthorCombo, addAuthBtn);
         HBox rmvAuthBox = new HBox();
         rmvAuthBox.getChildren().addAll(currentAuthCombo, removeAuthBtn);
 
@@ -96,44 +100,44 @@ public class AddUpdateBookPane extends BorderPane {
         Text genreText = new Text("Genre");
 
         //combobox to hold all genres
-        ComboBox<Genre> genreCombo = new ComboBox<>();
-        genreCombo.setItems(FXCollections.observableArrayList(genreTable.getAllGenres()));
+        ComboBox<Genre> allGenreCombo = new ComboBox<>();
+        allGenreCombo.setItems(FXCollections.observableArrayList(allGenres));
         TextArea genreDisplay = new TextArea();
         genreDisplay.setEditable(false);
         genreDisplay.setPrefHeight(100);
         genreDisplay.setPrefWidth(150);
 
-        //TODO - prevent adding duplicate genres
         //button to add genres to a list
         Button addGenreBtn = new Button("+");
         addGenreBtn.setOnAction(e-> {
-            Genre addedGenre = genreCombo.getSelectionModel().getSelectedItem();
-            //add genre to display list
+            Genre addedGenre = allGenreCombo.getSelectionModel().getSelectedItem();
             genreDisplay.setText(genreDisplay.getText() + addedGenre.toString() + "\n");
             //add genre to arraylist of genres
-            bookGenres.add(addedGenre);
-            refreshGenreCombo(currentGenreCombo, bookGenres);
+            currentGenres.add(addedGenre);
+            //refresh combo box
+            refreshGenreCombo(currentGenreCombo, currentGenres);
         });
 
-        //combobox to hold current authors
+        //combobox to hold current genres
         currentGenreCombo = new ComboBox<>();
-        currentGenreCombo.setItems(FXCollections.observableArrayList(bookGenres));
+        currentGenreCombo.setItems(FXCollections.observableArrayList(currentGenres));
         currentGenreCombo.setVisible(false);
 
         //button to remove authors from current auth list
         Button removeGenreBtn = new Button("-");
         removeGenreBtn.setOnAction(e-> {
             Genre removedGenre = currentGenreCombo.getSelectionModel().getSelectedItem();
-            bookGenres.remove(removedGenre);
-            genreDisplay.setText(bookGenres.toString().replace("[", "")
+            //remove genre from list of current genres
+            currentGenres.remove(removedGenre);
+            genreDisplay.setText(currentGenres.toString().replace("[", "")
                     .replace("]", "").replace(",", "\n"));
-            refreshGenreCombo(currentGenreCombo, bookGenres);
+            refreshGenreCombo(currentGenreCombo, currentGenres);
         });
         removeGenreBtn.setVisible(false);
 
         //hbox to hold genre input and display
         HBox addGenreBox = new HBox();
-        addGenreBox.getChildren().addAll(genreCombo, addGenreBtn);
+        addGenreBox.getChildren().addAll(allGenreCombo, addGenreBtn);
         HBox rmvGenreBox = new HBox();
         rmvGenreBox.getChildren().addAll(currentGenreCombo, removeGenreBtn);
 
@@ -193,12 +197,12 @@ public class AddUpdateBookPane extends BorderPane {
                 radioButton3.setSelected(true);
             }
 
-            for(Author author : bookAuthors) {
+            for(Author author : currentAuthors) {
                 authorDisplay.setText(authorDisplay.getText() + author.toString() + "\n");
                 System.out.println(author);
             }
 
-            for(Genre genre : bookGenres) {
+            for(Genre genre : currentGenres) {
                 genreDisplay.setText(genreDisplay.getText() + genre.toString() + "\n");
                 System.out.println(genre);
             }
@@ -250,7 +254,7 @@ public class AddUpdateBookPane extends BorderPane {
             String comment = commentInput.getText();
 
             //if author and genre are not empty, allow book to be created
-            if(!bookAuthors.isEmpty() && !bookGenres.isEmpty()) {
+            if(!currentAuthors.isEmpty() && !currentGenres.isEmpty()) {
                 validInput = true;
                 //book to be inserted
                 Book insertBook = new Book(bookTitle, bookPublisher, bookYear, bookStatus, comment);
@@ -260,12 +264,12 @@ public class AddUpdateBookPane extends BorderPane {
                     Book newestBook = bookTable.createBook(insertBook);
 
                     //for each genre added to the list, create a link in the book/genre table
-                    for(Genre genre: bookGenres) {
+                    for(Genre genre: currentGenres) {
                         bookGenreTable.createBookGenreRelation(newestBook, genre);
                     }
 
                     //for each author added to the list, create a link in the book/author table
-                    for(Author author : bookAuthors) {
+                    for(Author author : currentAuthors) {
                         bookAuthorTable.createBookAuthorRelation(newestBook, author);
                     }
                 }
@@ -281,14 +285,12 @@ public class AddUpdateBookPane extends BorderPane {
                     bookAuthorTable.removeAuthorRelation(insertBook);
 
                     //add updated genre relations
-                    for(Genre genre: bookGenres) {
-                        System.out.println("UPDATE GENRE: " + genre);
+                    for(Genre genre: currentGenres) {
                         bookGenreTable.createBookGenreRelation(insertBook, genre);
                     }
 
                     //add updated author relations
-                    for(Author author: bookAuthors) {
-                        System.out.println("UPDATE AUTHOR: " + author);
+                    for(Author author: currentAuthors) {
                         bookAuthorTable.createBookAuthorRelation(insertBook, author);
                     }
                 }

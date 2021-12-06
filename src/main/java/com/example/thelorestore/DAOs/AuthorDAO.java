@@ -10,6 +10,5 @@ public interface AuthorDAO {
      */
     public void createAuthor(Author author);
     public ArrayList<Author> getAllAuthors();
-    public Author getAuthor(int id);
     public void updateAuthor(Author author);
 }

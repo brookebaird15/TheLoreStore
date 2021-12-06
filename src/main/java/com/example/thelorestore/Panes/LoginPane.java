@@ -60,6 +60,7 @@ public class LoginPane extends StackPane {
         //Setting the alignments for username & password vboxes
         usernameBox.setAlignment(Pos.CENTER);
         passwordBox.setAlignment(Pos.CENTER);
+        databaseBox.setAlignment(Pos.CENTER);
 
         /**
          * Login box to host the username, password textfields and login button
@@ -109,7 +110,6 @@ public class LoginPane extends StackPane {
         }
     }
 
-    //TODO - delete dbconst? no longer constants and can be written to anywhere
     /**
      * Reads the credentials from a text file
      * Assigns them to the DBCONST variables

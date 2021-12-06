@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class PublisherTab extends Tab {
     private static PublisherTab tab;
@@ -39,6 +40,9 @@ public class PublisherTab extends Tab {
         TextField publisherField = new TextField();
         publisherField.setVisible(false);
 
+        Text warningText = new Text("Publisher name must be between 0 and 50 characters");
+        warningText.setVisible(false);
+
         //editButtons box holds add, save and update buttons
         HBox editButtons = new HBox();
 
@@ -57,27 +61,45 @@ public class PublisherTab extends Tab {
         //save button to commit changes
         saveButton = new Button("Save");
         saveButton.setOnAction(e-> {
-            //TODO - catch exception where user entry is too long
+            boolean changesSaved = false;
+
             if(updating) {
-                Publisher selection = (Publisher) tableView.getSelectionModel().getSelectedItem();
-                selection.setCompanyName(publisherField.getText());
-                publisherTable.updatePublisher(selection);
-                addPubButton.setDisable(false);
+                //check for valid input length
+                if (publisherField.getText().length() <= 50 && publisherField.getText().length() != 0) {
+                    Publisher selection = (Publisher) tableView.getSelectionModel().getSelectedItem();
+                    selection.setCompanyName(publisherField.getText());
+                    publisherTable.updatePublisher(selection);
+                    changesSaved = true;
+                } else {
+                    warningText.setVisible(true);
+                }
             } else {
-                Publisher publisher = new Publisher(publisherField.getText());
-                publisherTable.createPublisher(publisher);
-                updatePubButton.setDisable(false);
+                //check for valid input length
+                if (publisherField.getText().length() <= 50 && publisherField.getText().length() != 0) {
+                    Publisher publisher = new Publisher(publisherField.getText());
+                    publisherTable.createPublisher(publisher);
+                    changesSaved = true;
+                } else {
+                    warningText.setVisible(true);
+                }
             }
-            //hide fields and buttons
-            saveButton.setVisible(false);
-            publisherField.setVisible(false);
-            cancelButton.setVisible(false);
 
-            //refresh table
-            refreshPubTable();
+            if(changesSaved) {
+                //hide fields and buttons
+                updatePubButton.setDisable(false);
+                addPubButton.setDisable(false);
+                saveButton.setVisible(false);
+                publisherField.setVisible(false);
+                publisherField.setText("");
+                cancelButton.setVisible(false);
+                warningText.setVisible(false);
 
-            //set updating back to false
-            updating = false;
+                //refresh table
+                refreshPubTable();
+
+                //set updating back to false
+                updating = false;
+            }
         });
         saveButton.setVisible(false);
 
@@ -101,12 +123,17 @@ public class PublisherTab extends Tab {
             saveButton.setVisible(true);
         });
 
-        editButtons.getChildren().addAll(addPubButton, saveButton, cancelButton, updatePubButton);
+        HBox confirmButtons = new HBox();
+        confirmButtons.getChildren().addAll(saveButton, cancelButton);
+        confirmButtons.setAlignment(Pos.CENTER);
+
+        editButtons.getChildren().addAll(addPubButton, updatePubButton);
         editButtons.setAlignment(Pos.CENTER);
 
         //pubFields box holds buttons and field for entry
         VBox publisherFields = new VBox();
-        publisherFields.getChildren().addAll(publisherField, editButtons);
+        publisherFields.getChildren().addAll(publisherField, editButtons, confirmButtons, warningText);
+        publisherFields.setAlignment(Pos.CENTER);
 
         root.setBottom(publisherFields);
 
