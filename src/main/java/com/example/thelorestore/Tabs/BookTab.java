@@ -77,7 +77,7 @@ public class BookTab extends Tab {
             Launcher.mainStage.setScene(new AddUpdateBookScene());
         });
 
-        Text updateMsg = new Text("Please select a book to update!");
+        Text updateMsg = new Text("Please select a book to update");
         updateMsg.setVisible(false);
 
         //updateBookBtn directs user to UpdateBookPane

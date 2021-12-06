@@ -47,8 +47,10 @@ public class BookAuthorTable implements BookAuthorDAO {
      */
     @Override
     public ArrayList<Book> getAllBooksForAuthor(int authorId) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE "
-                + DBTableValues.BOOK_ID_COLUMN + " = " + authorId;
+        String query = "SELECT b.* FROM " + DBTableValues.BOOK_TABLE + " AS b INNER JOIN "
+                + DBTableValues.BOOK_AUTHOR_TABLE + " AS bar ON b." + DBTableValues.BOOK_ID_COLUMN + "=bar." + DBTableValues.BOOK_ID_COLUMN_FOR_AUTHOR
+                + " INNER JOIN " + DBTableValues.AUTHOR_TABLE + " AS a ON bar." + DBTableValues.AUTHOR_FK_ID_COLUMN + "=a." + DBTableValues.AUTHOR_ID_COLUMN
+                + " WHERE a." + DBTableValues.AUTHOR_ID_COLUMN + "=" + authorId;
         books = new ArrayList<>();
         try {
             Statement getBooks = db.getConnection().createStatement();

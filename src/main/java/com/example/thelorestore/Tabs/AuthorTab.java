@@ -1,7 +1,11 @@
 package com.example.thelorestore.Tabs;
 
 import com.example.thelorestore.Pojo.Author;
+import com.example.thelorestore.Pojo.Book;
+import com.example.thelorestore.Pojo.Genre;
 import com.example.thelorestore.Tables.AuthorTable;
+import com.example.thelorestore.Tables.BookAuthorTable;
+import com.example.thelorestore.Tables.BookGenreTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -10,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AuthorTab extends Tab {
@@ -35,6 +40,7 @@ public class AuthorTab extends Tab {
 
         TableColumn<Author, String> lastNameColumn = new TableColumn<>("Last Name");
         lastNameColumn.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getLastName()));
+        lastNameColumn.setMinWidth(150);
 
         tableView.getColumns().addAll(lastNameColumn, firstNameColumn, middleNameColumn);
         tableView.getItems().addAll(authorTable.getAllAuthors());
@@ -159,9 +165,22 @@ public class AuthorTab extends Tab {
         confirmButtons.getChildren().addAll(saveButton, cancelButton);
         confirmButtons.setAlignment(Pos.CENTER);
 
+        TextArea bookList = new TextArea("");
+        bookList.setEditable(false);
+
+        BookAuthorTable bookAuthorTable = new BookAuthorTable();
+        tableView.setOnMouseClicked(e-> {
+            bookList.setText("");
+            Author selection = (Author) tableView.getSelectionModel().getSelectedItem();
+            ArrayList<Book> books = bookAuthorTable.getAllBooksForAuthor(selection.getId());
+            for (Book book: books) {
+                bookList.setText(bookList.getText() + book.getTitle() + "\n");
+            }
+        });
+
         //authfields box holds buttons and fields for entry
         VBox authFields = new VBox();
-        authFields.getChildren().addAll(nameFields, editButtons, confirmButtons, warningText);
+        authFields.getChildren().addAll(nameFields, editButtons, confirmButtons, warningText, bookList);
         authFields.setAlignment(Pos.CENTER);
 
         root.setBottom(authFields);
