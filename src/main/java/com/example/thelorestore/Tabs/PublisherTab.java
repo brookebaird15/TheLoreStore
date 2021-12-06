@@ -83,14 +83,16 @@ public class PublisherTab extends Tab {
                     warningText.setVisible(true);
                 }
             }
-            
+
             if(changesSaved) {
                 //hide fields and buttons
                 updatePubButton.setDisable(false);
                 addPubButton.setDisable(false);
                 saveButton.setVisible(false);
                 publisherField.setVisible(false);
+                publisherField.setText("");
                 cancelButton.setVisible(false);
+                warningText.setVisible(false);
 
                 //refresh table
                 refreshPubTable();
@@ -121,12 +123,17 @@ public class PublisherTab extends Tab {
             saveButton.setVisible(true);
         });
 
-        editButtons.getChildren().addAll(addPubButton, saveButton, cancelButton, updatePubButton);
+        HBox confirmButtons = new HBox();
+        confirmButtons.getChildren().addAll(saveButton, cancelButton);
+        confirmButtons.setAlignment(Pos.CENTER);
+
+        editButtons.getChildren().addAll(addPubButton, updatePubButton);
         editButtons.setAlignment(Pos.CENTER);
 
         //pubFields box holds buttons and field for entry
         VBox publisherFields = new VBox();
-        publisherFields.getChildren().addAll(publisherField, editButtons);
+        publisherFields.getChildren().addAll(publisherField, editButtons, confirmButtons, warningText);
+        publisherFields.setAlignment(Pos.CENTER);
 
         root.setBottom(publisherFields);
 
