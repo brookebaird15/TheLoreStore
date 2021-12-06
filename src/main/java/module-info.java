@@ -8,4 +8,6 @@ module com.example.thelorestore {
     exports com.example.thelorestore;
     exports com.example.thelorestore.Database;
     opens com.example.thelorestore.Database to javafx.fxml;
+    exports com.example.thelorestore.Scenes;
+    opens com.example.thelorestore.Scenes to javafx.fxml;
 }
