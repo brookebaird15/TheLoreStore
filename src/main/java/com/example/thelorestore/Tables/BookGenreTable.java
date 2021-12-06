@@ -102,20 +102,6 @@ public class BookGenreTable implements BookGenreDAO {
         }
     }
 
-//    @Override
-//    public void updateGenreRelation(Book book, Genre genre) {
-//        String query = "UPDATE " + DBTableValues.BOOK_GENRE_TABLE + " SET " +
-//                DBTableValues.GENRE_FK_ID_COLUMN + " = " + genre.getId() +
-//                " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + book.getId();
-//        try {
-//            Statement updateRelation = db.getConnection().createStatement();
-//            updateRelation.executeUpdate(query);
-//            System.out.println("Book/genre relation updated");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     /**
      * Counts the number of books with a specified genre
      * @param genre is the genre id being counted

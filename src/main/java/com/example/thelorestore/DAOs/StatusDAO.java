@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public interface StatusDAO {
     public ArrayList<Status> getAllStatus();
-    public Status getStatus(int statusID);
+//    public Status getStatus(int statusID);
 }

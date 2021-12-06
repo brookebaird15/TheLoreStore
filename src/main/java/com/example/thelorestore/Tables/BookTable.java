@@ -81,31 +81,31 @@ public class BookTable implements BookDAO {
         return books;
     }
 
-    /**
-     * getBook() returns the book at the ISBN provided or null if no match
-     * @param id is the column id
-     * @return book | null
-     */
-    @Override
-    public Book getBook(int id) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + id;
-        try {
-            Statement getBook = db.getConnection().createStatement();
-            ResultSet data = getBook.executeQuery(query);
-            if(data.next()) {
-                Book book = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
-                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
-                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
-                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
-                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
-                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN));
-                return book;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    /**
+//     * getBook() returns the book at the ISBN provided or null if no match
+//     * @param id is the column id
+//     * @return book | null
+//     */
+//    @Override
+//    public Book getBook(int id) {
+//        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE " + DBTableValues.BOOK_ID_COLUMN + " = " + id;
+//        try {
+//            Statement getBook = db.getConnection().createStatement();
+//            ResultSet data = getBook.executeQuery(query);
+//            if(data.next()) {
+//                Book book = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
+//                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
+//                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
+//                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN));
+//                return book;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     /**
      * updateBook() updates the book information to the values provided
@@ -124,18 +124,6 @@ public class BookTable implements BookDAO {
             Statement updateItem = db.getConnection().createStatement();
             updateItem.executeUpdate(query);
             System.out.println("Book updated");
-//            query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " ORDER BY " + DBTableValues.BOOK_ID_COLUMN + " DESC LIMIT 0,1";
-//            Statement getBook = db.getConnection().createStatement();
-//            ResultSet data = getBook.executeQuery(query);
-//            if(data.next()) {
-//                Book updatedBook = new Book(data.getInt(DBTableValues.BOOK_ID_COLUMN),
-//                        data.getString(DBTableValues.BOOK_TITLE_COLUMN),
-//                        data.getInt(DBTableValues.BOOK_PUBLISHER_COLUMN),
-//                        data.getInt(DBTableValues.BOOK_YEAR_COLUMN),
-//                        data.getInt(DBTableValues.BOOK_STATUS_COLUMN),
-//                        data.getString(DBTableValues.BOOK_COMMENT_COLUMN));
-//                return updatedBook;
-//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -165,8 +153,6 @@ public class BookTable implements BookDAO {
      * displayPrettyBooks() displays all book table values formatted
      * @return books
      */
-
-    //TODO - have all authors displayed in one column and all genres displayed in one column
     public ArrayList<DisplayBook> displayPrettyBooks() {
         ArrayList<DisplayBook> books = new ArrayList<>();
         String query = "SELECT * FROM " + DBTableValues.BOOK_VIEW;

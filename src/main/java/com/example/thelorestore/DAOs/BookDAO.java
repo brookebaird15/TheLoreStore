@@ -22,7 +22,7 @@ public interface BookDAO {
      * Method for accessing one book in Book Table
      * @param isbn
      */
-    public Book getBook(int isbn);
+//    public Book getBook(int isbn);
 
     /**
      * Method for updating book information in Book Table

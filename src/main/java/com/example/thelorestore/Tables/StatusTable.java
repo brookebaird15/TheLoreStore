@@ -36,26 +36,26 @@ public class StatusTable implements StatusDAO {
         return statusList;
     }
 
-    /**
-     * getStatus() returns the status at the ID provided or null if no match
-     * @param statusID is the column id
-     * @return status | null
-     */
-    @Override
-    public Status getStatus(int statusID) {
-        String query = "SELECT * FROM " + DBTableValues.STATUS_TABLE + " WHERE " + DBTableValues.STATUS_ID_COLUMN + " = " + statusID;
-        try {
-            Statement getStatus = db.getConnection().createStatement();
-            ResultSet data = getStatus.executeQuery(query);
-            if(data.next()) {
-                Status status = new Status(data.getInt(DBTableValues.STATUS_ID_COLUMN),
-                        data.getString(DBTableValues.STATUS_NAME_COLUMN));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    /**
+//     * getStatus() returns the status at the ID provided or null if no match
+//     * @param statusID is the column id
+//     * @return status | null
+//     */
+//    @Override
+//    public Status getStatus(int statusID) {
+//        String query = "SELECT * FROM " + DBTableValues.STATUS_TABLE + " WHERE " + DBTableValues.STATUS_ID_COLUMN + " = " + statusID;
+//        try {
+//            Statement getStatus = db.getConnection().createStatement();
+//            ResultSet data = getStatus.executeQuery(query);
+//            if(data.next()) {
+//                Status status = new Status(data.getInt(DBTableValues.STATUS_ID_COLUMN),
+//                        data.getString(DBTableValues.STATUS_NAME_COLUMN));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
 
 }
