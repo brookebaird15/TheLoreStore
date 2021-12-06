@@ -154,7 +154,6 @@ public class AuthorTab extends Tab {
 
         editButtons.getChildren().addAll(addAuthButton, saveButton, cancelButton, updateAuthButton);
         editButtons.setAlignment(Pos.CENTER);
-//        editButtons.requestFocus();
 
         HBox confirmButtons = new HBox();
         confirmButtons.getChildren().addAll(saveButton, cancelButton);

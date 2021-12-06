@@ -43,8 +43,11 @@ public class BookGenreTable implements BookGenreDAO {
      */
     @Override
     public ArrayList<Book> getAllBooksForGenre(int genreId) {
-        String query = "SELECT * FROM " + DBTableValues.BOOK_TABLE + " WHERE "
-                + DBTableValues.BOOK_ID_COLUMN + " = " + genreId;
+        //SELECT b.* FROM book AS b INNER JOIN book_genre_relation AS bgr ON b.id=bgr.book_id INNER JOIN genre AS g ON bgr.genre_id=g.id WHERE g.id=1
+        String query = "SELECT b.* FROM " + DBTableValues.BOOK_TABLE + " AS b INNER JOIN "
+        + DBTableValues.BOOK_GENRE_TABLE + " AS bgr ON b." + DBTableValues.BOOK_ID_COLUMN + "=bgr." + DBTableValues.BOOK_ID_COLUMN_FOR_GENRE
+        + " INNER JOIN " + DBTableValues.GENRE_TABLE + " AS g ON bgr." + DBTableValues.GENRE_FK_ID_COLUMN + "=g." + DBTableValues.GENRE_ID_COLUMN
+        + " WHERE g." + DBTableValues.GENRE_ID_COLUMN + "=" + genreId;
         books = new ArrayList<>();
         try {
             Statement getBooks = db.getConnection().createStatement();

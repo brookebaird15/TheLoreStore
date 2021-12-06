@@ -1,6 +1,8 @@
 package com.example.thelorestore.Tabs;
 
+import com.example.thelorestore.Pojo.Book;
 import com.example.thelorestore.Pojo.Genre;
+import com.example.thelorestore.Tables.BookGenreTable;
 import com.example.thelorestore.Tables.GenreTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
@@ -9,6 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
 
 public class GenreTab extends Tab {
     private static GenreTab tab;
@@ -125,6 +129,19 @@ public class GenreTab extends Tab {
         });
         cancelBtn.setVisible(false);
 
+        TextArea bookList = new TextArea("");
+        bookList.setEditable(false);
+
+        BookGenreTable bookGenreTable = new BookGenreTable();
+        tableView.setOnMouseClicked(e-> {
+            bookList.setText("");
+            Genre selection = (Genre) tableView.getSelectionModel().getSelectedItem();
+            ArrayList<Book> books = bookGenreTable.getAllBooksForGenre(selection.getId());
+            for (Book book: books) {
+                bookList.setText(bookList.getText() + book.getTitle() + "\n");
+            }
+        });
+
         //Adding children to HBox
         editButtons.getChildren().addAll(addGenreBtn, updateGenreBtn);
         editButtons.setAlignment(Pos.CENTER);
@@ -135,7 +152,7 @@ public class GenreTab extends Tab {
 
         //VBox to hold buttons HBox and textfield
         VBox genreFields = new VBox();
-        genreFields.getChildren().addAll(genreField, editButtons, confirmButtons, warningText);
+        genreFields.getChildren().addAll(genreField, editButtons, confirmButtons, warningText, bookList);
         genreFields.setAlignment(Pos.CENTER);
 
         //Set the tableview to the center of the root
