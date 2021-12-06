@@ -13,7 +13,7 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        
+
         stylesheet = getClass().getResource("CSS/stylesheet.css").toExternalForm();
         mainStage = stage;
         mainStage.setScene(new LoginScene());
