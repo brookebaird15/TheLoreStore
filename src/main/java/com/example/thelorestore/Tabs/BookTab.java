@@ -21,8 +21,8 @@ public class BookTab extends Tab {
     private static BookTab tab;
     public static TableView tableView;
     public static DisplayBook selectedBook;
-    public static ArrayList<Author> bookAuthors;
-    public static ArrayList<Genre> bookGenres;
+    public static ArrayList<Author> currentAuthors;
+    public static ArrayList<Genre> currentGenres;
     public static Publisher bookPub;
     private VBox confirmation;
     public static boolean updating = false;
@@ -69,8 +69,8 @@ public class BookTab extends Tab {
         //addItemButton directs user to AddItemPane
         Button addBookBtn = new Button("Add Book");
         addBookBtn.setOnAction(e -> {
-            bookAuthors = new ArrayList<>();
-            bookGenres = new ArrayList<>();
+            currentAuthors = new ArrayList<>();
+            currentGenres = new ArrayList<>();
             updating = false;
             adding = true;
             selectedBook = null;
@@ -85,8 +85,8 @@ public class BookTab extends Tab {
         updateBookBtn.setOnAction(e -> {
             try {
                 selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
-                bookAuthors = bookAuthorTable.getAllAuthorsForBook(selectedBook.getId());
-                bookGenres = bookGenreTable.getAllGenresForBook(selectedBook.getId());
+                currentAuthors = bookAuthorTable.getAllAuthorsForBook(selectedBook.getId());
+                currentGenres = bookGenreTable.getAllGenresForBook(selectedBook.getId());
                 bookPub = publisherTable.getPublisher(selectedBook.getId());
                 updateMsg.setVisible(false);
             } catch (Exception ex) {

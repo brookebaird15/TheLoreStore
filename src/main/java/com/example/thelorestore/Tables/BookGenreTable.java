@@ -29,6 +29,8 @@ public class BookGenreTable implements BookGenreDAO {
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Book/genre relation created");
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            System.out.println("GENRE: " + genre + " already in table");
         } catch (SQLException e) {
             e.printStackTrace();
         }

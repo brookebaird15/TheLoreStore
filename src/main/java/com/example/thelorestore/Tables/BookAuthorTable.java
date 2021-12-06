@@ -9,6 +9,7 @@ import com.example.thelorestore.Pojo.Genre;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -32,6 +33,8 @@ public class BookAuthorTable implements BookAuthorDAO {
         try {
             db.getConnection().createStatement().execute(query);
             System.out.println("Book/author relation created");
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            System.out.println("AUTHOR: " + author + " already in table");
         } catch (SQLException e) {
             e.printStackTrace();
         }
