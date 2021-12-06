@@ -151,35 +151,4 @@ public class DBTableValues {
             " INNER JOIN " + AUTHOR_TABLE + " AS a" +
             " ON bar." + AUTHOR_FK_ID_COLUMN + " = a." + AUTHOR_ID_COLUMN +
             " GROUP BY b." + BOOK_ID_COLUMN + ", b." + BOOK_TITLE_COLUMN + ", p." + PUBLISHER_COMPANY_COLUMN + ", b." + BOOK_YEAR_COLUMN + ", s." + STATUS_NAME_COLUMN + ", b." + BOOK_COMMENT_COLUMN;
-
-//    CREATE VIEW book_info AS SELECT b.title, CONCAT(a.first_name, ' ', COALESCE(a.middle_name, ""), ' ', a.last_name) AS author_name,
-//     g.genre, p.company_name, b.year_published, s.status, COALESCE(b.comment, "") AS comment
-//    FROM genre AS g INNER JOIN book_genre_relation AS bgr
-//    ON g.id=bgr.genre_id
-//    INNER JOIN book AS b
-//    ON bgr.book_id=b.id
-//    INNER JOIN publisher AS p
-//    ON p.id=b.publisher
-//    INNER JOIN status AS s
-//    ON s.id=b.status
-//    INNER JOIN book_author_relation AS bar
-//    ON b.id=bar.book_id
-//    INNER JOIN author AS a
-//    ON bar.author_id = a.id
-
-//    CREATE VIEW book_info2 AS SELECT b.id, b.title, GROUP_CONCAT(CONCAT(a.first_name, ' ', COALESCE(a.middle_name, ""), ' ', a.last_name)) AS author_name,
-//    GROUP_CONCAT(g.genre) AS genre, p.company_name, b.year_published, s.status, COALESCE(b.comment, "") AS comment
-//    FROM genre AS g INNER JOIN book_genre_relation AS bgr
-//    ON g.id=bgr.genre_id
-//    INNER JOIN book AS b
-//    ON bgr.book_id=b.id
-//    INNER JOIN publisher AS p
-//    ON p.id=b.publisher
-//    INNER JOIN status AS s
-//    ON s.id=b.status
-//    INNER JOIN book_author_relation AS bar
-//    ON b.id=bar.book_id
-//    INNER JOIN author AS a
-//    ON bar.author_id = a.id
-//    GROUP BY b.id, b.title, p.company_name, b.year_published, s.status, b.comment
 }

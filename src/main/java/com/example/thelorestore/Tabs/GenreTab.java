@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class GenreTab extends Tab {
     private static GenreTab tab;
@@ -39,6 +40,9 @@ public class GenreTab extends Tab {
         genreField = new TextField();
         genreField.setVisible(false);
 
+        Text warningText = new Text("Genre name must be between 0 and 30 characters");
+        warningText.setVisible(false);
+
         /** HBOX **/
         HBox editButtons = new HBox();
 
@@ -55,27 +59,48 @@ public class GenreTab extends Tab {
         //Save Button to commit changes
         saveBtn = new Button("Save");
         saveBtn.setOnAction(event -> {
-            //TODO - catch exception where user entry is too long
+            boolean changesSaved = false;
+
             if(updating) {
-                Genre selection = (Genre) tableView.getSelectionModel().getSelectedItem();
-                selection.setName(genreField.getText());
-                genreTable.updateGenre(selection);
-                addGenreBtn.setDisable(false);
+                //check input length
+                if(genreField.getText().length() <= 30 && genreField.getText().length() != 0) {
+                    Genre selection = (Genre) tableView.getSelectionModel().getSelectedItem();
+                    selection.setName(genreField.getText());
+                    genreTable.updateGenre(selection);
+                    changesSaved = true;
+                } else {
+                    warningText.setVisible(true);
+                }
+
             } else {
-                Genre genre = new Genre(genreField.getText());
-                genreTable.createGenre(genre);
-                updateGenreBtn.setDisable(false);
+                //check input length
+                if(genreField.getText().length() <= 30 && genreField.getText().length() != 0) {
+                    Genre genre = new Genre(genreField.getText());
+                    genreTable.createGenre(genre);
+                    changesSaved = true;
+                } else {
+                    warningText.setVisible(true);
+                }
             }
-            //set updating back to false
-            updating = false;
 
-            //hide field and buttons
-            saveBtn.setVisible(false);
-            genreField.setVisible(false);
-            cancelBtn.setVisible(false);
+            //if changes saved (input length was correct), close add/update fields
+            if(changesSaved) {
+                //set updating back to false
+                updating = false;
 
-            //refresh table
-            refreshGenreTable();
+                //hide field and buttons
+                addGenreBtn.setDisable(false);
+                updateGenreBtn.setDisable(false);
+                saveBtn.setVisible(false);
+                genreField.setText("");
+                genreField.setVisible(false);
+                cancelBtn.setVisible(false);
+                warningText.setVisible(false);
+
+                //refresh table
+                refreshGenreTable();
+            }
+
         });
         saveBtn.setVisible(false);
 
@@ -102,12 +127,17 @@ public class GenreTab extends Tab {
         cancelBtn.setVisible(false);
 
         //Adding children to HBox
-        editButtons.getChildren().addAll(addGenreBtn, saveBtn, cancelBtn, updateGenreBtn);
+        editButtons.getChildren().addAll(addGenreBtn, updateGenreBtn);
         editButtons.setAlignment(Pos.CENTER);
+
+        HBox confirmButtons = new HBox();
+        confirmButtons.getChildren().addAll(saveBtn, cancelBtn);
+        confirmButtons.setAlignment(Pos.CENTER);
 
         //VBox to hold buttons HBox and textfield
         VBox genreFields = new VBox();
-        genreFields.getChildren().addAll(genreField, editButtons);
+        genreFields.getChildren().addAll(genreField, editButtons, confirmButtons, warningText);
+        genreFields.setAlignment(Pos.CENTER);
 
         //Set the tableview to the center of the root
         root.setCenter(tableView);
