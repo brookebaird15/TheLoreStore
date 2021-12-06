@@ -100,7 +100,6 @@ public class GenreTab extends Tab {
                 //refresh table
                 refreshGenreTable();
             }
-
         });
         saveBtn.setVisible(false);
 
