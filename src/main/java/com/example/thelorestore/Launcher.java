@@ -20,7 +20,5 @@ public class Launcher extends Application {
         mainStage.setResizable(false);
         mainStage.setTitle("Book Tracker - by Ashley McCallum and Brooke Baird");
         mainStage.show();
-        mainStage.setOnCloseRequest(e-> {
-        });
     }
 }

@@ -60,15 +60,20 @@ public class BookTab extends Tab {
 
         tableView.getColumns().addAll(titleColumn, authorColumn, genreColumn, publisherColumn, yearColumn, statusColumn, commentColumn);
         tableView.getItems().addAll(bookTable.displayPrettyBooks());
+        tableView.setMaxHeight(400);
 
-        root.setCenter(tableView);
+        root.setTop(tableView);
 
         //editButtons box holds addItem and viewItem buttons
         HBox editButtons = new HBox();
 
+        Text updateMsg = new Text("Please select a book to update");
+        updateMsg.setVisible(false);
+
         //addItemButton directs user to AddItemPane
         Button addBookBtn = new Button("Add Book");
         addBookBtn.setOnAction(e -> {
+            updateMsg.setVisible(false);
             currentAuthors = new ArrayList<>();
             currentGenres = new ArrayList<>();
             updating = false;
@@ -77,8 +82,6 @@ public class BookTab extends Tab {
             Launcher.mainStage.setScene(new AddUpdateBookScene());
         });
 
-        Text updateMsg = new Text("Please select a book to update");
-        updateMsg.setVisible(false);
 
         //updateBookBtn directs user to UpdateBookPane
         Button updateBookBtn = new Button("Update Book");
@@ -121,16 +124,19 @@ public class BookTab extends Tab {
         HBox confirmationButtons = new HBox();
         confirmationButtons.getChildren().addAll(confirmButton, cancelButton);
         confirmationButtons.setAlignment(Pos.CENTER);
+        confirmationButtons.setId("delete-buttons");
 
         //box to hold confirm prompt and buttons
         confirmation = new VBox();
         confirmation.getChildren().addAll(confirmationPrompt, confirmationButtons);
         confirmation.setVisible(false);
         confirmation.setAlignment(Pos.CENTER);
+        confirmation.setId("delete-confirm");
 
         //button to delete book from table
         Button deleteItemButton = new Button("Delete Book");
         deleteItemButton.setOnAction(e-> {
+            updateMsg.setVisible(false);
             selectedBook = (DisplayBook) tableView.getSelectionModel().getSelectedItem();
             if(selectedBook != null) {
                 confirmation.setVisible(true);
@@ -144,8 +150,9 @@ public class BookTab extends Tab {
         VBox allButtons = new VBox();
         allButtons.getChildren().addAll(updateMsg, editButtons, confirmation);
         allButtons.setAlignment(Pos.CENTER);
+        allButtons.setId("book-buttons");
 
-        root.setBottom(allButtons);
+        root.setCenter(allButtons);
 
         this.setContent(root);
     }

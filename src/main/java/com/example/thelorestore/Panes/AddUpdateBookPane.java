@@ -70,6 +70,7 @@ public class AddUpdateBookPane extends BorderPane {
             //refresh combobox
             refreshAuthCombo(currentAuthCombo, currentAuthors);
         });
+        addAuthBtn.setId("author-add-button");
 
         //combobox to hold current authors
         currentAuthCombo = new ComboBox<>();
@@ -86,6 +87,7 @@ public class AddUpdateBookPane extends BorderPane {
             refreshAuthCombo(currentAuthCombo, currentAuthors);
         });
         removeAuthBtn.setVisible(false);
+        removeAuthBtn.setId("author-rmv-button");
 
         //hbox to hold author input fields and display
         HBox addAuthBox = new HBox();
@@ -118,6 +120,7 @@ public class AddUpdateBookPane extends BorderPane {
             //refresh combo box
             refreshGenreCombo(currentGenreCombo, currentGenres);
         });
+        addGenreBtn.setId("genre-add-button");
 
         //combobox to hold current genres
         currentGenreCombo = new ComboBox<>();
@@ -135,6 +138,7 @@ public class AddUpdateBookPane extends BorderPane {
             refreshGenreCombo(currentGenreCombo, currentGenres);
         });
         removeGenreBtn.setVisible(false);
+        removeGenreBtn.setId("genre-rmv-button");
 
         //hbox to hold genre input and display
         HBox addGenreBox = new HBox();

@@ -3,7 +3,6 @@ package com.example.thelorestore.Panes;
 import com.example.thelorestore.Tabs.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 public class MainTablePane extends BorderPane {
 
@@ -16,8 +15,9 @@ public class MainTablePane extends BorderPane {
         AuthorTab authorTab = AuthorTab.getInstance();
         GenreTab genreTab = GenreTab.getInstance();
         PublisherTab publisherTab = PublisherTab.getInstance();
-        StatsTab statsTab = StatsTab.getInstance();
-        tabPane.getTabs().addAll(bookTab, authorTab, genreTab, publisherTab, statsTab);
+        StatusStatsTab statusStatsTab = StatusStatsTab.getInstance();
+        GenreStatsTab genreStatsTab = GenreStatsTab.getInstance();
+        tabPane.getTabs().addAll(bookTab, authorTab, genreTab, publisherTab, statusStatsTab, genreStatsTab);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         this.setTop(tabPane);

@@ -40,7 +40,6 @@ public class LoginPane extends StackPane {
         Text database = new Text("Database Name");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
         loginError.setVisible(false);
-        loginError.setId("login-error");
 
         //New login button
         Button loginBtn = new Button("Log in");
@@ -125,18 +124,27 @@ public class LoginPane extends StackPane {
             while (input.hasNext()) {
                 credentials.add(input.next());
             }
-            //assign credentials
-            DBConst.DB_USER = credentials.get(0);
-            DBConst.DB_PASS = credentials.get(1);
-            DBConst.DB_NAME = credentials.get(2);
+
+            if(credentials.size() == 3) {
+                //assign credentials
+                DBConst.DB_USER = credentials.get(0);
+                DBConst.DB_PASS = credentials.get(1);
+                DBConst.DB_NAME = credentials.get(2);
+            }
+
             input.close();
             //delete login file once assigned
             loginFile.delete();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Credentials file not found");
         }
-        Database.getInstance();
-        mainStage.setScene(new MainTableScene());
+
+        if(DBConst.DB_PASS != null && DBConst.DB_NAME != null && DBConst.DB_USER != null) {
+            Database.getInstance();
+            mainStage.setScene(new MainTableScene());
+        } else {
+            loginError.setVisible(true);
+        }
     }
 
     /**
