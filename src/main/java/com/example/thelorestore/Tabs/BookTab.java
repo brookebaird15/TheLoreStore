@@ -60,7 +60,7 @@ public class BookTab extends Tab {
 
         tableView.getColumns().addAll(titleColumn, authorColumn, genreColumn, publisherColumn, yearColumn, statusColumn, commentColumn);
         tableView.getItems().addAll(bookTable.displayPrettyBooks());
-        tableView.setMaxHeight(400);
+        tableView.setMinHeight(550);
 
         root.setTop(tableView);
 
@@ -116,6 +116,7 @@ public class BookTab extends Tab {
         cancelButton.setOnAction(e-> {
             confirmation.setVisible(false);
         });
+        cancelButton.getStyleClass().add("cancel");
 
         //text prompt to notify user
         Text confirmationPrompt = new Text("Are you sure you want to delete this book?");

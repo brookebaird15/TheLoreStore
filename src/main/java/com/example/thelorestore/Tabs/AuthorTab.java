@@ -60,6 +60,8 @@ public class AuthorTab extends Tab {
         nameFields.getChildren().addAll(firstField, middleField, lastField);
         nameFields.setVisible(false);
         nameFields.setAlignment(Pos.CENTER);
+        nameFields.getStyleClass().add("entry-field");
+        nameFields.getStyleClass().add("button-box");
 
         Text warningText = new Text("Author names must be between 0 and 50 characters (middle name may be left blank)");
         warningText.setVisible(false);
@@ -80,6 +82,7 @@ public class AuthorTab extends Tab {
             lastField.setText("");
         });
         cancelButton.setVisible(false);
+        cancelButton.getStyleClass().add("cancel");
 
         //save button to commit changes
         saveButton = new Button("Save");
@@ -161,15 +164,18 @@ public class AuthorTab extends Tab {
             updating = true;
         });
 
-        editButtons.getChildren().addAll(addAuthButton, saveButton, cancelButton, updateAuthButton);
+        editButtons.getChildren().addAll(addAuthButton, updateAuthButton);
         editButtons.setAlignment(Pos.CENTER);
+        editButtons.getStyleClass().add("button-box");
 
         HBox confirmButtons = new HBox();
         confirmButtons.getChildren().addAll(saveButton, cancelButton);
         confirmButtons.setAlignment(Pos.CENTER);
+        confirmButtons.getStyleClass().add("button-box");
 
         TextArea bookList = new TextArea("");
         bookList.setEditable(false);
+        bookList.setMaxSize(500, 150);
 
         BookAuthorTable bookAuthorTable = new BookAuthorTable();
         tableView.setOnMouseClicked(e-> {
@@ -185,6 +191,7 @@ public class AuthorTab extends Tab {
         VBox authFields = new VBox();
         authFields.getChildren().addAll(nameFields, editButtons, confirmButtons, warningText, bookList);
         authFields.setAlignment(Pos.CENTER);
+        authFields.getStyleClass().add("fields");
 
         root.setBottom(authFields);
 

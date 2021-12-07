@@ -39,6 +39,7 @@ public class PublisherTab extends Tab {
         //textfield to allow user to input publisher info
         TextField publisherField = new TextField();
         publisherField.setVisible(false);
+        publisherField.getStyleClass().add("entry-field");
 
         Text warningText = new Text("Publisher name must be between 0 and 50 characters");
         warningText.setVisible(false);
@@ -57,7 +58,7 @@ public class PublisherTab extends Tab {
             publisherField.setText("");
         });
         cancelButton.setVisible(false);
-
+        cancelButton.getStyleClass().add("cancel");
 
         //save button to commit changes
         saveButton = new Button("Save");
@@ -127,14 +128,17 @@ public class PublisherTab extends Tab {
         HBox confirmButtons = new HBox();
         confirmButtons.getChildren().addAll(saveButton, cancelButton);
         confirmButtons.setAlignment(Pos.CENTER);
+        confirmButtons.getStyleClass().add("button-box");
 
         editButtons.getChildren().addAll(addPubButton, updatePubButton);
         editButtons.setAlignment(Pos.CENTER);
+        editButtons.getStyleClass().add("button-box");
 
         //pubFields box holds buttons and field for entry
         VBox publisherFields = new VBox();
         publisherFields.getChildren().addAll(publisherField, editButtons, confirmButtons, warningText);
         publisherFields.setAlignment(Pos.CENTER);
+        publisherFields.getStyleClass().add("fields");
 
         root.setBottom(publisherFields);
 

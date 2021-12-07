@@ -129,9 +129,11 @@ public class GenreTab extends Tab {
             genreField.setText("");
         });
         cancelBtn.setVisible(false);
+        cancelBtn.getStyleClass().add("cancel");
 
         TextArea bookList = new TextArea("");
         bookList.setEditable(false);
+        bookList.setMaxSize(500, 150);
 
         BookGenreTable bookGenreTable = new BookGenreTable();
         tableView.setOnMouseClicked(e-> {
@@ -146,15 +148,18 @@ public class GenreTab extends Tab {
         //Adding children to HBox
         editButtons.getChildren().addAll(addGenreBtn, updateGenreBtn);
         editButtons.setAlignment(Pos.CENTER);
+        editButtons.getStyleClass().add("button-box");
 
         HBox confirmButtons = new HBox();
         confirmButtons.getChildren().addAll(saveBtn, cancelBtn);
         confirmButtons.setAlignment(Pos.CENTER);
+        confirmButtons.getStyleClass().add("button-box");
 
         //VBox to hold buttons HBox and textfield
         VBox genreFields = new VBox();
         genreFields.getChildren().addAll(genreField, editButtons, confirmButtons, warningText, bookList);
         genreFields.setAlignment(Pos.CENTER);
+        genreFields.getStyleClass().add("fields");
 
         //Set the tableview to the center of the root
         root.setCenter(tableView);

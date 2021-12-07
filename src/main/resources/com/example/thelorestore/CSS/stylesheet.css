@@ -1,16 +1,19 @@
 .root {
     -fx-font-family: "Baskerville Old Face";
+}
 
+.button {
+    -fx-background-color: white;
 }
 
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #ba9172;
+    -fx-background-color: #cfb59d;
 
 }
 
 #main {
     -fx-font-family: "Century Schoolbook";
-    -fx-background-color: #ba9172;
+    -fx-background-color: #cfb59d;
     -fx-font-size: 14px;
     -fx-padding: 10px, 10px, 0, 10px;
 }
@@ -24,12 +27,11 @@
     -fx-padding: 25;
     -fx-background-radius: 40;
     -fx-font-weight: bold;
-    /*-fx-border-radius: 50;*/
 }
 
 #add-update {
     -fx-font-family: "Century Schoolbook";
-    -fx-background-color: #ba9172;
+    -fx-background-color: #cfb59d;
     -fx-font-size: 14px;
     -fx-padding: 10px, 10px, 0, 10px;
 }
@@ -38,12 +40,24 @@
     -fx-spacing: 10px;
 }
 
-#author-add-button, #author-rmv-button, #genre-add-button, #genre-rmv-button {
+#author-add-button, #author-rmv-button, #genre-add-button, #genre-rmv-button, .cancel {
     -fx-background-color: #7a2b31;
     -fx-text-fill: white;
 }
 
 #genre-stats, #status-stats {
     -fx-background-color: #f4f4f4;
-    -fx-background-radius: 0px 0px, 50px, 50px;
+}
+
+.fields {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+.table-view {
+    -fx-padding: 0px, 10px, 10px, 10px;
+}
+
+.button-box {
+    -fx-spacing: 10px;
 }

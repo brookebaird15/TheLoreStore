@@ -28,18 +28,19 @@ import static com.example.thelorestore.Launcher.mainStage;
 public class LoginPane extends StackPane {
 
     public static File loginFile = new File("credentials.txt");
-    public static Text loginError = new Text("Invalid login - please try again");
+    public static Text loginError = new Text();
     public static TextField userTextField = new TextField();
     public static TextField pwTextField = new PasswordField();
     public static TextField dbTextField = new TextField();
 
-    public LoginPane(){
+    public LoginPane() {
         this.setId("login");
         Text user = new Text("Username");
         Text password = new Text("Password");
         Text database = new Text("Database Name");
         ImageView booksImage = new ImageView(new Image("file:Images/booksLogin.jpg"));
         loginError.setVisible(false);
+//        loginError.setStyle();
 
         //New login button
         Button loginBtn = new Button("Log in");
@@ -70,12 +71,16 @@ public class LoginPane extends StackPane {
         VBox loginBox = new VBox();
         loginBox.setId("login-box");
         loginBox.setStyle("");
-        loginBox.getChildren().addAll(loginError, usernameBox, passwordBox, databaseBox, loginBtn);
+        loginBox.getChildren().addAll(usernameBox, passwordBox, databaseBox, loginBtn);
         loginBox.setAlignment(Pos.CENTER);
         loginBox.setSpacing(10);
         loginBox.setMaxSize(350, 250);
 
-        this.getChildren().addAll(booksImage, loginBox);
+        VBox contents = new VBox();
+        contents.getChildren().addAll(loginError, loginBox);
+        contents.setAlignment(Pos.CENTER);
+
+        this.getChildren().addAll(booksImage, contents);
 
         //Animations for background
         /**

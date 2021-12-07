@@ -1,5 +1,8 @@
 package com.example.thelorestore.Database;
 import com.example.thelorestore.Panes.LoginPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
@@ -33,6 +36,9 @@ public class Database {
                 insertStatusItems(DBTableValues.INSERT_INTO_STATUS, connection);
             } catch (Exception e) {
                 //display login error
+                LoginPane.loginError.setFill(Color.web("#decdc1"));
+                LoginPane.loginError.setFont(new Font("Century Schoolbook", 20));
+                LoginPane.loginError.setText("Invalid login - please try again");
                 LoginPane.loginError.setVisible(true);
                 //reset fields
                 LoginPane.pwTextField.setText("");

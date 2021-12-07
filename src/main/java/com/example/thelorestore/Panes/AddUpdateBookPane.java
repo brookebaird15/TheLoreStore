@@ -323,6 +323,7 @@ public class AddUpdateBookPane extends BorderPane {
             updating = false;
             adding = false;
         });
+        cancelButton.getStyleClass().add("cancel");
         buttons.getChildren().addAll(saveButton, cancelButton);
         buttons.setSpacing(50);
 
