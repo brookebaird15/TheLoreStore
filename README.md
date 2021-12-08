@@ -44,7 +44,7 @@ The publisher tab lists all publishers in the database. Users can add a new item
 There are two statistics tabs. The Status Stats tab contains a pie chart displaying the proportion of books in the user's collection that are unread, in progress, or completed. 
 The Genre Stats tab contains a pie chart displaying a breakdown of the genres contained in the user's collection. It only displays genres that have at least one book, so if a user adds a genre without associating it to a book, it will not be added to the chart for simplicity's sake.
 
-![status_chart](https://user-images.githubusercontent.com/90527594/145302501-cb7f6010-dbe1-4516-9b60-8850384e84a2.png)      ![genre_chart](https://user-images.githubusercontent.com/90527594/145302505-14312cb1-4033-4f50-aea4-5dee22f5f255.png)
+![status_chart](https://user-images.githubusercontent.com/90527594/145302501-cb7f6010-dbe1-4516-9b60-8850384e84a2.png) ![genre_chart](https://user-images.githubusercontent.com/90527594/145302505-14312cb1-4033-4f50-aea4-5dee22f5f255.png)
 
 ***
 ## Prerequesites
@@ -73,6 +73,10 @@ The database contains the following tables:
 - A book view to gather and format all information
 
 ![image](https://user-images.githubusercontent.com/90527594/145244613-65a574f9-63db-4539-9487-fdef94c03476.png)
+
+***
+### Compatibility
+This project is built with JDK 16
 
 ***
 |Author information| |
