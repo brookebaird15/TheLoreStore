@@ -45,4 +45,18 @@ public static String DB_PASS = "";
 These strings can be declared as empty strings.
 
 ***
-Authors: Ashley McCallum and Brooke Baird
+### Database Layout
+The database contains the following tables:
+- Book
+- Status
+- Publisher
+- Genre
+- A genre/book joining table
+- Author
+- An author/book joining table
+- A book view to gather and format all information
+
+![image](https://user-images.githubusercontent.com/90527594/145244613-65a574f9-63db-4539-9487-fdef94c03476.png)
+
+***
+**Authors:** Ashley McCallum and Brooke Baird
