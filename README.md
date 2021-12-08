@@ -13,9 +13,9 @@ Once sucessfully logged in, they will be directed to the main book table which d
 In the add item screen, the user may enter the new item information. The application takes text input for the title, year of publishing, and comment fields. Users can select a radio button to declare if a book is unread, in progress, or completed. The screen also has drop-down menus for selecting authors, genres, and a publisher. Once completed the save button directs the user back to the main table.
 
 ### Updating Books
-In the update screen, users can edit the information of a selected book. The fields in the update screen automatically generate with the current information. Users can change all information, including updating the status if they started or finished a book, as well as adding or removing authors and genres. Once completed the save button directs the user back to the main table
+In the update screen, users can edit the information of a selected book. The fields in the update screen automatically generate with the current information. Users can change all information, including updating the status if they started or finished a book, as well as adding or removing authors and genres. Once completed the save button directs the user back to the main table.
 
-*Note* - If a user adds the same author or genre from the drop down lists multiple times, it will not add duplicate entries. A book can only have one reference to a specific author or genre
+*Note* - If a user adds the same author or genre from the drop down lists multiple times, it will not add duplicate entries. A book can only have one reference to a specific author or genre.
 
 ### Author Tab
 The author tab lists all authors in the database. Users can add a new author or they can select an author to update. When a user selects an item in the table, the page will list all books written by the selected author. To prevent a book from having null authors, users cannot delete authors once entered, but their first, middle, and last names can be updated.
