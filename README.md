@@ -59,4 +59,7 @@ The database contains the following tables:
 ![image](https://user-images.githubusercontent.com/90527594/145244613-65a574f9-63db-4539-9487-fdef94c03476.png)
 
 ***
-**Authors:** Ashley McCallum and Brooke Baird
+|Author information| |
+|-------|--|
+|Ashley McCallum     |  w0765596@myscc.ca| 
+|Brooke Baird        |  w0766373@myscc.ca|
